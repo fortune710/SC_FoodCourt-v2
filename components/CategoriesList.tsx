@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { View, FlatList, Pressable, Text, StyleSheet } from "react-native";
 import { Image } from "expo-image";
 import Styles from "../constants/Styles";
@@ -9,10 +9,22 @@ const Categories = [
     'Pasta',
     'Grills',
     'Wraps'
-]
+] as const
 
+type Category = typeof Categories[number];
 
-const CategoriesList: React.FC = () => {
+interface CategoriesListProps {
+    onChange?: (category: Category) => void
+}
+
+const CategoriesList: React.FC<CategoriesListProps> = ({ onChange }) => {
+    const [_, setCategory] = useState<Category>();
+
+    const handleChange = (category: Category) => {
+        setCategory(category);
+        onChange && onChange(category)
+    }
+
     return (
         <View style={Styles.DefaultSpaceY}>
             <Text style={styles.containerPadding}>
@@ -24,7 +36,7 @@ const CategoriesList: React.FC = () => {
                 style={styles.containerPadding}                
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item: category }) => (
-                    <Pressable style={styles.horizontalListItem}>
+                    <Pressable onPress={() => handleChange(category)} style={styles.horizontalListItem}>
                         <View style={styles.itemContainer}>
                             <Image style={{ width: 50, height: 50 }} source={require("../assets/images/rice-bowl.svg")} />
                         </View>
