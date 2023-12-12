@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
 const Styles = StyleSheet.create({
     DefaultPaddingX: {
@@ -12,7 +14,24 @@ const Styles = StyleSheet.create({
         height: "100%", 
         position: "absolute", 
         zIndex: -10, 
-
+    },
+    ProfileSettingsContainer: {
+        width: screenWidth,
+        borderTopEndRadius: 35,
+        backgroundColor: "#F34A4A",
+        minHeight: 350
+    },
+    FlexCenterJustifyBetween: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
+    },
+    FlexCenterJustifyCenter: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center"
     }
 })
 
