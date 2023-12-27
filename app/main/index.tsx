@@ -1,5 +1,5 @@
 import { ScrollView, View as DefaultView, StyleSheet, FlatList, Pressable } from "react-native";
-import { Page, Text } from "../components/Themed";
+import { Page, Text } from "../../components/Themed";
 import { SearchBar } from "react-native-screens";
 import { TextInput } from "react-native";
 
@@ -7,11 +7,11 @@ import { TextInput } from "react-native";
 import { Image, ImageBackground } from "expo-image"
 
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import useThemeColor from "../hooks/useThemeColor";
-import Styles from "../constants/Styles";
+import useThemeColor from "../../hooks/useThemeColor";
+import Styles from "../../constants/Styles";
 import { Link, useRouter } from "expo-router";
-import Searchbar from "../components/Searchbar";
-import CategoriesList from "../components/CategoriesList";
+import Searchbar from "../../components/Searchbar";
+import CategoriesList from "../../components/CategoriesList";
 
 const Vendors = [
     { name: "W Sauce" },
