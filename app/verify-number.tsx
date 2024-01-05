@@ -4,6 +4,7 @@ import { StyleSheet } from "react-native";
 import { Image } from "expo-image";
 import { Pressable, View,} from "react-native";
 import { useState } from "react";
+import { Entypo } from "@expo/vector-icons";
 
 import { OtpInput } from "react-native-otp-entry";
 
@@ -19,14 +20,11 @@ export default function VerifyNumberPage() {
         <Page>
             <Pressable
                   onPress={() => {}}
-                  style={{marginTop: 20, marginLeft: 10}}
+                  style={{marginTop: 10, marginLeft: 10}}
               >
-                <View style={{width:'12%', flexDirection: 'row', justifyContent: 'space-between',alignItems:'center', }}>
-                  <Image
-                    source={require("../assets/images/arrow-left.svg")}
-                    style={{ height: 20, width: 20, resizeMode: 'contain',}}
-                  />
-                  <Text style={{fontSize:15, fontWeight: '500'}}>Back</Text>
+                <View style={{width: 50, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center', }}>
+                  <Entypo name="chevron-small-left" size={22} color="black" />
+                  <Text style={{fontSize:15, textAlign:'center'}}>Back</Text>
                 </View>
             </Pressable>
   
@@ -67,14 +65,14 @@ export default function VerifyNumberPage() {
             </View>
             
             <View style={{ width:'100%', alignItems: "center", marginTop: 60}}>
-                <Button
-                  title="Continue"
-                  onPress={() => {
+            <Button
+              title="Continue"
+              onPress={() => {
                     // Handle button press
-                  }}
-                  buttonStyle={{backgroundColor:'#fe0000', paddingRight:65}}
-                  titleStyle={{color:'#fff',}}
-                />
+              }}
+              buttonStyle={{backgroundColor:'#fe0000',width:160,}}
+              titleStyle={{color:'#fff', fontSize:15}}
+              />
             </View>
         </Page>
     )

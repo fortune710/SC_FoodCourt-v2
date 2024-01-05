@@ -2,6 +2,7 @@ import { Page, Text } from "../components/Themed";
 import { StyleSheet } from "react-native";
 import { Image } from "expo-image";
 import { Pressable, View,} from "react-native";
+import { Entypo } from "@expo/vector-icons";
 
 
 
@@ -10,17 +11,14 @@ export default function CheckEmailPage() {
   return (
       <Page>
           <Pressable
-                onPress={() => {}}
-                style={{marginTop: 10, marginLeft: 10}}
-            >
-              <View style={{width:'12%', flexDirection: 'row', justifyContent: 'space-between',alignItems:'center', }}>
-                <Image
-                  source={require("../assets/images/arrow-left.svg")}
-                  style={{ height: 20, width: 20, resizeMode: 'contain',}}
-                />
-                <Text style={{fontSize:15, fontWeight: '500'}}>Back</Text>
-              </View>
-          </Pressable>
+                  onPress={() => {}}
+                  style={{marginTop: 10, marginLeft: 10}}
+              >
+                <View style={{width: 50, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center', }}>
+                  <Entypo name="chevron-small-left" size={22} color="black" />
+                  <Text style={{fontSize:15, textAlign:'center'}}>Back</Text>
+                </View>
+            </Pressable>
 
           <View style={{ width:"90%", height:"40%", alignSelf: 'center', alignItems: "center", justifyContent:"flex-end"}}>
             <Image
