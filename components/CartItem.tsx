@@ -15,24 +15,25 @@ interface CartItemProps {
   const CartItem: React.FC<CartItemProps> = ({ name, description, price, quantity }) => {
     const [qty, setQty] = useState(quantity);
 
-    const handleIncrement = () => {
-      if (qty == 20) {}
-      else {setQty(qty + 1)}
-    };
+    const handleIncrement = () => qty === 20 ? null : setQty(qty + 1);
   
-    const handleDecrement = () => {
-        if (qty == 1) {}
-        else {setQty(qty - 1)}
-    };
+    const handleDecrement = () => qty === 1 ? null : setQty(qty - 1);
   
+    const store = 'African pot'
+
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{name}</Text>
-        <View style={styles.descriptionContainer}>
-          <Text style={styles.description}>{description}</Text>
+        <View style = {{flexDirection: 'row', justifyContent:'space-between'}}>
+          <View style = {{flexDirection: 'row'}}>
+            <Text style={styles.title}>{name} - </Text>
+            <Text style={{fontWeight: 'bold',fontSize: 15, color:'#f72f2f'}}>{store}</Text>
+          </View>
           <View style={styles.priceContainer}>
             <Text style={styles.priceLabel}># {price}</Text>
           </View>
+        </View>
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.description}>{description}</Text>
         </View>
         <View style={styles.actionsContainer}>
           <Pressable onPress={handleIncrement} style={styles.actionButton}>
@@ -56,7 +57,7 @@ interface CartItemProps {
       width: '90%',
       height: 100,
       alignSelf: 'center',
-      marginBottom: 15,
+      marginBottom: 20,
     },
     title: {
       fontWeight: 'bold',
@@ -91,14 +92,14 @@ interface CartItemProps {
     actionsContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      width: '30%',
+      width: '27%',
       marginTop:10,
     },
     actionButton: {
       backgroundColor: '#f7941e',
-      width: 35,
+      width: 30,
       height: 25,
-      borderRadius: 5,
+      borderRadius: 7,
       alignItems: 'center',
       justifyContent: 'center',
     },
