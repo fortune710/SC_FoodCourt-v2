@@ -61,7 +61,7 @@ export default function HomePage() {
         <Page>
             <ScrollView>
 
-                <Text>Hello There</Text>
+                {/* <Text>Hello There</Text> */}
 
                 <DefaultView>
                     <Text>Hi, Ada Tobi Musa</Text>
