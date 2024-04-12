@@ -58,14 +58,14 @@ export default function HomePage() {
     const router = useRouter()
 
     return (
-        <Page>
+        <Page style={{ paddingHorizontal: 16 }}>
             <ScrollView>
 
                 {/* <Text>Hello There</Text> */}
 
                 <DefaultView>
-                    <Text>Hi, Ada Tobi Musa</Text>
-                    <Text>What will we be having today?</Text>
+                    <Text style={{ fontWeight: "700", marginVertical: 8 }}>Hi, Ada Tobi Musa</Text>
+                    <Text style={{ fontWeight: "900" }}>What will we be having today?</Text>
                 </DefaultView>
 
                 <Searchbar/>
