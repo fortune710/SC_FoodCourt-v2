@@ -95,7 +95,7 @@ export default function HomePage() {
                     {
                         Vendors.map(({ name }, index) => (
                             <Pressable onPress={() => router.push(`/vendor/${name.replaceAll(" ", "-")}`)} key={`${name}-${index}`} style={[styles.horizontalListItem, styles.vendorCard]}>
-                                <Image style={{ width: "100%", height: "100%", position: "absolute", zIndex: -10, borderRadius: 12 }} source={require("../assets/images/food.png")}/>
+                                <Image style={{ width: "100%", height: "100%", position: "absolute", zIndex: -10, borderRadius: 12 }} source={require("../../assets/images/food.png")}/>
                                 <Text style={{ color: "#fff" }}>{name}</Text>
                             </Pressable>
                         ))

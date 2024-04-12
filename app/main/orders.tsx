@@ -8,8 +8,8 @@ import { Chip, ListItem, Slider } from "@rneui/themed";
 import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
 
-import * as vendors from "@/mock/vendors.json";
-import * as orders from "@/mock/orders.json";
+import vendors from "@/mock/vendors.json";
+import orders from "@/mock/orders.json";
 
 export default function OrdersPage() {
 
@@ -49,6 +49,8 @@ export default function OrdersPage() {
                             }
 
                             style={{ borderWidth: 1, borderRadius: 12 }}
+
+                            key={orderId}
                         
                         >
                             {
