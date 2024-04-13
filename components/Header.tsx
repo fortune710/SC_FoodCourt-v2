@@ -23,14 +23,14 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
     const primaryColor = useThemeColor({}, "primary");
 
     return (
-        <SafeAreaView style={styles.header}>
-            <Button color="white" onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
+        <View style={styles.header}>
+            <Button color="#fff" onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
                 <Ionicons name="menu" size={25} color={primaryColor} />
             </Button>
             {/* <DrawerToggleButton tintColor={primaryColor}></DrawerToggleButton> */}
             {/* <Text style={styles.title}>{pageTitle}</Text> */}
             <MaterialCommunityIcons size={25} name="cart" color={primaryColor}/>
-        </SafeAreaView>
+        </View>
     )
 }
 
@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        paddingTop: 8,
         paddingHorizontal: 8,
+        paddingTop: 40,
         // height: 70,
         backgroundColor: "#fff"
     },

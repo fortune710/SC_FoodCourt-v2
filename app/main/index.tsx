@@ -1,4 +1,4 @@
-import { ScrollView, View as DefaultView, StyleSheet, FlatList, Pressable } from "react-native";
+import { ScrollView, View as DefaultView, StyleSheet, FlatList, Pressable, View } from "react-native";
 import { Page, Text } from "../../components/Themed";
 import { SearchBar } from "react-native-screens";
 import { TextInput } from "react-native";
@@ -59,13 +59,13 @@ export default function HomePage() {
 
     return (
         <Page style={{ paddingHorizontal: 16 }}>
-            <ScrollView>
+            <ScrollView contentInset={{ bottom: 64 }} showsVerticalScrollIndicator={false}>
 
                 {/* <Text>Hello There</Text> */}
 
                 <DefaultView>
-                    <Text style={{ fontWeight: "700", marginVertical: 8 }}>Hi, Ada Tobi Musa</Text>
-                    <Text style={{ fontWeight: "900" }}>What will we be having today?</Text>
+                    <Text style={{ fontWeight: "800", marginTop: 8 }}>Hi, Ada Tobi Musa</Text>
+                    <Text style={{ fontWeight: "900", marginVertical: 16, fontSize: 20 }}>What will we be having today?</Text>
                 </DefaultView>
 
                 <Searchbar/>
@@ -73,25 +73,38 @@ export default function HomePage() {
                 <CategoriesList/>
 
                 <DefaultView>
-                    <Text>Recents</Text>
+                    <Text style={{ fontWeight: "900", marginVertical: 16, fontSize: 20 }} >Recents</Text>
                     <FlatList
                         horizontal
                         data={Recents}
                         renderItem={({ item: { name, resturant, status } }) => (
-                            <Pressable style={styles.horizontalListItem}>
-                                <Text>{name}</Text>
-                                <Text>{resturant}</Text>
+                            <Pressable 
+                                style={{ 
+                                    ...styles.horizontalListItem,
+                                    backgroundColor: "#fff",
+                                    borderWidth: 1,
+                                    borderColor: "#C2C2C2",
+                                    borderRadius: 8,
+                                    paddingVertical: 8,
+                                    paddingHorizontal: 12,
+                                    gap: 8 
+                                }}
+                            >
+                                <Text style={{ alignSelf: "flex-start", fontWeight: "500" }}>{name}</Text>
+                                <Text style={{ alignSelf: "flex-start", fontWeight: "700" }}>{resturant}</Text>
 
-                                <Text style={{ backgroundColor: "#FFD686", color: "#fff" }}>
-                                    {status}
-                                </Text>
+                                <View style={{ backgroundColor: "#FFD686", alignSelf: "flex-end", padding: 6, borderRadius: 16 }}>
+                                    <Text style={{ color: "#000", textTransform: "capitalize", fontWeight: "700" }}>
+                                        {status}
+                                    </Text>
+                                </View>
                             </Pressable>
                         )}
                     />
                 </DefaultView>
 
-                <DefaultView style={Styles.DefaultPaddingX}>
-                    <Text>Vendor</Text>
+                <DefaultView>
+                    <Text style={{ fontWeight: "900", marginVertical: 16, fontSize: 20 }}>Vendor</Text>
                     {
                         Vendors.map(({ name }, index) => (
                             <Pressable onPress={() => router.push(`/vendor/${name.replaceAll(" ", "-")}`)} key={`${name}-${index}`} style={[styles.horizontalListItem, styles.vendorCard]}>
@@ -123,7 +136,7 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        marginRight: 12
+        marginRight: 12,
     },
     itemContainer: {
         borderWidth: 1, 

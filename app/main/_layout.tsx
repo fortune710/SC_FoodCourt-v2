@@ -7,7 +7,13 @@ import Header from "@/components/Header";
 export default function DrawerLayout() {
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
-            <Drawer>
+            <Drawer 
+                screenOptions={{
+                    drawerStyle: {
+                        backgroundColor: "#2C1801"
+                    }
+                }}
+            >
                 <Drawer.Screen
                     name="index"
                     options={{
@@ -20,14 +26,24 @@ export default function DrawerLayout() {
                 <Drawer.Screen
                     name="profile"
                     options={{
-                        drawerLabel: "Profile"
+                        drawerLabel: "Profile",
+                        header: () => <Header pageTitle="Profile" />
+                    }}
+                />
+
+                <Drawer.Screen
+                    name="orders"
+                    options={{
+                        drawerLabel: "Orders",
+                        header: () => <Header pageTitle="Orders" />
                     }}
                 />
 
                 <Drawer.Screen
                     name="settings"
                     options={{
-                        drawerLabel: "Settings"
+                        drawerLabel: "Settings",
+                        header: () => <Header pageTitle="Settings" />
                     }}
                 />
             </Drawer>

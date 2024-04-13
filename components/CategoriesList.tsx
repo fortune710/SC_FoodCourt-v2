@@ -27,13 +27,13 @@ const CategoriesList: React.FC<CategoriesListProps> = ({ onChange }) => {
 
     return (
         <View style={Styles.DefaultSpaceY}>
-            <Text style={styles.containerPadding}>
+            <Text style={{ marginBottom: 8, fontWeight: "900", fontSize: 20 }}>
                 Categories
             </Text>
             <FlatList
                 horizontal
                 data={Categories}
-                style={styles.containerPadding}                
+                style={{}}                
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item: category }) => (
                     <Pressable onPress={() => handleChange(category)} style={styles.horizontalListItem}>
