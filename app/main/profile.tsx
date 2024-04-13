@@ -9,42 +9,41 @@ import { Pressable, View } from "react-native";
 export default function ProfilePage() {
     return (
         <Page>
-            <Header pageTitle=""/>
 
             <EditProfilePhoto/>
 
             <View style={Styles.ProfileSettingsContainer}>
-                <Text>Profile</Text>
+                <Text style={{ color: "#fff", fontWeight: "700", paddingVertical: 16, fontSize: 20 }}>Profile</Text>
 
-                <View style={styles.borderVertical}>
-                    <Pressable style={styles.borderBotton}>
-                        <Text style={styles.mediumText}>
-                            Name: <Text style={styles.boldText}>SUSAN SHARON</Text>
+                <View style={[ styles.borderVertical ]}>
+                    <Pressable style={[ styles.borderBotton, { paddingHorizontal: 16, paddingVertical: 8 } ]}>
+                        <Text style={[ styles.boldText, { color: "#fff", fontSize: 16 } ]}>
+                            Name: <Text style={[ styles.mediumText, { color: "#fff", fontSize: 16 }  ]}>SUSAN SHARON</Text>
                         </Text>
                     </Pressable>
 
-                    <Pressable style={styles.borderBotton}>
-                        <Text style={styles.mediumText}>
-                            Name: <Text style={styles.boldText}>SUSAN SHARON</Text>
+                    <Pressable style={[ styles.borderBotton, { paddingHorizontal: 16, paddingVertical: 8 } ]}>
+                        <Text style={[ styles.boldText, { color: "#fff", fontSize: 16 } ]}>
+                            Email: <Text style={[ styles.mediumText, { color: "#fff", fontSize: 16 }  ]}>susan.sharon@gmail.com</Text>
                         </Text>
                     </Pressable>
 
-                    <Pressable style={styles.borderBotton}>
-                        <Text style={styles.mediumText}>
-                            Name: <Text style={styles.boldText}>SUSAN SHARON</Text>
+                    <Pressable style={[ styles.borderBotton, { paddingHorizontal: 16, paddingVertical: 8 } ]}>
+                        <Text style={[ styles.boldText, { color: "#fff", fontSize: 16 } ]}>
+                            Phone Number: <Text style={[ styles.mediumText, { color: "#fff", fontSize: 16 }  ]}>+234 901 807 7761</Text>
                         </Text>
                     </Pressable>
 
-                    <Pressable>
-                        <Text style={styles.mediumText}>
-                            Name: <Text style={styles.boldText}>SUSAN SHARON</Text>
+                    <Pressable style={{ paddingHorizontal: 16, paddingVertical: 8 }}>
+                        <Text style={[ styles.boldText, { color: "#fff", fontSize: 16 } ]}>
+                            Change Password
                         </Text>
                     </Pressable>
                 </View>
 
-                <Button type="clear">
+                {/* <Button type="clear">
                     Log Out
-                </Button>
+                </Button> */}
             </View>
         </Page>
     )
@@ -58,9 +57,9 @@ const styles = StyleSheet.create({
         fontWeight: "500"
     },
     borderVertical: {
-        borderTopWidth: 1,
+        // borderTopWidth: 1,
         borderBottomWidth: 1,
-        borderTopColor: "#fff",
+        // borderTopColor: "#fff",
         borderBottomColor: "#fff",
         width: "100%"
     },
