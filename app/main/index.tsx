@@ -12,6 +12,9 @@ import Styles from "../../constants/Styles";
 import { Link, useRouter } from "expo-router";
 import Searchbar from "../../components/Searchbar";
 import CategoriesList from "../../components/CategoriesList";
+import { supabase } from "@/utils/supabase";
+import { useEffect, useState } from "react";
+import { Session } from "@supabase/supabase-js";
 
 const Vendors = [
     { name: "W Sauce" },
@@ -56,15 +59,35 @@ const Recents = [
 
 export default function HomePage() {
     const router = useRouter()
+    const [session, setSession] = useState<Session | null>(null)
+    const [profile, setProfile] = useState<any | null>(null)
+
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setSession(session)
+            supabase
+                .from("profiles")
+                .select("*")
+                .eq("id", session?.user.id)
+                .single()
+                .then((profile) => {
+                    setProfile(profile)
+                })
+        })
+
+        supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session)
+        })
+    }, [])
 
     return (
         <Page style={{ paddingHorizontal: 16 }}>
-            <ScrollView contentInset={{ bottom: 64 }} showsVerticalScrollIndicator={false}>
+            <ScrollView contentInset={{ bottom: 128 }} showsVerticalScrollIndicator={false}>
 
                 {/* <Text>Hello There</Text> */}
 
                 <DefaultView>
-                    <Text style={{ fontWeight: "800", marginTop: 8 }}>Hi, Ada Tobi Musa</Text>
+                    <Text style={{ fontWeight: "800", marginTop: 8 }}>Hi There</Text>
                     <Text style={{ fontWeight: "900", marginVertical: 16, fontSize: 20 }}>What will we be having today?</Text>
                 </DefaultView>
 
@@ -77,6 +100,7 @@ export default function HomePage() {
                     <FlatList
                         horizontal
                         data={Recents}
+                        showsHorizontalScrollIndicator={false}
                         renderItem={({ item: { name, resturant, status } }) => (
                             <Pressable 
                                 style={{ 

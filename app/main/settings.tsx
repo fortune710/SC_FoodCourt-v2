@@ -120,7 +120,7 @@ export default function SettingsPage() {
 
     return (
         <Page>
-            <Header pageTitle=""/>
+            {/* <Header pageTitle=""/> */}
 
             <EditProfilePhoto/>
 

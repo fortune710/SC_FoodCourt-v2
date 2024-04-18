@@ -11,6 +11,7 @@ import {
 // import { useNavigation } from "expo-router";
 import { DrawerNavigationProp, DrawerToggleButton } from "@react-navigation/drawer";
 import { Button } from "@rneui/base";
+import { Link } from "expo-router";
 
 interface HeaderProps {
     pageTitle: string
@@ -29,7 +30,9 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
             </Button>
             {/* <DrawerToggleButton tintColor={primaryColor}></DrawerToggleButton> */}
             {/* <Text style={styles.title}>{pageTitle}</Text> */}
-            <MaterialCommunityIcons size={25} name="cart" color={primaryColor}/>
+            <Link href="/cart/shopping-cart-full" asChild>
+                <MaterialCommunityIcons size={25} name="cart" color={primaryColor}/>
+            </Link>
         </View>
     )
 }

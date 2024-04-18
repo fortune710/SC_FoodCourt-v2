@@ -10,7 +10,10 @@ export default function DrawerLayout() {
             <Drawer 
                 screenOptions={{
                     drawerStyle: {
-                        backgroundColor: "#2C1801"
+                        backgroundColor: "#2C1801",
+                    },
+                    drawerLabelStyle: {
+                        color: "#fff"
                     }
                 }}
             >

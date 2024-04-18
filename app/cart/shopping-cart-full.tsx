@@ -6,18 +6,22 @@ import { Feather, MaterialIcons, Entypo } from '@expo/vector-icons';
 
 import CartItem from '../../components/CartItem';
 import cartItemList from 'mock/cart.json';
+import { SafeAreaView } from "react-native";
+import { useRouter } from "expo-router";
 
 
 
 
 export default function CartFullPage() {
+  const router = useRouter()
 
   return (
-      <Page>
+      <SafeAreaView>
+        <Page>
         <View style={{flexDirection: 'row',justifyContent:'space-between', width: '55%', alignItems: 'center', marginTop:30}}>
-          <View>
+          {/* <View> */}
             <Pressable
-                  onPress={() => {}}
+                  onPress={() => router.back()}
                   style={{marginTop: 10, marginLeft: 10}}
               >
                 <View style={{width: 50, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center', }}>
@@ -25,7 +29,7 @@ export default function CartFullPage() {
                   <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
                 </View>
             </Pressable>
-          </View>
+          {/* </View> */}
     
           <Text style={{fontWeight:'bold', fontSize: 24, textAlign:'center', marginTop: 5}}>Cart</Text>
         </View>
@@ -37,7 +41,7 @@ export default function CartFullPage() {
           />
         </View>
 
-        <ScrollView style={{marginBottom:200}}>
+        <ScrollView style={{marginBottom:200}} contentInset={{ bottom: 192 }}>
           <View style={{marginBottom:30}}>
             {cartItemList.map((foodItem) => (
               <CartItem
@@ -71,5 +75,6 @@ export default function CartFullPage() {
         {/* <View style={{height:30}}/> */}
           
       </Page>
+      </SafeAreaView>
   )
 }

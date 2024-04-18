@@ -10,6 +10,7 @@ import { Pressable, Text, View } from "react-native";
 
 import vendors from "@/mock/vendors.json";
 import orders from "@/mock/orders.json";
+import Searchbar from "@/components/Searchbar";
 
 export default function OrdersPage() {
 
@@ -31,10 +32,10 @@ export default function OrdersPage() {
 
 
     return (
-        <Page>
-            <Header
-                pageTitle="Orders"
-            />
+        <Page style={{ paddingHorizontal: 16, paddingTop: 16 }}>
+
+            <Searchbar />
+            <View style={{ height: 16 }} />
 
             {
                 orderIds.map((orderId) => {
