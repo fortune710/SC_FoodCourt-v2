@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "name": "Pasta"
+    },
+    {
+        "id": 2,
+        "name": "Pizza"
+    },
+    {
+        "id": 3,
+        "name": "Sushi"
+    },
+    {
+        "id": 4,
+        "name": "Cakes"
+    },
+    {
+        "id": 5,
+        "name": "Grills"
+    },
+    {
+        "id": 6,
+        "name": "Salads"
+    },
+    {
+        "id": 7,
+        "name": "Tacos"
+    },
+    {
+        "id": 8,
+        "name": "Drinks"
+    }
+]

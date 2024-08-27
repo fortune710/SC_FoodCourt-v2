@@ -6,7 +6,7 @@ import useThemeColor from "@/hooks/useThemeColor";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Chip, ListItem, Slider } from "@rneui/themed";
 import { useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text, View, ScrollView } from "react-native";
 
 import vendors from "@/mock/vendors.json";
 import orders from "@/mock/orders.json";
@@ -35,43 +35,35 @@ export default function OrdersPage() {
         <Page style={{ paddingHorizontal: 16, paddingTop: 16 }}>
 
             <Searchbar />
-            <View style={{ height: 16 }} />
+            <ScrollView style={{flex: 1}}>
+                <View style={{ height: 16 }} />
+                {
+                    orderIds.map((orderId) => {
+                        const orders = allOrders[orderId] as OrderItem[];
+                        return (
+                            <View key={orderId} style={{ borderWidth: 1, borderRadius: 12, padding: 12, marginVertical: 4 }}>
+                                <Text style={{ fontWeight: 'bold' }}>Order No: {orderId}</Text>
+                                {/* <Text style={{ fontSize: 12, color: 'gray' }}>{orders[0].createdAt}</Text> */}
+                                {
+                                    orders.map((order) => (
+                                        <View key={order.id} style={{ marginVertical: 8 }}>
+                                            {
+                                                order.products.map(({product, quantity}) => (
+                                                    <View key={product.id} style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                        <Text>{quantity}x {product.name}</Text>
+                                                        <Text>{product.price}</Text>
+                                                    </View>
+                                                ))
+                                            }
+                                        </View>
+                                    ))
+                                }
+                            </View>
+                        )
+                    })
+                }
+            </ScrollView>
 
-            {
-                orderIds.map((orderId) => {
-
-                    const orders = allOrders[orderId] as OrderItem[];
-                    return (
-                        <ListItem.Accordion
-                            content={
-                                <ListItem.Content>
-                                    <ListItem.Title>Order {orderId}</ListItem.Title>
-                                </ListItem.Content>
-                            }
-
-                            style={{ borderWidth: 1, borderRadius: 12 }}
-
-                            key={orderId}
-                        
-                        >
-                            {
-                                orders.map((order) => (
-                                    <ListItem>
-                                        {
-                                            order.products.map(({product, quantity}) => (
-                                                <>
-                                                    <ListItem.Title>{quantity}x {product.name}</ListItem.Title>
-                                                    <ListItem.Subtitle>{product.price}</ListItem.Subtitle>
-                                                </>
-                                            ))
-                                        }
-                                    </ListItem>
-                                ))
-                            }
-                        </ListItem.Accordion>
-                    )
-                })
-            }
 
         </Page>
     )
