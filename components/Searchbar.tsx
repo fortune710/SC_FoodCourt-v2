@@ -1,10 +1,21 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { View, TextInput, StyleSheet } from "react-native";
 import useThemeColor from "../hooks/useThemeColor";
+import { router } from "expo-router";
+import { useEffect, useState } from "react";
+import useDebounce from "@/hooks/useDebounce";
 
 const Searchbar: React.FC = () => {
 
     const primary = useThemeColor({}, "primary");
+    const [query, setQuery] = useState("");
+    const debouncedQuery = useDebounce(query, 500);
+
+    useEffect(() => {
+        router.setParams({ query: debouncedQuery });
+    }, [debouncedQuery])
+
+
 
     const searchbarStyle = {
         borderColor: primary
@@ -17,6 +28,8 @@ const Searchbar: React.FC = () => {
                 placeholder="Search" 
                 style={{ fontWeight: "600", marginLeft: 7 }}
                 placeholderTextColor={primary}
+                onChangeText={(text) => setQuery(text)}
+                value={query}
             />
         </View>
 
