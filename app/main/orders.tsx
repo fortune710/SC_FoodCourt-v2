@@ -6,11 +6,12 @@ import useThemeColor from "@/hooks/useThemeColor";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Chip, ListItem, Slider } from "@rneui/themed";
 import { useState } from "react";
-import { Pressable, Text, View, ScrollView } from "react-native";
+import { Pressable, Text, View, ScrollView, StyleSheet } from "react-native";
 
 import vendors from "@/mock/vendors.json";
 import orders from "@/mock/orders.json";
 import Searchbar from "@/components/Searchbar";
+import { OrderItem } from "@/types";
 
 export default function OrdersPage() {
 
