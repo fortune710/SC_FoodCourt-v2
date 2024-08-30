@@ -3,9 +3,9 @@
   "compilerOptions": {
     "strict": true,
     "allowJs": true,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["*"]
     },
   },
   "include": [
