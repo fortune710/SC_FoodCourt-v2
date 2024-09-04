@@ -18,7 +18,7 @@ interface CartItem {
 export interface OrderItem {
     id: string;
     orderId: string;
-    status: "preparing"|"prepared"|"cancelled",
+    status: "preparing"|"prepared"|"canceled",
     products: CartItem[]
 }
 

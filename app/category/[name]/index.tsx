@@ -5,6 +5,8 @@ import vendors from "@/mock/vendors.json"
 import products from "@/mock/products.json"
 import { useRouter } from 'expo-router';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Link } from 'expo-router';
+import { Product } from '@/types';
 
 const CategoryPage = () => {
   const router = useRouter();
@@ -16,7 +18,7 @@ const CategoryPage = () => {
 
 
   const groupedProducts = useMemo(() => {
-    return categoryProducts.reduce((acc : {[key: string]: any}, product) => {
+    return categoryProducts.reduce((acc : {[key: string]: Product[]}, product) => {
       if (!acc[product.vendorId]) {
         acc[product.vendorId] = [];
       }
@@ -54,16 +56,16 @@ const CategoryPage = () => {
             return (
                 <View key={vendorId}>
                     <Text style={styles.restaurantName}>{vendor?.name}</Text>
-                    {vendorProducts.map((item: any) => (
-                    <View key={item.id} style={styles.menuItem}>
+                    {vendorProducts.map((item: Product) => (
+                    <Link href={`/item/${item.id}?restaurantId=${item.vendorId}`} key={item.id} style={styles.menuItem}>
                         <View style={styles.itemInfo}>
-                        <Text style={styles.itemName}>{item.name}</Text>
-                        <Text style={styles.itemDescription}>{item.description}</Text>
+                          <Text style={styles.itemName}>{item.name}</Text>
+                          <Text style={styles.itemDescription}>{item.description}</Text>
+                          </View>
+                          <View style={styles.priceTag}>
+                          <Text style={styles.price}>₦ {item.price}</Text>
                         </View>
-                        <View style={styles.priceTag}>
-                        <Text style={styles.price}>₦ {item.price}</Text>
-                        </View>
-                    </View>
+                    </Link>
                     ))}
                 </View>
             )})}
