@@ -7,13 +7,20 @@ import useDebounce from "@/hooks/useDebounce";
 import categories from "@/mock/categories.json"
 import vendors from "@/mock/vendors.json"
 import products from "@/mock/products.json"
-import { Product } from '@/types';
+import MenuItem from '@/components/MenuItem';
+import CategoriesList from './CategoriesList';
+import { Product, Vendor, Category } from '@/types';
+
+type SearchResult = 
+  | (Product & { vendorName: string; categoryName: string; type: string })
+  | (Vendor & { type: string })
+  | (Category & { type: string });
 
 const HomeSearch: React.FC<{setIsSearchActive: React.Dispatch<React.SetStateAction<boolean>>}> = ({setIsSearchActive}) => {
   const primary = useThemeColor({}, "primary");
   const [query, setQuery] = useState("");
   const debouncedQuery = useDebounce(query, 500);
-  const [searchResults, setSearchResults] = useState<Product[] & {vendorName: string, categoryName: string}[]>([]);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const searchbarStyle = {
     borderColor: primary
 }
@@ -26,34 +33,36 @@ const HomeSearch: React.FC<{setIsSearchActive: React.Dispatch<React.SetStateActi
       return;
     }
 
-    const filteredResults = products.filter(item =>
+    const filteredProducts = products.filter(item =>
       item.name.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
       item.description.toLowerCase().includes(debouncedQuery.toLowerCase())
-    );
-
-    const resultsWithDetails = filteredResults.map(item => ({
+    ).map(item => ({
       ...item,
       vendorName: vendors.find(v => v.id === item.vendorId)?.name || 'Unknown Vendor',
-      categoryName: categories.find(c => c.id === parseInt(item.categoryId))?.name || 'Uncategorized',
+      categoryName: categories.find(c => c.id === item.categoryId)?.name || 'Uncategorized',
+      type: 'product'
     }));
 
-    setSearchResults(resultsWithDetails);
+    const filteredVendors = vendors.filter(vendor =>
+      vendor.name.toLowerCase().includes(debouncedQuery.toLowerCase())
+    ).map(vendor => ({
+      ...vendor,
+      type: 'vendor'
+    }));
+
+    const filteredCategories = categories.filter(category =>
+      category.name.toLowerCase().includes(debouncedQuery.toLowerCase())
+    ).map(category => ({
+      ...category,
+      type: 'category'
+    }));
+
+    setSearchResults([...filteredProducts, ...filteredVendors, ...filteredCategories]);
   }, [debouncedQuery]);
 
-  const renderItem = ({ item } : {item : Product & {vendorName: string, categoryName: string}}) => (
-    <Pressable className="flex-row p-4 border-b border-gray-200">
-      <Image 
-        source={{ uri: `` }} 
-        className="w-20 h-20 rounded-md"
-      />
-      <View className="flex-1 ml-4">
-        <Text className="text-lg font-bold">{item.name}</Text>
-        <Text className="text-sm text-gray-600">{item.description}</Text>
-        <Text className="text-xs text-gray-500">{item.vendorName} • {item.categoryName}</Text>
-        <Text className="text-sm font-semibold mt-1">${(item.price / 100).toFixed(2)}</Text>
-      </View>
-    </Pressable>
-  );
+  const productResults = searchResults.filter(result => result.type === 'product') as (Product & { vendorName: string; categoryName: string })[];
+  const vendorResults = searchResults.filter(result => result.type === 'vendor') as Vendor[];
+  const categoryResults = searchResults.filter(result => result.type === 'category') as Category[];
 
   return (
     <View className="flex-1">
@@ -75,11 +84,38 @@ const HomeSearch: React.FC<{setIsSearchActive: React.Dispatch<React.SetStateActi
           <Text className="text-gray-500">Sorry this item cannot be found</Text>
         </View>
       ) : (
-        <FlatList
-          data={searchResults}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-        />
+        <div>
+          <div>
+            <h2>Products</h2>
+            {productResults.length > 0 ? (
+              productResults.map(product => (
+                <MenuItem item={product} />
+              ))
+            ) : (
+              <p>No products found</p>
+            )}
+          </div>
+          <div>
+            <h2>Vendors</h2>
+            {vendorResults.length > 0 ? (
+              vendorResults.map(vendor => (
+                <div key={vendor.id}>
+                  <h3>{vendor.name}</h3>
+                </div>
+              ))
+            ) : (
+              <p>No vendors found</p>
+            )}
+          </div>
+          <div>
+            <h2>Categories</h2>
+            {categoryResults.length > 0 ? (
+              <CategoriesList filteredCategories={categoryResults}/>
+            ) : (
+              <p>No categories found</p>
+            )}
+          </div>
+        </div>
       )}
     </View>
   );

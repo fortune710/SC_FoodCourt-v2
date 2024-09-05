@@ -1,3 +1,5 @@
+import { CategoryName } from "@/components/CategoriesList";
+
 export interface Product {
     id: string,
     name: string,
@@ -34,4 +36,15 @@ export interface MenuItem {
     id: number,
     category: string,
     quantity: number
+}
+
+export interface Vendor {
+    id: string,
+    name: string
+}
+
+export interface Category{
+    id: string,
+    name: CategoryName,
+    image: string,
 }

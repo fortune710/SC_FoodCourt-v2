@@ -7,14 +7,19 @@ import { useRouter } from 'expo-router';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Link } from 'expo-router';
 import { Product } from '@/types';
+import MenuItem from '@/components/MenuItem';
 
 const CategoryPage = () => {
   const router = useRouter();
-  const name = "1" //route param
+  const id = "1";
+  const category = categories.find(category => category.id === id);
+  const name = category?.name;
 
   const categoryProducts = useMemo(() => {
-    return products.filter(product => product.categoryId === name);
-  }, [name]);
+    return products.filter(product => product.categoryId === id);
+  }, [id]);
+
+
 
 
   const groupedProducts = useMemo(() => {
@@ -57,15 +62,7 @@ const CategoryPage = () => {
                 <View key={vendorId}>
                     <Text style={styles.restaurantName}>{vendor?.name}</Text>
                     {vendorProducts.map((item: Product) => (
-                    <Link href={`/item/${item.id}?restaurantId=${item.vendorId}`} key={item.id} style={styles.menuItem}>
-                        <View style={styles.itemInfo}>
-                          <Text style={styles.itemName}>{item.name}</Text>
-                          <Text style={styles.itemDescription}>{item.description}</Text>
-                          </View>
-                          <View style={styles.priceTag}>
-                          <Text style={styles.price}>₦ {item.price}</Text>
-                        </View>
-                    </Link>
+                      <MenuItem item={item}/>
                     ))}
                 </View>
             )})}
@@ -82,12 +79,6 @@ const styles = StyleSheet.create({
   searchInput: { flex: 1, marginLeft: 8, color: 'red' },
   subtitle: { textAlign: 'center', marginBottom: 16 },
   restaurantName: { fontSize: 20, fontWeight: 'bold', color: 'red', marginTop: 16, marginLeft: 16 },
-  menuItem: { flexDirection: 'row', justifyContent: 'space-between', padding: 16, borderBottomWidth: 1, borderBottomColor: '#eee' },
-  itemInfo: { flex: 1, marginRight: 16 },
-  itemName: { fontSize: 18, fontWeight: 'bold' },
-  itemDescription: { color: 'gray', marginTop: 4 },
-  priceTag: { backgroundColor: 'red', borderRadius: 16, padding: 8 },
-  price: { color: 'white', fontWeight: 'bold' },
 });
 
 export default CategoryPage;
