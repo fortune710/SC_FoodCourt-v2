@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { View, FlatList, Pressable, Text, StyleSheet } from "react-native";
 import { Image } from "expo-image";
+import {Link, router, useRouter} from "expo-router";
 import Styles from "../constants/Styles";
 import { X } from "lucide-react-native";
 import { Category } from "@/types";
@@ -16,6 +17,7 @@ interface CategoriesListProps {
 
 const CategoriesList: React.FC<CategoriesListProps> = ({ onChange, filteredCategories }) => {
     const [_, setCategory] = useState<CategoryName>();
+    const data = filteredCategories ? filteredCategories : CATEGORIES;
 
     const handleChange = (category: CategoryName) => {
         if (category === _) {
@@ -34,18 +36,24 @@ const CategoriesList: React.FC<CategoriesListProps> = ({ onChange, filteredCateg
             </Text>
             <FlatList
                 horizontal
-                data={filteredCategories || CATEGORIES}
+                data={data}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item: category }) => (
-                    <Pressable onPress={() => handleChange(category.name)} style={styles.horizontalListItem}>
-                        <View style={styles.itemContainer}>
-                            {
-                                category.name === _ ? <X /> :
-                                <Image style={{ width: 50, height: 50 }} source={category.image} />
-                            }
-                        </View>
-                        <Text>{category.name}</Text>
-                    </Pressable>
+                    <Link href={{
+                        pathname: '/category/[id]',
+                        params: { id: category.id }
+                    }} asChild>
+                        <Pressable onPress={() => handleChange(category.name)} style={styles.horizontalListItem}>
+                            <View style={styles.itemContainer}>
+                                {
+                                    category.name === _ ? <X /> :
+
+                                    <Image style={{ width: 50, height: 50 }} source={category.image} />
+                                }
+                            </View>
+                            <Text>{category.name}</Text>
+                        </Pressable>
+                    </Link>
                 )}
             />
         </View>

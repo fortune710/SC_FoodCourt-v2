@@ -97,7 +97,7 @@ export default function HomePage() {
                 </DefaultView>
 
                 <Pressable onPress={() => setIsSearchActive(true)}>
-                    <Searchbar/>
+                    <Searchbar disable={false}/>
                 </Pressable>
 
                 <CategoriesList/>

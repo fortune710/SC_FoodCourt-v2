@@ -83,39 +83,42 @@ const HomeSearch: React.FC<{setIsSearchActive: React.Dispatch<React.SetStateActi
         <View className="flex-1 justify-center items-center">
           <Text className="text-gray-500">Sorry this item cannot be found</Text>
         </View>
-      ) : (
-        <div>
-          <div>
-            <h2>Products</h2>
+      ) : ( query !== '' && (
+        <View>
+          <View className='mt-20' style={{marginTop: 20}}>
+            <Text style={{fontWeight: "900", fontSize: 20 }}>
+                Products
+            </Text>
             {productResults.length > 0 ? (
               productResults.map(product => (
                 <MenuItem item={product} />
               ))
             ) : (
-              <p>No products found</p>
+              <Text>No products found</Text>
             )}
-          </div>
-          <div>
-            <h2>Vendors</h2>
-            {vendorResults.length > 0 ? (
-              vendorResults.map(vendor => (
-                <div key={vendor.id}>
-                  <h3>{vendor.name}</h3>
-                </div>
-              ))
-            ) : (
-              <p>No vendors found</p>
-            )}
-          </div>
-          <div>
-            <h2>Categories</h2>
+          </View>
+          <View style={{marginTop: 20}}>
             {categoryResults.length > 0 ? (
               <CategoriesList filteredCategories={categoryResults}/>
             ) : (
-              <p>No categories found</p>
+              <Text>No categories found</Text>
             )}
-          </div>
-        </div>
+          </View>
+          <View style={{marginTop: 20}}>
+              <Text style={{fontWeight: "900", fontSize: 20 }}>
+                  Vendors
+              </Text>
+            {vendorResults.length > 0 ? (
+              vendorResults.map(vendor => (
+                <View key={vendor.id}>
+                  <Text>{vendor.name}</Text>
+                </View>
+              ))
+            ) : (
+              <Text>No vendors found</Text>
+            )}
+          </View>
+        </View>)
       )}
     </View>
   );

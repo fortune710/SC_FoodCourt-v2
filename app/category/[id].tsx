@@ -1,19 +1,25 @@
-import React, { useMemo } from 'react';
-import { View, Text, ScrollView, SafeAreaView, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import React, { useMemo, useState } from 'react';
+import { View, Text, ScrollView, SafeAreaView, StyleSheet, TextInput, Pressable } from 'react-native';
 import categories from "@/mock/categories.json"
 import vendors from "@/mock/vendors.json"
 import products from "@/mock/products.json"
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Entypo } from '@expo/vector-icons';
 import { Link } from 'expo-router';
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Product } from '@/types';
 import MenuItem from '@/components/MenuItem';
+import useThemeColor from '@/hooks/useThemeColor';
+import CategorySearchbar from '@/components/CategorySearch';
 
 const CategoryPage = () => {
   const router = useRouter();
-  const id = "1";
+  const { id } = useLocalSearchParams();
   const category = categories.find(category => category.id === id);
   const name = category?.name;
+  const primary = useThemeColor({}, "primary");
+  const [searchResults, setSearchResults] = useState<Product[]>([]);
 
   const categoryProducts = useMemo(() => {
     return products.filter(product => product.categoryId === id);
@@ -23,7 +29,7 @@ const CategoryPage = () => {
 
 
   const groupedProducts = useMemo(() => {
-    return categoryProducts.reduce((acc : {[key: string]: Product[]}, product) => {
+    return (searchResults.length > 0 ? searchResults : categoryProducts).reduce((acc : {[key: string]: Product[]}, product) => {
       if (!acc[product.vendorId]) {
         acc[product.vendorId] = [];
       }
@@ -34,24 +40,32 @@ const CategoryPage = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Icon name="menu-outline" size={24} color="red" />
-        </TouchableOpacity>
-        <Text style={styles.title}>{name}</Text>
-        <TouchableOpacity onPress={() => router.push('/cart')}>
-          <Icon name="cart-outline" size={24} color="red" />
-        </TouchableOpacity>
-      </View>
+      <View style={{flexDirection: 'row',justifyContent:'space-between', width: '55%', alignItems: 'center', marginTop:30}}>
+            <Pressable
+                  onPress={() => router.back()}
+                  style={{marginTop: 10, marginLeft: 10}}
+              >
+                <View style={{width: 50, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center', }}>
+                  <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
+                  <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
+                </View>
+            </Pressable>
+          {/* </View> */}
+    
+          <Text style={{fontWeight:'bold', fontSize: 24, textAlign:'center', marginTop: 5}}>{name}</Text>
+        </View>
 
-      <View style={styles.searchContainer}>
-        <Icon name="search-outline" size={20} color="red" />
+        <View style={{padding: 15}}>
+          <CategorySearchbar products={categoryProducts} setSearchResults={setSearchResults} />
+        </View>
+        {/* <View style={styles.searchContainer}>
+        <Icon name="search-outline" size={20} color={primary} />
         <TextInput 
           style={styles.searchInput}
           placeholder="Search"
-          placeholderTextColor="red"
+          placeholderTextColor={primary}
         />
-      </View>
+      </View> */}
 
       <Text style={styles.subtitle}>Select item, then add to cart</Text>
 
@@ -59,7 +73,7 @@ const CategoryPage = () => {
         {Object.entries(groupedProducts).map(([vendorId, vendorProducts]) => {
             const vendor = vendors.find(vendor => vendor.id === vendorId);
             return (
-                <View key={vendorId}>
+                <View key={vendorId} style={{marginBottom: 20}}>
                     <Text style={styles.restaurantName}>{vendor?.name}</Text>
                     {vendorProducts.map((item: Product) => (
                       <MenuItem item={item}/>
@@ -76,7 +90,6 @@ const styles = StyleSheet.create({
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 16 },
   title: { fontSize: 24, fontWeight: 'bold' },
   searchContainer: { flexDirection: 'row', alignItems: 'center', margin: 16, padding: 8, borderWidth: 1, borderColor: 'red', borderRadius: 25 },
-  searchInput: { flex: 1, marginLeft: 8, color: 'red' },
   subtitle: { textAlign: 'center', marginBottom: 16 },
   restaurantName: { fontSize: 20, fontWeight: 'bold', color: 'red', marginTop: 16, marginLeft: 16 },
 });

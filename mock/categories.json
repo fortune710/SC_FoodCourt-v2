@@ -1,8 +1,8 @@
 [
     {
         "id": "1",
-        "name": "Rice,
-        "image": "require(\"../assets/images/rice-bowl.svg\")"
+        "name": "Rice",
+        "image": "require(\"../assets/images/pasta.svg\")"
     },
     {
         "id": "2",
