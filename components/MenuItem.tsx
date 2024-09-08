@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     itemDescription: { color: 'gray', marginTop: 4 },
     priceTag: { backgroundColor: 'red', borderRadius: 16, padding: 8 },
     price: { color: 'white', fontWeight: 'bold' },
-    menuItem: { flexDirection: 'row', justifyContent: 'space-between', padding:16, borderBottomWidth: 1, borderBottomColor: '#eee', },
+    menuItem: { flexDirection: 'row', justifyContent: 'space-between', padding:16, borderBottomWidth: 1, borderBottomColor: '#eee', width: "100%"},
 })
 
 export default MenuItem;

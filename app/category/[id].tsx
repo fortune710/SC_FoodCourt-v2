@@ -7,7 +7,6 @@ import { useRouter, useLocalSearchParams } from 'expo-router';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Entypo } from '@expo/vector-icons';
 import { Link } from 'expo-router';
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Product } from '@/types';
 import MenuItem from '@/components/MenuItem';
 import useThemeColor from '@/hooks/useThemeColor';

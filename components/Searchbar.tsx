@@ -30,8 +30,8 @@ const Searchbar: React.FC<{setQuery?: React.Dispatch<React.SetStateAction<any>>,
                 placeholderTextColor={primary}
                 onChangeText={setQuery}
                 value={query}
-                editable={false}
-                selectTextOnFocus={false}
+                editable={disable}
+                selectTextOnFocus={disable}
             />
         </View>
 

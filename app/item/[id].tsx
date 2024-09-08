@@ -79,10 +79,8 @@ export default function VendorDetailPage() {
                     })} 
                     color="#F72F2F" 
                     style={{ alignSelf: "center", width: "100%" }} 
-                    titleStyle={{ textAlign: "center", padding: 32 }}
-                    >
-                    Add to Cart (N {(menuItem?.price || 0) * quantity})
-                </Button>
+                    title={`Add to Cart (N ${(menuItem?.price || 0) * quantity})`}
+                />
 
 
 
