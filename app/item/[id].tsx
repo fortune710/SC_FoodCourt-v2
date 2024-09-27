@@ -10,9 +10,10 @@ import Header from "../../components/Header";
 import { useState } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import useSingleRestaurant from "@/hooks/useSingleResturant";
-import { Button } from "@rneui/themed";
+import { Button, ListItem } from "@rneui/themed";
 import useCart from "@/hooks/useCart";
 import useCurrentUser from "@/hooks/useCurrentUser";
+import { Clock } from "lucide-react-native";
 
 const Dishes = [
     {
@@ -37,12 +38,16 @@ export default function VendorDetailPage() {
     const primaryColor = useThemeColor({}, "primary");
     const { id, resturantId } = useLocalSearchParams();
 
-    const { getSingleMenuItem } = useSingleRestaurant(Number(resturantId));
+    const { getSingleMenuItem,menuItems } = useSingleRestaurant(Number(resturantId));
     const menuItem = getSingleMenuItem(Number(id));
     const [quantity, setQuantity] = useState(1);
     const { currentUser } = useCurrentUser();
+    const [expanded, setExpanded] = useState(false);
 
-    const { addItem } = useCart(currentUser?.id!)
+    const { addItem } = useCart(currentUser?.id!);
+    console.log(menuItem)
+
+
 
 
 
@@ -54,7 +59,7 @@ export default function VendorDetailPage() {
                     <ImageBackground source={require("../../assets/images/food.png")} style={[Styles.ImageBackground]}/>
                 </View>
 
-                <View>
+                <View className="flex flex-row justify-between w-full">
                     <View>
                         <Text>{menuItem?.name}</Text>
                         <Text>Category: {menuItem?.category}</Text>
@@ -71,6 +76,38 @@ export default function VendorDetailPage() {
                     </View>
                 </View>
 
+                <View>
+                    <Clock/>
+                    <Text>{menuItem?.preparation_time!}</Text>
+                </View>
+
+                
+                <ListItem.Accordion
+                    content={
+                        <ListItem.Content>
+                            <ListItem.Title>Add Ons</ListItem.Title>
+                        </ListItem.Content>
+                    }
+                    isExpanded={expanded}
+                    onPress={() => {
+                        setExpanded(!expanded);
+                    }}
+                    >
+                        {
+                            menuItem?.add_ons?.map((item) => (
+                                <ListItem key={item.foodName} bottomDivider>
+                                    <ListItem.Content>
+                                        <ListItem.Title>{item.foodName}</ListItem.Title>
+                                        <ListItem.Subtitle>{item.price}</ListItem.Subtitle>
+                                    </ListItem.Content>
+                                    <ListItem.Chevron />
+                                </ListItem>
+
+                            ))
+                        }
+                </ListItem.Accordion>
+
+
                 <Button 
                     onPress={() => addItem({
                         user_id: currentUser?.id!,
@@ -80,8 +117,8 @@ export default function VendorDetailPage() {
                     color="#F72F2F" 
                     style={{ alignSelf: "center", width: "100%" }} 
                     titleStyle={{ textAlign: "center", padding: 32 }}
-                    >
-                    Add to Cart (N {(menuItem?.price || 0) * quantity})
+                >
+                    <Text>Add to Cart (N {(menuItem?.price || 0) * quantity})</Text>    
                 </Button>
 
 
