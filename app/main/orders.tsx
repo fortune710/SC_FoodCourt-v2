@@ -12,10 +12,12 @@ import vendors from "@/mock/vendors.json";
 import orders from "@/mock/orders.json";
 import Searchbar from "@/components/Searchbar";
 import { OrderItem } from "@/types";
+import OrderSearchbar from "@/components/OrderSearchModal";
 
 export default function OrdersPage() {
 
-    const allOrders = orders.reduce((grouped: any, item) => {
+    const [searchResults, setSearchResults] = useState<OrderItem[]>([]);
+    const allOrders = (searchResults.length > 0 ? searchResults : orders).reduce((grouped: any, item) => {
       const { orderId } = item;
     
       // Create a new group if it doesn't exist
@@ -35,7 +37,7 @@ export default function OrdersPage() {
     return (
         <Page style={{ paddingHorizontal: 16, paddingTop: 16 }}>
 
-            <Searchbar />
+            <OrderSearchbar setSearchResults={setSearchResults} />
             <ScrollView style={{flex: 1}}>
                 <View style={{ height: 16 }} />
                 {

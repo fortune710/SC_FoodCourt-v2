@@ -16,6 +16,7 @@ import { supabase } from "@/utils/supabase";
 import { useEffect, useState } from "react";
 import { Session } from "@supabase/supabase-js";
 import useRestaurant from "@/hooks/useRestaurant";
+import HomeSearch from "@/components/HomeSearch";
 
 
 
@@ -56,6 +57,7 @@ export default function HomePage() {
     const router = useRouter()
     const [session, setSession] = useState<Session | null>(null)
     const [profile, setProfile] = useState<any | null>(null)
+    const [isSearchActive, setIsSearchActive] = useState(false);
 
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
@@ -77,16 +79,26 @@ export default function HomePage() {
 
     const { isLoading, data: restaurant } = useRestaurant();
 
+    if(isSearchActive) {
+        return (
+            <Page  style={{ paddingHorizontal: 16 }}>
+                <HomeSearch setIsSearchActive={setIsSearchActive} />
+            </Page>
+        )
+    }
+
     return (
         <Page style={{ paddingHorizontal: 16 }}>
             <ScrollView contentInset={{ bottom: 128 }} showsVerticalScrollIndicator={false}>
 
                 <DefaultView>
-                    <Text style={{ fontWeight: "800", marginTop: 8 }}>Hi There</Text>
+                    <Text>Hi There</Text>
                     <Text style={{ fontWeight: "900", marginVertical: 16, fontSize: 20 }}>What will we be having today?</Text>
                 </DefaultView>
 
-                <Searchbar/>
+                <Pressable onPress={() => setIsSearchActive(true)}>
+                    <Searchbar disable={false}/>
+                </Pressable>
 
                 <CategoriesList/>
 

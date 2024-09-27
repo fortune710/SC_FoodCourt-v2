@@ -1,62 +1,61 @@
-import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { Pressable, ScrollView, View } from "react-native";
 import { Page, Text } from "../../components/Themed";
 import useThemeColor from "../../hooks/useThemeColor";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { Image, ImageBackground } from "expo-image";
-import Styles from "../../constants/Styles";
-import Searchbar from "../../components/Searchbar";
-import CategoriesList from "../../components/CategoriesList";
-import Header from "../../components/Header";
-import { useState } from "react";
+import { ImageBackground } from "expo-image";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import useSingleRestaurant from "@/hooks/useSingleResturant";
 import { Button, ListItem } from "@rneui/themed";
 import useCart from "@/hooks/useCart";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { Clock } from "lucide-react-native";
+import { useState } from "react";
 
-const Dishes = [
-    {
-        name: "Mexican Sharwama 1",
-        price: 1500,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-    },
-    {
-        name: "Mexican Sharwama 2",
-        price: 1100,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-    },
-    {
-        name: "Mexican Sharwama 3",
-        price: 1600,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-    },   
-]
+import products from "@/mock/products.json";
 
-export default function VendorDetailPage() {
-
-    const primaryColor = useThemeColor({}, "primary");
+export default function MenuItemDetail() {
+    const router = useRouter();
     const { id, resturantId } = useLocalSearchParams();
+    const [expanded, setExpanded] = useState(false);
 
-    const { getSingleMenuItem,menuItems } = useSingleRestaurant(Number(resturantId));
+
+    const { getSingleMenuItem } = useSingleRestaurant(Number(resturantId));
     const menuItem = getSingleMenuItem(Number(id));
     const [quantity, setQuantity] = useState(1);
     const { currentUser } = useCurrentUser();
-    const [expanded, setExpanded] = useState(false);
-
     const { addItem } = useCart(currentUser?.id!);
-    console.log(menuItem)
-
-
-
 
 
     return (
-        <Page>
-            <ScrollView>
-                <Header pageTitle={menuItem?.name || ""}/>
-                <View style={{ position: "relative", height: 150, width: "100%" }}>
-                    <ImageBackground source={require("../../assets/images/food.png")} style={[Styles.ImageBackground]}/>
+        <Page className="flex-1 bg-white">
+            <View className="relative h-48">
+                <ImageBackground
+                    source={require("../../assets/images/food.png")}
+                    className="w-full h-full"
+                    resizeMode="cover"
+                >
+                    <View className="absolute top-0 left-0 p-4 flex-row justify-between items-center w-full">
+                        <Pressable onPress={() => router.back()}>
+                            <FontAwesome name="bars" size={24} color="black" />
+                        </Pressable>
+                        <Text className="text-black text-lg font-semibold">Mexican Shawarma</Text>
+                        <FontAwesome name="shopping-cart" size={24} color="red" />
+                    </View>
+                </ImageBackground>
+            </View>
+
+            <ScrollView className="p-4 space-y-4">
+                <Text className="text-xl font-semibold">{menuItem?.name}</Text>
+                <Text className="text-gray-500">{menuItem?.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}</Text>
+                
+                <View className="flex-row items-center space-x-4">
+                    <Pressable onPress={() => setQuantity(quantity > 1 ? quantity - 1 : 1)} className="p-2 bg-gray-200 rounded-full">
+                        <FontAwesome name="minus" size={16} color="black" />
+                    </Pressable>
+                    <Text className="text-lg">{quantity}</Text>
+                    <Pressable onPress={() => setQuantity(quantity + 1)} className="p-2 bg-gray-200 rounded-full">
+                        <FontAwesome name="plus" size={16} color="black" />
+                    </Pressable>
                 </View>
 
                 <View className="flex flex-row justify-between w-full">
@@ -68,10 +67,6 @@ export default function VendorDetailPage() {
                     <View style={{ display: "flex", flexDirection: "row", width: 300, justifyContent: "space-around" }}>
                         <Pressable onPress={() => setQuantity(quantity + 1)}>
                             <FontAwesome name="plus"/>
-                        </Pressable>
-                        <Text>{quantity}</Text>
-                        <Pressable onPress={() => setQuantity((prev) => prev--)}>
-                            <FontAwesome name="minus"/>
                         </Pressable>
                     </View>
                 </View>
@@ -126,29 +121,5 @@ export default function VendorDetailPage() {
 
             </ScrollView>
         </Page>
-    )
+    );
 }
-
-const styles = StyleSheet.create({
-    header: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        paddingHorizontal: 12,
-        height: 70
-    },
-    listItem: {
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        height: 90
-    },
-    priceTag: {
-        paddingHorizontal: 12,
-        paddingVertical: 5,
-        borderWidth: 1,
-        borderRadius: 20
-    }
-})
