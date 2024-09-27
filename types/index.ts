@@ -1,4 +1,7 @@
-interface Product {
+import { CategoryName } from "@/components/CategoriesList";
+import { Timestamp } from "react-native-reanimated/lib/typescript/reanimated2/commonTypes";
+
+export interface Product {
     id: string,
     name: string,
     description: string,
@@ -18,7 +21,7 @@ interface CartItem {
 export interface OrderItem {
     id: string;
     orderId: string;
-    status: "preparing"|"prepared"|"cancelled",
+    status: "preparing"|"prepared"|"canceled",
     products: CartItem[]
 }
 
@@ -30,8 +33,21 @@ export interface Addon {
 export interface MenuItem {
     name: string,
     addons: Addon[],
+    restaurantId: string
     price: number,
     id: number,
     category: string,
-    quantity: number
+    quantity: number,
+    description: string,
+}
+
+export interface Vendor {
+    id: string,
+    name: string
+}
+
+export interface Category{
+    id: string,
+    name: CategoryName,
+    image: string,
 }
