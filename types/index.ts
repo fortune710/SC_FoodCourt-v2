@@ -29,9 +29,10 @@ export interface Addon {
 
 export interface MenuItem {
     name: string,
-    addons: Addon[],
+    add_ons: Addon[],
     price: number,
     id: number,
     category: string,
-    quantity: number
+    quantity: number,
+    preparation_time: string
 }
