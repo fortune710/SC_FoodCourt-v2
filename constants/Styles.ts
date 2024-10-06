@@ -16,10 +16,13 @@ const Styles = StyleSheet.create({
         zIndex: -10, 
     },
     ProfileSettingsContainer: {
-        width: screenWidth,
+        // width: screenWidth,
+        alignItems: "center",
+        borderTopStartRadius: 35,
         borderTopEndRadius: 35,
         backgroundColor: "#F34A4A",
-        minHeight: 350
+        // minHeight: 350
+        flex: 1
     },
     FlexCenterJustifyBetween: {
         display: "flex",
