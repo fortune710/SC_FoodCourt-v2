@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { Page, Text } from "../../components/Themed";
 import useThemeColor from "../../hooks/useThemeColor";
 import { useLocalSearchParams, useRouter, router } from "expo-router";
@@ -15,10 +15,10 @@ export default function VendorDetailPage() {
 
     const primaryColor = useThemeColor({}, "primary");
     const { id, category } = useLocalSearchParams();
-    const { restaurant, menuItems, isLoading, menuItemsSorted } = useSingleRestaurant(Number(id));
+    const { restaurant, isLoading, menuItemsSorted } = useSingleRestaurant(Number(id));
     const availableCategories = Object.keys(menuItemsSorted ?? {});
 
-    const router = useRouter()
+    const router = useRouter();
 
     const priceTagColor = {
         color: primaryColor,
@@ -55,22 +55,32 @@ export default function VendorDetailPage() {
 
                     <View style={[Styles.DefaultPaddingX, Styles.DefaultSpaceY, { marginHorizontal: 16 }]}>
                         {
+                            isLoading ? <ActivityIndicator/> :
                             !category || category == "all" ?
                             availableCategories.map((category, index) => (
                                 <View key={category}>
-                                    <Text>{category}</Text>
+                                    <Text style={[priceTagColor, { fontWeight: "600", fontSize: 20  }]}>{category}</Text>
                                     {
                                         menuItemsSorted![category]?.map((dish, index) => (
                                             <Pressable 
                                                 key={index} 
                                                 style={styles.listItem}
-                                                onPress={() => router.push(`/item/${dish.name}`)}
+                                                onPress={() => router.push({
+                                                    pathname: "/item/[id]",
+                                                    params: {
+                                                        id: dish.id,
+                                                        resturantId: restaurant?.id
+                                                    }
+                                                })}                                            
                                             >
                                                 <View style={{ width: "70%" }}>
                                                     <Text>{dish.name}</Text>
                                                     <Text>{dish.quantity} available</Text>
                                                 </View>
-                                                <Text style={[styles.priceTag, priceTagColor]}>N {dish.price}</Text>
+                                                <View style={[styles.priceTag, priceTagColor]}>
+                                                    <Text style={[priceTagColor]}>N {dish.price}</Text>
+
+                                                </View>
                                             </Pressable>
                                         ))
                                     }
@@ -78,13 +88,19 @@ export default function VendorDetailPage() {
                             ))
                             :
                             <View>
-                                <Text>{category}</Text>
+                                <Text style={[priceTagColor, { fontWeight: "600" }]}>{category}</Text>
                                 {
                                     menuItemsSorted![category as string]?.map((dish, index) => (
                                         <Pressable 
                                             key={index} 
                                             style={styles.listItem}
-                                            onPress={() => router.push(`/item/${dish.name}`)}
+                                            onPress={() => router.push({
+                                                pathname: "/item/[id]",
+                                                params: {
+                                                    id: dish.id,
+                                                    resturantId: restaurant?.id
+                                                }
+                                            })}
                                         >
                                             <View style={{ width: "70%" }}>
                                                 <Text>{dish.name}</Text>
@@ -124,6 +140,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         paddingVertical: 5,
         borderWidth: 1,
-        borderRadius: 20
+        borderRadius: 20,
+        backgroundColor: "#F72F2F4C"
     }
 })

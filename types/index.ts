@@ -52,3 +52,12 @@ export interface Category{
     name: CategoryName,
     image: string,
 }
+
+export enum OrderStatus {
+    New = 0,
+    Accepted = 1,
+    Preparing = 2,
+    Completed = 3,
+    Collected = 4,
+    Cancelled = 5,
+}
