@@ -3,7 +3,8 @@ import { supabase } from '../utils/supabase';
 interface SignUpData {
     email: string;
     password: string;
-    name: string
+    name: string;
+    phone_number?: string;
 }
 
 export default function useAuth() {
@@ -30,12 +31,13 @@ export default function useAuth() {
                     full_name: data.name,
                     image_url:  `https://api.dicebear.com/9.x/initials/png?seed=${data.name}`,
                     username: data.name.toLowerCase().replace(" ", ""),
-                    user_type: "customer"
+                    user_type: "customer",
+                    phone_number: data?.phone_number
                 }
             }
         })
 
-        return res.data.user
+        return res
     }
 
     return {
