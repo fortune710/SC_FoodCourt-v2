@@ -8,12 +8,16 @@ import CartItem from '../../components/CartItem';
 import cartItemList from 'mock/cart.json';
 import { SafeAreaView } from "react-native";
 import { useRouter } from "expo-router";
+git import useCart from "@/hooks/useCart";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 
 
 
 export default function CartFullPage() {
-  const router = useRouter()
+  const router = useRouter();
+  const { currentUser } = useCurrentUser();
+  const { cartItems } = useCart(currentUser?.id!);
 
   return (
       <SafeAreaView>
@@ -43,12 +47,12 @@ export default function CartFullPage() {
 
         <ScrollView style={{marginBottom:200}} contentInset={{ bottom: 192 }}>
           <View style={{marginBottom:30}}>
-            {cartItemList.map((foodItem) => (
+            {cartItems?.map((foodItem) => (
               <CartItem
                 key={foodItem.id}
-                name={foodItem.product.name}
-                description={foodItem.product.description}
-                price={foodItem.product.price}
+                name={foodItem.menu_item.name}
+                description={foodItem.menu_item.description}
+                price={foodItem.menu_item.price}
                 quantity = {foodItem.quantity}
               />
             ))}

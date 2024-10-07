@@ -46,6 +46,8 @@ export default function useCart(userId: string) {
   }
 
   async function addToCart(data: AddToCartData) {
+    if (!data.user_id) throw new Error("User is not logged in");
+
     const { error } = await supabase
       .from('cart_items')
       .insert(data);

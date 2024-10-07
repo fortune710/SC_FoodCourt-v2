@@ -32,13 +32,14 @@ export interface Addon {
 
 export interface MenuItem {
     name: string,
-    addons: Addon[],
+    add_ons: Addon[],
     restaurantId: string
     price: number,
     id: number,
     category: string,
     quantity: number,
     description: string,
+    preparation_time: string,
 }
 
 export interface Vendor {
@@ -50,4 +51,13 @@ export interface Category{
     id: string,
     name: CategoryName,
     image: string,
+}
+
+export enum OrderStatus {
+    New = 0,
+    Accepted = 1,
+    Preparing = 2,
+    Completed = 3,
+    Collected = 4,
+    Cancelled = 5,
 }

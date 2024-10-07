@@ -1,3 +1,4 @@
+import React from "react";
 import { Alert, AppState, View } from "react-native"
 import Input from "@/components/ui/Input";
 import { useState } from "react";
@@ -7,7 +8,8 @@ import { supabase } from "@/utils/supabase";
 import { CheckBox } from "@rneui/themed"
 import useThemeColor from "@/hooks/useThemeColor";
 import { Link, useRouter } from "expo-router";
-import { Lock, Mail } from "lucide-react-native";
+import { Lock, Mail, Phone, User } from "lucide-react-native";
+import useAuth from "@/hooks/useAuth";
 
 interface FormProps {
     formType: "login"|"sign-up"
@@ -28,10 +30,10 @@ AppState.addEventListener('change', (state) => {
 const AuthForm: React.FC<FormProps> = ({ formType }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [fullName, setFullName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const { signUpWithEmail: signUp } = useAuth();
 
     const router = useRouter()
 
@@ -39,9 +41,6 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
     const [rememberMe, setRememberMe] = useState(false);
     const primaryColor = useThemeColor({}, "primary");
 
-    const handleButtonPress = () => {
-
-    }
 
     async function signInWithEmail() {
         setLoading(true)
@@ -58,25 +57,23 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
     
       async function signUpWithEmail() {
         setLoading(true)
-        const {
-          data: { session },
-          error,
-        } = await supabase.auth.signUp({
-          email: email,
-          password: password,
-        })
 
-        await supabase.from("profiles").upsert({
-            id: session?.user.id,
-            full_name: `${firstName} ${lastName}`,
+        const {
+            data: { session },
+            error,
+        } = await signUp({
+            name: fullName,
+            password,
+            email,
             phone_number: phoneNumber
         })
-    
-        if (error) Alert.alert(error.message)
-        if (!session) Alert.alert('Please check your inbox for email verification!')
+        
+        if (error) return Alert.alert(error.message)
+            
+        if (session) Alert.alert('Please check your inbox for email verification!')
         setLoading(false)
 
-        router.replace("/main/")
+        router.replace("/login")
       }
 
     return (
@@ -86,15 +83,10 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                     formType !== "sign-up" ? null :
                     <>
                         <Input
-                            placeholder="First Name"
-                            onChangeText={(firstName) => setFirstName(firstName)}
+                            placeholder="Full Name"
+                            onChangeText={(fullName) => setFullName(fullName)}
                             style={{ padding: 16 }}
-                        />
-
-                        <Input
-                            placeholder="Last Name"
-                            onChangeText={(lastName) => setLastName(lastName)}
-                            style={{ padding: 16 }}
+                            icon={<User stroke={primaryColor}/>}
                         />
 
                         <Input  
@@ -102,6 +94,7 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                             inputMode="numeric"
                             onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
                             style={{ padding: 16 }}
+                            icon={<Phone stroke={primaryColor}/>}
                         />
                     </>
                 }
@@ -122,7 +115,7 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                 />
             </View>
 
-            <View style={{ flexDirection: "row", alignItems: "center", alignSelf: "stretch", justifyContent: "space-between" }}>
+            <View className="flex flex-row self-stretch items-center justify-between">
                 <CheckBox
                     checked={rememberMe}
                     onPress={() => setRememberMe(!rememberMe)}
@@ -141,7 +134,13 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                 }
             </View>
             
-            <Button loading={loading} color="#F72F2F" style={{ alignSelf: "center", width: "100%" }} titleStyle={{ textAlign: "center", padding: 32 }} onPress={formType === "login" ? signInWithEmail : signUpWithEmail}>
+            <Button 
+                loading={loading} 
+                color="#F72F2F" 
+                style={{ alignSelf: "center", width: "100%" }} 
+                titleStyle={{ textAlign: "center", padding: 32 }} 
+                onPress={formType === "login" ? signInWithEmail : signUpWithEmail}
+            >
                 Continue
             </Button>
         </View>
