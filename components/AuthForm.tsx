@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, AppState, View } from "react-native"
+import { Alert, AppState, KeyboardAvoidingView, View } from "react-native"
 import Input from "@/components/ui/Input";
 import { useState } from "react";
 import Button from "./ui/Button";
@@ -49,10 +49,10 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
           password: password,
         })
     
-        if (error) Alert.alert(error.message)
         setLoading(false)
+        if (error) return Alert.alert(error.message)
     
-        router.replace("/main/")
+        return router.replace("/main/home")
       }
     
       async function signUpWithEmail() {
@@ -77,7 +77,7 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
       }
 
     return (
-        <View>
+        <KeyboardAvoidingView behavior="padding">
             <View style={{ gap: 16 }}>
                 {
                     formType !== "sign-up" ? null :
@@ -115,7 +115,7 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                 />
             </View>
 
-            <View className="flex flex-row self-stretch items-center justify-between">
+            <View className="flex flex-row py-3 items-center justify-between">
                 <CheckBox
                     checked={rememberMe}
                     onPress={() => setRememberMe(!rememberMe)}
@@ -123,8 +123,8 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                     checkedIcon="checkbox-marked"
                     uncheckedIcon="checkbox-blank-outline"
                     checkedColor={primaryColor}
-                    title="Remeber Me"
-                    containerStyle={{ borderRadius: 5 }}
+                    title="Remember Me"
+                    containerStyle={{ borderRadius: 5, padding: 0 }}
                     center={true}
                 />
 
@@ -143,7 +143,7 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
             >
                 Continue
             </Button>
-        </View>
+        </KeyboardAvoidingView>
     )
 }
 

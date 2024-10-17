@@ -1,6 +1,6 @@
 import { TouchableOpacity, View } from "react-native"
 import { Text } from "@/components/Themed";
-import { StyleSheet } from "nativewind";
+import { StyleSheet } from "react-native";
 import { OrderStatus } from "@/types";
 
 const RecentOrderCard = ({ name, restaurant, status }: { name: string, restaurant: string, status: number }) => {

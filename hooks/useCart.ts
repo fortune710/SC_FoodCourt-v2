@@ -9,7 +9,13 @@ interface CartItem {
   menu_item_id: number;
   quantity: number;
   user_id: string;
-  menu_item: MenuItem;
+  menu_item: {
+    resturant_id: number,
+    price: number,
+    name: string,
+    description: string
+  };
+  restaurant_subaccount_code: string
 }
 
 // Interface for adding an item to the cart
@@ -30,18 +36,30 @@ export default function useCart(userId: string) {
         menu_item_id,
         quantity,
         user_id,
-        menu_items:menu_item_id (*)
+        menu_items:menu_item_id (
+          resturant_id,
+          price,
+          name,
+          description,
+          restaurant:resturant_id (
+            subaccount_code
+          )
+        )
       `)
-      .eq('user_id', userId);
+      .eq('user_id', userId)
+      //.limit(1, { referencedTable: 'menu_items' })
+      //.limit(1, { referencedTable: 'restaurants' })
 
     if (error) throw new Error(error.message);
 
-    return data.map((item: any) => ({
+
+    return data.map((item) => ({
       id: item.id,
       menu_item_id: item.menu_item_id,
       quantity: item.quantity,
       user_id: item.user_id,
-      menu_item: item.menu_items,
+      menu_item: item.menu_items as any,
+      restaurant_subaccount_code: (item.menu_items as any).restaurant.subaccount_code
     })) as CartItem[];
   }
 
@@ -133,6 +151,9 @@ export default function useCart(userId: string) {
     }
   });
 
+  const refreshCart = () => queryClient.invalidateQueries({ queryKey: ["cart", userId] });
+
+
   return {
     cartItems,
     isLoading,
@@ -140,5 +161,6 @@ export default function useCart(userId: string) {
     addItem,
     updateItem,
     removeItem,
+    refreshCart
   };
 }
