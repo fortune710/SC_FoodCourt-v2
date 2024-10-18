@@ -46,7 +46,7 @@ export default function DrawerLayout() {
                     name="settings"
                     options={{
                         drawerLabel: "Settings",
-                        header: () => <Header pageTitle="Settings" />
+                        header: () => <Header pageTitle="Settings" altColor={true} />
                     }}
                 />
             </Drawer>

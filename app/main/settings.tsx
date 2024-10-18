@@ -16,18 +16,9 @@ export default function SettingsPage() {
   return (
       <Page>
         <View style={{backgroundColor: '#f72f2f', height: 180, zIndex: 0}}>
-          {/* <View style={{flexDirection: 'row',justifyContent:'space-between', width: '95%', alignItems: 'center',alignSelf:'center', marginTop:30}}>
-              <Pressable
-                    onPress={() => {}}
-                    style={{}}
-                >
-                <Entypo name="menu" size={34} color="#fff" />
-              </Pressable>
+          {/* <View style={{flexDirection: 'row',justifyContent:'space-between', width: '95%', alignItems: 'center',alignSelf:'center', marginTop:30}}> */}
             <Text style={{fontWeight:'bold', fontSize: 24, textAlign:'center', color: '#fff'}}>Settings</Text> 
-            <Pressable>
-              <MaterialIcons name="shopping-cart" size={26} color="#fff" />
-            </Pressable>
-          </View> */}
+          {/* </View> */}
         </View>
 
         <View style={{width: '90%', backgroundColor: '#fff', borderRadius: 25, marginTop: -50, alignSelf:'center', elevation: 3}}>
