@@ -1,178 +1,151 @@
-import EditProfilePhoto from "@/components/EditProfilePhoto";
-import Header from "@/components/Header";
-import { Page, Text } from "@/components/Themed";
-import Button from "@/components/ui/Button";
-import Styles from "@/constants/Styles";
-import { useState } from "react";
-import { StyleSheet } from "react-native";
-import { Pressable, View } from "react-native";
+import { Text, Page } from '../../components/Themed';
+import { Image } from "expo-image";
+import { Pressable, View} from "react-native";
+import { MaterialIcons, Entypo, Ionicons, MaterialCommunityIcons, Fontisto, Octicons } from '@expo/vector-icons';
+import { Switch } from 'react-native-switch';
 
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Switch } from "@rneui/themed";
+import React, { useState } from 'react';
+
+
+
 
 export default function SettingsPage() {
-    const [selectedOption, setSelectedOption] = useState<"support"|"more-info">();
 
-    function settingsOptions() {
-        if(!selectedOption) {
-            return (
-                <>
-                    <Pressable style={[styles.borderBottom, Styles.FlexCenterJustifyBetween]}>
-                        <Text style={styles.mediumText}>
-                            Notifications
-                        </Text>
-                        <Switch/>
-                    </Pressable>
+  const [switchValue, setSwitchValue] = useState(true);
 
-                    <Pressable style={[styles.borderBottom, Styles.FlexCenterJustifyBetween]}>
-                        <Text style={styles.mediumText}>
-                            Display Mode
-                        </Text>
-                        <Switch/>
-                    </Pressable>
+  return (
+      <Page>
+        <View style={{backgroundColor: '#f72f2f', height: 180, zIndex: 0}}>
+          {/* <View style={{flexDirection: 'row',justifyContent:'space-between', width: '95%', alignItems: 'center',alignSelf:'center', marginTop:30}}>
+              <Pressable
+                    onPress={() => {}}
+                    style={{}}
+                >
+                <Entypo name="menu" size={34} color="#fff" />
+              </Pressable>
+            <Text style={{fontWeight:'bold', fontSize: 24, textAlign:'center', color: '#fff'}}>Settings</Text> 
+            <Pressable>
+              <MaterialIcons name="shopping-cart" size={26} color="#fff" />
+            </Pressable>
+          </View> */}
+        </View>
 
-                    <Pressable 
-                        style={[styles.borderBottom, Styles.FlexCenterJustifyBetween]}
-                        onPress={() => setSelectedOption("support")}
-                    >
-                        <Text style={styles.mediumText}>
-                            Support
-                        </Text>
-                        <FontAwesome name="caret-right"/>
-                    </Pressable>
+        <View style={{width: '90%', backgroundColor: '#fff', borderRadius: 25, marginTop: -50, alignSelf:'center', elevation: 3}}>
+          <View style={{padding: 30}}>
+            {/* INTERFACE */}
+            <View style={{paddingBottom: 40}}>
+              <Text style ={{fontWeight: 'bold', fontSize: 14 }}>Interface</Text>
 
-                    <Pressable 
-                        style={[styles.borderBottom, Styles.FlexCenterJustifyBetween]}
-                        onPress={() => setSelectedOption("more-info")}
-                    >
-                        <Text style={styles.mediumText}>
-                            More Information
-                        </Text>
-                        <FontAwesome name="caret-right"/>
-                    </Pressable>
+              <View style={{flexDirection:'row', alignItems: 'center', justifyContent:'space-between', paddingTop: 20, paddingBottom: 10}}>
 
-                </>
-            )
-        } else if (selectedOption === "support") {
-            return (
-                <>
-                    <Pressable 
-                        style={[styles.borderBottom, Styles.FlexCenterJustifyBetween]}
-                    >
-                        <Text style={styles.mediumText}>
-                            I Need Help
-                        </Text>
-                        <FontAwesome name="caret-right"/>
-                    </Pressable>
-
-                    <Pressable 
-                        style={[styles.borderBottom, Styles.FlexCenterJustifyBetween]}
-                    >
-                        <Text style={styles.mediumText}>
-                            I Have a Safety Concern
-                        </Text>
-                        <FontAwesome name="caret-right"/>
-                    </Pressable>
-
-                    <Pressable 
-                        style={[styles.borderBottom, Styles.FlexCenterJustifyBetween]}
-                    >
-                        <Text style={styles.mediumText}>
-                            I Have a Privacy Question
-                        </Text>
-                        <FontAwesome name="caret-right"/>
-                    </Pressable>
-                </>
-            )
-        } else if (selectedOption === "more-info") {
-            return (
-                <>
-                    <Pressable 
-                        style={[styles.borderBottom, Styles.FlexCenterJustifyBetween]}
-                    >
-                        <Text style={styles.mediumText}>
-                            Privacy Policy
-                        </Text>
-                        <FontAwesome name="caret-right"/>
-                    </Pressable>
-
-                    <Pressable 
-                        style={[styles.borderBottom, Styles.FlexCenterJustifyBetween]}
-                    >
-                        <Text style={styles.mediumText}>
-                            Terms and Conditions
-                        </Text>
-                        <FontAwesome name="caret-right"/>
-                    </Pressable>
-
-                    <Pressable 
-                        style={[styles.borderBottom, Styles.FlexCenterJustifyBetween]}
-                    >
-                        <Text style={styles.mediumText}>
-                            Licenses
-                        </Text>
-                        <FontAwesome name="caret-right"/>
-                    </Pressable>
-                </>
-            )
-        } else null
-    }
-
-    return (
-        <Page>
-            {/* <Header pageTitle=""/> */}
-
-            <EditProfilePhoto/>
-
-            <View style={Styles.ProfileSettingsContainer}>
-                <View style={styles.containerToolbar}>
-                    {
-                        !selectedOption ? null :
-                        <Pressable 
-                            onPress={() => setSelectedOption(undefined)} 
-                            style={styles.backArrow}
-                        >
-                            <FontAwesome name="caret-left"/>
-                        </Pressable>
-                    }
-                    <Text style={{ textAlign: "center" }}>Settings</Text>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Ionicons name="notifications-outline" size={28} color="#f72f2f" />
+                  <Text style ={{fontWeight: '500', fontSize: 14, paddingLeft: 10 }}>Notifications</Text>
                 </View>
 
-                <View>{settingsOptions()}</View>
-
-                <Button type="clear">
-                    Log Out
-                </Button>
+                <Switch
+                  value={switchValue}
+                  onValueChange={(switchValue) => {
+                    const newValue = switchValue == true ? false : true;
+                    console.log(newValue);
+                    setSwitchValue(newValue); // Update the state with the new value
+                  }}
+                  activeText={''}
+                  inActiveText={''}
+                  circleSize={22}
+                  barHeight={30}
+                  backgroundActive={'#fe0000'}
+                  backgroundInactive={'gray'}
+                  circleActiveColor={'#fff'}
+                  circleInActiveColor={'#000000'}
+                  switchWidthMultiplier={2.70}
+                />
+              </View>
             </View>
-        </Page>
-    )
-}
 
-const styles = StyleSheet.create({
-    boldText: {
-        fontWeight: "700"
-    },
-    mediumText: {
-        fontWeight: "500"
-    },
-    borderVertical: {
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
-        borderTopColor: "#fff",
-        borderBottomColor: "#fff",
-        width: "100%"
-    },
-    borderBottom: {
-        borderBottomWidth: 1,
-        borderBottomColor: "#fff",
-        width: "100%",
-    },
-    containerToolbar: {
-        height: 70,
-        position: "relative"
-    },
-    backArrow: {
-        position: "absolute",
-        left: 0
-    }
-})
+            {/* LEGAL */}
+            <View style={{paddingBottom: 40}}>
+              <Text style ={{fontWeight: 'bold', fontSize: 14 }}>Legal</Text>
+
+              <Pressable
+                    onPress={() => {}}
+                    style={{flexDirection:'row', alignItems: 'center', justifyContent:'space-between', paddingTop: 20, paddingBottom: 10}}
+                >
+
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Octicons name="checklist" size={28} color="#f72f2f" />
+                  <Text style ={{fontWeight: '500', fontSize: 14, paddingLeft: 10 }}>Terms & Conditions</Text>
+                </View>
+
+                <Ionicons name="chevron-forward" size={24} color="#f72f2f" />
+              </Pressable>
+
+              <Pressable
+                    onPress={() => {}}
+                    style={{flexDirection:'row', alignItems: 'center', justifyContent:'space-between', paddingTop: 20, paddingBottom: 10}}
+                >
+
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <MaterialCommunityIcons name="shield-account-outline" size={28} color="#f72f2f" />
+                  <Text style ={{fontWeight: '500', fontSize: 14, paddingLeft: 10 }}>Privacy Policy</Text>
+                </View>
+
+                <Ionicons name="chevron-forward" size={24} color="#f72f2f" />
+              </Pressable>
+            </View>
+
+            {/* SUPPORT */}
+            <View>
+              <Text style ={{fontWeight: 'bold', fontSize: 14 }}>Support</Text>
+
+              <Pressable
+                    onPress={() => {}}
+                    style={{flexDirection:'row', alignItems: 'center', justifyContent:'space-between', paddingTop: 20, paddingBottom: 10}}
+                >
+
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Fontisto name="smiley" size={24} color="#f72f2f" />
+                  <Text style ={{fontWeight: '500', fontSize: 14, paddingLeft: 10 }}>Feedback</Text>
+                </View>
+
+                <Ionicons name="chevron-forward" size={24} color="#f72f2f" />
+              </Pressable>
+
+              <Pressable
+                    onPress={() => {}}
+                    style={{flexDirection:'row', alignItems: 'center', justifyContent:'space-between', paddingTop: 20, paddingBottom: 10}}
+                >
+
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Image
+                    source={require("../../assets/images/contact-us.svg")}
+                    style={{ width: 30, height: 30, resizeMode: 'contain' }}
+                  />
+                  <Text style ={{fontWeight: '500', fontSize: 14, paddingLeft: 10 }}>Contact Us</Text>
+                </View>
+
+                <Ionicons name="chevron-forward" size={24} color="#f72f2f" />
+              </Pressable>
+            </View>
+
+
+          </View>
+        </View>
+        
+        <View style={{width: '90%', backgroundColor: '#fff', borderRadius: 30, marginTop: 20, alignSelf:'center', borderColor: '#7E7E7E66', borderWidth: 1}}>
+          <View style={{paddingHorizontal: 30, paddingVertical: 20}}>
+            <Pressable
+                    onPress={() => {}}
+                    style={{flexDirection:'row', alignItems: 'center'}}
+                >
+
+                <Ionicons name="log-out-outline" size={28} color="#f72f2f" />
+                <Text style ={{fontWeight: '600', fontSize: 16, paddingLeft: 10 }}>Sign Out</Text>
+
+            </Pressable>
+          </View>
+        </View>
+          
+      </Page>
+  )
+}
