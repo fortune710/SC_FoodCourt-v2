@@ -76,7 +76,6 @@ function RootLayoutNav() {
         <StatusBar/>
         <Stack initialRouteName={ (session && session.user) ? "main" : "login" } screenOptions={{ headerShown: false }}>
           <Stack.Screen name="main"/>
-          <Stack.Screen name="vendor"/>
           <Stack.Screen name="login"/>
           <Stack.Screen name="create-account"/>
         </Stack>

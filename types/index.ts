@@ -11,12 +11,26 @@ export interface Product {
     image?: string
 }
 
-interface CartItem {
+export interface CartItem {
     id: string;
     cartId: string;
     product: Product;
     quantity: number
 }
+
+export interface CartItemAlt {
+    id: number;
+    menu_item_id: number;
+    quantity: number;
+    user_id: string;
+    menu_item: {
+      resturant_id: number,
+      price: number,
+      name: string,
+      description: string
+    };
+    restaurant_subaccount_code: string
+  }
 
 export interface OrderItem {
     id: string;
@@ -33,7 +47,7 @@ export interface Addon {
 export interface MenuItem {
     name: string,
     add_ons: Addon[],
-    restaurantId: string
+    resturant_id: number,
     price: number,
     id: number,
     category: string,
@@ -45,6 +59,17 @@ export interface MenuItem {
 export interface Vendor {
     id: string,
     name: string
+}
+
+export interface TranactionSplitData {
+    subaccount: string,
+    share: number
+}
+
+export interface TransactionData {
+    email: string,
+    amount: number,
+    subaccounts: TranactionSplitData[]
 }
 
 export interface Category{

@@ -18,7 +18,7 @@ export default function DrawerLayout() {
                 }}
             >
                 <Drawer.Screen
-                    name="index"
+                    name="home"
                     options={{
                         drawerLabel: "Home",
                         headerTitle: "Home",

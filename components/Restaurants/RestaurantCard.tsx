@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router"
 import { TouchableOpacity } from "react-native";
-import { StyleSheet } from "nativewind";
+import { StyleSheet } from "react-native";
 import { Image } from "expo-image";
 import { Text } from "@/components/Themed";
 
