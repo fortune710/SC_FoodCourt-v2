@@ -69,7 +69,9 @@ export interface TranactionSplitData {
 export interface TransactionData {
     email: string,
     amount: number,
-    subaccounts: TranactionSplitData[]
+    subaccounts: TranactionSplitData[],
+    cartItems: CartItemAlt[],
+    customerName: string,
 }
 
 export interface Category{
