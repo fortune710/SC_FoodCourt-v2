@@ -8,6 +8,7 @@ import useRestaurant from "@/hooks/useRestaurant";
 import HomeSearch from "@/components/HomeSearch";
 import RestaurantsList from "@/components/Restaurants/RestaurantsList";
 import RecentOrdersList from "@/components/RecentOrders/RecentOrdersList";
+import useOrders from "@/hooks/useOrders";
 
 const Recents = [
     {
@@ -50,6 +51,8 @@ export default function HomePage() {
 
 
     const { isLoading, data: restaurant } = useRestaurant();
+    const { getRecentOrders } = useOrders();
+    const recentOrders = getRecentOrders();
 
     if(isSearchActive) {
         return (
@@ -76,7 +79,7 @@ export default function HomePage() {
 
                 <View>
                     <Text style={styles.recentsText}>Recents</Text>
-                    <RecentOrdersList recentOrders={Recents} />
+                    <RecentOrdersList recentOrders={recentOrders!} />
                 </View>
 
                 <View>
