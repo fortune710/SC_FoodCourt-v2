@@ -46,7 +46,7 @@ export default function DrawerLayout() {
                     name="settings/index"
                     options={{
                         drawerLabel: "Settings",
-                        header: () => null
+                        header: () => <Header pageTitle="Settings" altColor={true} />
                     }}
                 />
             </Drawer>

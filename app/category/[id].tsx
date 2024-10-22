@@ -75,7 +75,7 @@ const CategoryPage = () => {
                 <View key={vendorId} style={{marginBottom: 20}}>
                     <Text style={styles.restaurantName}>{vendor?.name}</Text>
                     {vendorProducts.map((item: Product) => (
-                      <MenuItem item={item}/>
+                      <MenuItem key={item.id} item={item}/>
                     ))}
                 </View>
             )})}
