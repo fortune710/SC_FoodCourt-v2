@@ -30,6 +30,11 @@ const Paystack = {
                 type: "flat",
                 bearer_type: "account",
                 subaccounts: data.subaccounts
+            },
+            metadata: {
+                user_id: data.cartItems[0].user_id,
+                cart: data.cartItems,
+                customer_name: data.customerName,
             }
         })
 

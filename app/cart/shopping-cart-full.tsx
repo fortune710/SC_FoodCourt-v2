@@ -34,7 +34,9 @@ export default function CartFullPage() {
       subaccounts: vendorShares.map((vendor) => ({
         share: vendor.total_price * convertToKobo,
         subaccount: vendor.restaurant_subaccount_code
-      }))
+      })),
+      cartItems: cartItems!,
+      customerName: currentUser?.full_name!,
     })
 
   }

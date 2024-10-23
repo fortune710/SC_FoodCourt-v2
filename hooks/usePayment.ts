@@ -5,16 +5,19 @@ import { openBrowserAsync, WebBrowserResult } from "expo-web-browser";
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import Toast from "react-native-toast-message";
+import useOrders from "./useOrders";
 
 export default function usePayment() {
     const primary = useThemeColor({}, "primary");
     const [result, setResult] = useState<WebBrowserResult>();
     const [transactionRef, setTransactionRef] = useState<string>("");
+    const { refreshOrders } = useOrders();
 
     useEffect(() => {
         if (!result || result.type !== "cancel" || !transactionRef) return
         
-        verifyTransactionForPaystack(transactionRef);
+        verifyTransactionForPaystack(transactionRef)
+            .then(() => refreshOrders());
     }, [result]);
   
     async function verifyTransaction(transactionReference: string) {
