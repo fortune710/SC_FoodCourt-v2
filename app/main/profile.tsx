@@ -23,7 +23,7 @@ export default function ProfilePage() {
                     </Pressable>
 
                     <Pressable style={[ styles.borderBotton, { paddingHorizontal: 16, paddingVertical: 8 } ]}>
-                        <Text style={[ styles.boldText, { color: "#fff", fontSize: 16 } ]}>
+                        <Text style={[ styles.boldTe   xt, { color: "#fff", fontSize: 16 } ]}>
                             Email: <Text style={[ styles.mediumText, { color: "#fff", fontSize: 16 }  ]}>susan.sharon@gmail.com</Text>
                         </Text>
                     </Pressable>
