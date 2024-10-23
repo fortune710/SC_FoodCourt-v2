@@ -27,7 +27,7 @@ export default function DrawerLayout() {
                 />
 
                 <Drawer.Screen
-                    name="profile"
+                    name="profile/index"
                     options={{
                         drawerLabel: "Profile",
                         header: () => <Header pageTitle="Profile" />
@@ -43,7 +43,7 @@ export default function DrawerLayout() {
                 />
 
                 <Drawer.Screen
-                    name="settings"
+                    name="settings/index"
                     options={{
                         drawerLabel: "Settings",
                         header: () => <Header pageTitle="Settings" altColor={true} />

@@ -16,6 +16,7 @@ import Searchbar from "@/components/Searchbar";
 import { OrderItem } from "@/types";
 import OrderSearchbar from "@/components/OrderSearchModal";
 import useOrders from "@/hooks/useOrders";
+import OrderListItem from "@/components/Orders/OrderListItem";
 
 export default function OrdersPage() {
 
@@ -23,37 +24,18 @@ export default function OrdersPage() {
 
     const { orders, isLoading } = useOrders();
 
-
     return (
         <Page style={{ paddingHorizontal: 16, paddingTop: 16 }}>
 
             <OrderSearchbar setSearchResults={setSearchResults} />
             {
-                isLoading ? <ActivityIndicator/> :
+                isLoading ? <ActivityIndicator/> : 
                 <ScrollView style={{flex: 1}}>
                     <View style={{ height: 16 }} />
                     {
-                        orders?.map((order) => {
-                            return (
-                                <View key={order?.id} style={{ borderWidth: 1, borderRadius: 12, padding: 12, marginVertical: 4 }}>
-                                    <Text style={{ fontWeight: 'bold' }}>Order No: {order?.id}</Text>
-                                    {
-                                        orders.map((order) => (
-                                            <View key={order.id} style={{ marginVertical: 8 }}>
-                                                {
-                                                    order.order_items.map(({ menu_items, quantity, menu_item_id }) => (
-                                                        <View key={menu_item_id} style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                            <Text>{quantity}x {menu_items[0].name}</Text>
-                                                            <Text>{menu_items[0].price}</Text>
-                                                        </View>
-                                                    ))
-                                                }
-                                            </View>
-                                        ))
-                                    }
-                                </View>
-                            )
-                        })
+                        orders?.map((order) => (
+                            <OrderListItem key={order.id} order={order} />
+                        ))
                     }
                 </ScrollView>
 

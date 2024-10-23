@@ -1,17 +1,8 @@
-import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons"
 import { View, StyleSheet, Text } from "react-native";
 import useThemeColor from "../hooks/useThemeColor";
-import { SafeAreaView } from "react-native-safe-area-context";
-import {
-    DrawerActions,
-    ParamListBase,
-    useNavigation,
-  } from '@react-navigation/native';
-// import { useNavigation } from "expo-router";
-import { DrawerNavigationProp, DrawerToggleButton } from "@react-navigation/drawer";
-import { Button, color } from "@rneui/base";
 import { Link } from "expo-router";
+import DrawerButton from "./DrawerButton";
 
 interface HeaderProps {
     pageTitle: string
@@ -19,18 +10,11 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ pageTitle, altColor }) => {
-    // const navigation = useNavigation()
-    const navigation = useNavigation<DrawerNavigationProp<ParamListBase>>();
-
     const primaryColor = useThemeColor({}, "primary");
 
     return (
-        <View style={[styles.header, {backgroundColor: altColor ? primaryColor :  "#fff"}]}>
-            <Button color={altColor ? primaryColor : "#fff"} onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-                <Ionicons name="menu" size={25} color={altColor ? "#fff" : primaryColor} />
-            </Button>
-            {/* <DrawerToggleButton tintColor={primaryColor}></DrawerToggleButton> */}
-            {/* <Text style={styles.title}>{pageTitle}</Text> */}
+        <View style={styles.header}>
+            <DrawerButton iconColor={primaryColor}/>
             <Link href="/cart/shopping-cart-full" asChild>
                 <MaterialCommunityIcons size={25} name="cart" color={altColor ? "#fff" : primaryColor}/>
             </Link>

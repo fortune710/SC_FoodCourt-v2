@@ -43,7 +43,13 @@ export default function useOrders() {
           order_id,
           menu_item_id,
           quantity,
-          menu_items:menu_item_id (name, price)
+          menu_items:menu_item_id (
+            name,
+            price,
+            restaurant:resturant_id (
+              name
+            )
+          )
         )
       `)
       .eq('user_id', currentUser?.id!)
@@ -61,9 +67,24 @@ export default function useOrders() {
     enabled: !!currentUser,
   });
 
+  const getRecentOrders = () => {
+    return orders?.slice(0, 5).map((order) => ({
+      id: order.id,
+      name: order.order_items.length > 1 ?
+       `${((order.order_items[0].menu_items) as any).name} + ${order.order_items.length - 1} more` : 
+       ((order.order_items[0].menu_items) as any).name,
+      restaurant: ((order.order_items[0].menu_items) as any).restaurant.name,
+      status: order.status
+    }))
+  }
+
+  const refreshOrders = () => queryClient.invalidateQueries({ queryKey: ["orders"] })
+
   return {
     orders,
     isLoading,
     error,
+    getRecentOrders,
+    refreshOrders
   };
 }
