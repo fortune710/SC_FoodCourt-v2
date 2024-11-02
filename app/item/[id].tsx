@@ -23,7 +23,7 @@ export default function MenuItemDetail() {
   const [quantity, setQuantity] = useState(1);
   const { currentUser } = useCurrentUser();
 
-  const { addItem } = useCart(currentUser?.id!);
+  const { addItem, updateItem, getSingleCartItem } = useCart(currentUser?.id!);
 
   const primary = useThemeColor({}, "primary");
 
@@ -35,13 +35,18 @@ export default function MenuItemDetail() {
   const increaseQuantity = () => setQuantity(quantity + 1);
 
   const addItemToCart = () => {
-    return addItem({
-      user_id: currentUser?.id!,
-      menu_item_id: menuItem?.id!,
-      quantity: quantity,
-    });
-  };
+    const existingItem = getSingleCartItem(menuItem?.id!);
 
+    if (existingItem) {
+      updateItem({id: existingItem.id, quantity: existingItem.quantity + quantity});
+    } else {
+      addItem({
+        user_id: currentUser?.id!,
+        menu_item_id: menuItem?.id!,
+        quantity: quantity,
+      });
+    }
+  };
   const totalPrice = (menuItem?.price || 0) * quantity;
 
   return (

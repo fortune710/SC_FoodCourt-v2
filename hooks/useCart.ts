@@ -91,6 +91,14 @@ export default function useCart(userId: string) {
     if (error) throw new Error(error.message);
   }
 
+  function getSingleCartItem(menuItemId: number) {
+    const cartItem = cartItems?.find(
+        (cartItem) => cartItem.menu_item_id === menuItemId
+    );
+    return cartItem;
+}
+
+
   const { data: cartItems, isLoading, error } = useQuery({
     queryKey: ["cart", userId],
     queryFn: getCartItems,
@@ -161,6 +169,7 @@ export default function useCart(userId: string) {
     addItem,
     updateItem,
     removeItem,
-    refreshCart
+    refreshCart,
+    getSingleCartItem,
   };
 }
