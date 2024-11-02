@@ -3,7 +3,7 @@ import { Text, Page } from '../../components/Themed';
 import { Image } from "expo-image";
 import { Pressable, View, ScrollView} from "react-native";
 import { Feather, MaterialIcons, Entypo } from '@expo/vector-icons';
-
+import { useEffect, useState } from "react";
 import CartItem from '../../components/CartItem';
 import { SafeAreaView } from "react-native";
 import { useRouter } from "expo-router";
@@ -18,15 +18,31 @@ import usePayment from "@/hooks/usePayment";
 export default function CartFullPage() {
   const router = useRouter();
   const { currentUser } = useCurrentUser();
-  const { cartItems, refreshCart } = useCart(currentUser?.id!);
+  const { cartItems: dbCartItems, refreshCart } = useCart(currentUser?.id!);
+  const [localCartItems, setLocalCartItems] = useState(dbCartItems || []);
   const { initializeTransactionForPaystack } = usePayment();
-  const totalPrice = cartItems?.reduce((prev, curr) => prev + (curr.menu_item.price * curr.quantity), 0) || 0;
+
+  useEffect(() => {
+    setLocalCartItems(dbCartItems || []);
+  }, [dbCartItems]);
+
+  const totalPrice = localCartItems?.reduce((prev, curr) => prev + (curr.menu_item.price * curr.quantity), 0) || 0;
 
   const subCharge = calculateServiceCharge(totalPrice || 0);
   const convertToKobo = 100;
 
+  const handleQuantityChange = (menuItemId: number, newQuantity: number) => {
+    setLocalCartItems(prevItems => 
+      prevItems.map(item => 
+        item.menu_item_id === menuItemId 
+          ? { ...item, quantity: newQuantity }
+          : item
+      )
+    );
+  };
+
   const confirmCharge = async () => {
-    const vendorShares = groupCartItemsByRestaurant(cartItems!);
+    const vendorShares = groupCartItemsByRestaurant(localCartItems!);
 
     return await initializeTransactionForPaystack({
       email: currentUser?.email!,
@@ -35,7 +51,7 @@ export default function CartFullPage() {
         share: vendor.total_price * convertToKobo,
         subaccount: vendor.restaurant_subaccount_code
       })),
-      cartItems: cartItems!,
+      cartItems: localCartItems!,
       customerName: currentUser?.full_name!,
     })
 
@@ -67,7 +83,7 @@ export default function CartFullPage() {
 
       <ScrollView style={{marginBottom:200}} contentInset={{ bottom: 192 }}>
         <View style={{marginBottom:30}}>
-          {cartItems?.map((foodItem) => (
+          {localCartItems?.map((foodItem) => (
             <CartItem
               key={foodItem.id}
               name={foodItem.menu_item.name}
@@ -75,6 +91,9 @@ export default function CartFullPage() {
               price={foodItem.menu_item.price}
               quantity = {foodItem.quantity}
               restaurantId={foodItem.menu_item.resturant_id}
+              onQuantityChange={(newQuantity) => 
+                handleQuantityChange(foodItem.menu_item_id, newQuantity)
+              }
             />
           ))}
         </View>

@@ -12,18 +12,26 @@ interface CartItemProps {
   price: number;
   quantity: number;
   restaurantId: number;
+  onQuantityChange: (newQuantity: number) => void;
 }
   
-const CartItem: React.FC<CartItemProps> = ({ name, description, price, quantity, restaurantId }) => {
-  const [qty, setQty] = useState(quantity);
+const CartItem: React.FC<CartItemProps> = ({ name, description, price, quantity, restaurantId, onQuantityChange }) => {
   const { data: restaurants } = useRestaurant();
 
   const restaurant = restaurants?.find(({ id }) => id === restaurantId);
 
 
-  const handleIncrement = () => qty === 20 ? null : setQty(qty + 1);
+  // const handleIncrement = () => qty === 20 ? null : setQty(qty + 1);
 
-  const handleDecrement = () => qty === 1 ? null : setQty(qty - 1);
+  // const handleDecrement = () => qty === 1 ? null : setQty(qty - 1);
+
+  const handleIncrement = () => {
+    quantity === 20 ? null : onQuantityChange(quantity + 1);
+  };
+
+  const handleDecrement = () => {
+    quantity === 1 ? null : onQuantityChange(quantity - 1);
+  };
 
   return (
     <View style={styles.container}>
@@ -33,7 +41,7 @@ const CartItem: React.FC<CartItemProps> = ({ name, description, price, quantity,
           <Text style={{fontWeight: 'bold',fontSize: 15, color:'#f72f2f'}}>{restaurant?.name}</Text>
         </View>
         <View style={styles.priceContainer}>
-          <Text style={styles.priceLabel}>N {price * qty}</Text>
+          <Text style={styles.priceLabel}>N {price * quantity}</Text>
         </View>
       </View>
       <View style={styles.descriptionContainer}>
@@ -45,7 +53,7 @@ const CartItem: React.FC<CartItemProps> = ({ name, description, price, quantity,
             <Feather name="plus-circle" size={18} color="white" />
           </View>
         </Pressable>
-        <Text style={styles.amountText}>{qty}</Text>
+        <Text style={styles.amountText}>{quantity}</Text>
         <Pressable onPress={handleDecrement} style={styles.actionButton}>
           <View style={styles.iconContainer}>
             <Feather name="minus-circle" size={18} color="white" />
