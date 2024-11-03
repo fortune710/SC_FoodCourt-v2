@@ -4,10 +4,6 @@ import { Pressable, View, ScrollView} from "react-native";
 import { Feather, MaterialIcons, Entypo,Ionicons } from '@expo/vector-icons';
 
 
-
-
-
-
 export default function TCPage() {
 
   return (
