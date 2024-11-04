@@ -3,7 +3,11 @@ import { Addon } from "@/types";
 import { ListItem } from "@rneui/themed";
 import { useState } from "react";
 
-const MenuItemAddons = ({ addons }: { addons: Addon[] }) => {
+const MenuItemAddons = ({ addons, placeAddOn, selectedAddon }: { 
+    addons: Addon[],
+    placeAddOn: (data: { name: string, price: number }|null) => any ,
+    selectedAddon: any,
+}) => {
     const [expanded, setExpanded] = useState(false);
     const primary = useThemeColor({}, "primary");
 
@@ -26,7 +30,14 @@ const MenuItemAddons = ({ addons }: { addons: Addon[] }) => {
                             <ListItem.Title>{item.foodName}</ListItem.Title>
                             <ListItem.Subtitle>{item.price}</ListItem.Subtitle>
                         </ListItem.Content>
-                        <ListItem.Chevron />
+                        <ListItem.CheckBox
+                            checked={selectedAddon && selectedAddon.name === item.foodName}
+                            checkedIcon="dot-circle-o"
+                            uncheckedIcon="circle-o"
+                            checkedColor={primary}
+                            onPress={() => placeAddOn({ name: item.foodName, price: item.price })}
+
+                        />
                     </ListItem>
                 ))
             }

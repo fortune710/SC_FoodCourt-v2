@@ -62,6 +62,12 @@ export default function VendorDetailPage() {
                         {
                             isLoading ? <ActivityIndicator/> :
                             !category || category == "all" ?
+                            availableCategories.length === 0 ? 
+                            <View className="px-3 py-16 flex flex-col items-center text-center gap-3">
+                                <Text className="text-center">There are no menu items avialable for this vendor.</Text>
+                                <Text>Please check back again soon.</Text>
+                            </View> 
+                            :
                             availableCategories.map((category, index) => (
                                 <View key={category}>
                                     <View style={{paddingTop: 4, paddingBottom: 24}}>

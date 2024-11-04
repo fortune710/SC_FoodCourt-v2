@@ -23,6 +23,8 @@ export interface CartItemAlt {
     menu_item_id: number;
     quantity: number;
     user_id: string;
+    addon_name?: string;
+    addon_price?: number;
     menu_item: {
       resturant_id: number,
       price: number,

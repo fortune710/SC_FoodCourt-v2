@@ -6,7 +6,6 @@ export default function useRestaurant() {
         queryKey: ["restaurants"],
         queryFn: async () => {
             const { data, error } = await supabase.from("restaurants").select("*");
-            console.log(data);
             if (error) {
                 throw new Error(error.message);
             }

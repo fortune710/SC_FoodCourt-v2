@@ -7,6 +7,7 @@ import { Switch } from 'react-native-switch';
 import React, { useState } from 'react';
 import DrawerButton from '@/components/DrawerButton';
 import { useRouter } from 'expo-router';
+import Drawer from 'expo-router/drawer';
 
 
 
@@ -20,6 +21,7 @@ export default function SettingsPage() {
 
   return (
       <Page>
+        <Drawer.Screen options={{ header: () => null }} />
         <View style={{backgroundColor: '#f72f2f', height: 180, zIndex: 0}}>
           <View style={{flexDirection: 'row',justifyContent:'space-between', width: '95%', alignItems: 'center',alignSelf:'center', marginTop:60}}>
             <DrawerButton iconColor='#fff'/>

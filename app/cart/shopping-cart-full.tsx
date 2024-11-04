@@ -26,7 +26,9 @@ export default function CartFullPage() {
     setLocalCartItems(dbCartItems || []);
   }, [dbCartItems]);
 
-  const totalPrice = localCartItems?.reduce((prev, curr) => prev + (curr.menu_item.price * curr.quantity), 0) || 0;
+  const totalPrice = localCartItems?.reduce((prev, curr) => {
+    return prev + (curr.menu_item.price * curr.quantity) + (curr?.addon_price || 0)
+  }, 0) || 0;
 
   const subCharge = calculateServiceCharge(totalPrice || 0);
   const convertToKobo = 100;
@@ -91,6 +93,7 @@ export default function CartFullPage() {
                 price={foodItem.menu_item.price}
                 quantity = {foodItem.quantity}
                 restaurantId={foodItem.menu_item.resturant_id}
+                addon={{ name: foodItem.addon_name!, price: foodItem.addon_price! }}
                 onQuantityChange={(newQuantity) => 
                   handleQuantityChange(foodItem.menu_item_id, newQuantity)
                 }

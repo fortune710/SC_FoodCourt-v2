@@ -33,8 +33,8 @@ export default function OrdersPage() {
                 <ScrollView style={{flex: 1}}>
                     <View style={{ height: 16 }} />
                     {
-                        orders?.map((order) => (
-                            <OrderListItem key={order.id} order={order} />
+                        orders?.map((order, index) => (
+                            <OrderListItem key={index} order={order} />
                         ))
                     }
                 </ScrollView>

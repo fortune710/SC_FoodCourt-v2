@@ -10,6 +10,7 @@ import RestaurantsList from "@/components/Restaurants/RestaurantsList";
 import RecentOrdersList from "@/components/RecentOrders/RecentOrdersList";
 import useOrders from "@/hooks/useOrders";
 import Styles from "@/constants/Styles";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 const Recents = [
     {
@@ -52,6 +53,7 @@ export default function HomePage() {
 
 
     const { isLoading, data: restaurant } = useRestaurant();
+    const { currentUser } = useCurrentUser();
     const { getRecentOrders } = useOrders();
     const recentOrders = getRecentOrders();
 
@@ -68,7 +70,9 @@ export default function HomePage() {
             <ScrollView contentInset={{ bottom: 128 }} showsVerticalScrollIndicator={false}>
 
                 <View style={styles.pagePadding}>
-                    <Text style={{fontSize: 20, fontFamily: "Montserrat", fontWeight: 500}}>Hi, User's Name</Text>
+                    <Text style={{fontSize: 20, fontFamily: "Montserrat", fontWeight: 500}}>
+                        Hi, {currentUser?.full_name! || "User's Name"}
+                    </Text>
                     <Text style={styles.greetingText}>What will we be having today?</Text>
                 </View>
 

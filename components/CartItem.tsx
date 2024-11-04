@@ -12,10 +12,11 @@ interface CartItemProps {
   price: number;
   quantity: number;
   restaurantId: number;
+  addon?: { name: string; price: number };
   onQuantityChange: (newQuantity: number) => void;
 }
   
-const CartItem: React.FC<CartItemProps> = ({ name, description, price, quantity, restaurantId, onQuantityChange }) => {
+const CartItem: React.FC<CartItemProps> = ({ name, addon, description, price, quantity, restaurantId, onQuantityChange }) => {
   const { data: restaurants } = useRestaurant();
 
   const restaurant = restaurants?.find(({ id }) => id === restaurantId);
@@ -41,12 +42,27 @@ const CartItem: React.FC<CartItemProps> = ({ name, description, price, quantity,
           <Text style={{fontWeight: 'bold',fontSize: 15, color:'#f72f2f'}}>{restaurant?.name}</Text>
         </View>
         <View style={styles.priceContainer}>
-          <Text style={styles.priceLabel}>N {price * quantity}</Text>
+          <Text style={styles.priceLabel}>N {(price * quantity) + (addon?.price || 0)}</Text>
         </View>
       </View>
-      <View style={styles.descriptionContainer}>
-        <Text style={styles.description}>{description}</Text>
-      </View>
+
+      {
+        !description ? null : (
+          <View style={styles.descriptionContainer}>
+            <Text style={styles.description}>{description}</Text>
+          </View>
+        )
+      }
+
+      {
+        !addon ? null : (
+          <View style={styles.descriptionContainer}>
+            <Text style={styles.description}>
+              Selected Addon: {addon.name} - {addon.price}
+            </Text>
+          </View>
+        )
+      }
       <View style={styles.actionsContainer}>
         <Pressable onPress={handleIncrement} style={styles.actionButton}>
           <View style={styles.iconContainer}>
@@ -106,6 +122,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '27%',
+    marginTop: 12
   },
   actionButton: {
     backgroundColor: '#f7941e',

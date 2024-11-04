@@ -6,18 +6,32 @@ import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import Toast from "react-native-toast-message";
 import useOrders from "./useOrders";
+import useCart from "./useCart";
+import useCurrentUser from "./useCurrentUser";
+import { useRouter } from "expo-router";
 
 export default function usePayment() {
     const primary = useThemeColor({}, "primary");
     const [result, setResult] = useState<WebBrowserResult>();
     const [transactionRef, setTransactionRef] = useState<string>("");
     const { refreshOrders } = useOrders();
+    const { currentUser } = useCurrentUser();
+    const { refreshCart } = useCart(currentUser?.id!);
+    const router = useRouter();
 
     useEffect(() => {
         if (!result || result.type !== "cancel" || !transactionRef) return
         
         verifyTransactionForPaystack(transactionRef)
-            .then(() => refreshOrders());
+            .then(async () => {
+                return await Promise.all([
+                    await refreshOrders(),
+                    await refreshCart(),
+                ])
+            })
+            .then(() => {
+                return router.back();
+            })
     }, [result]);
   
     async function verifyTransaction(transactionReference: string) {
@@ -26,7 +40,7 @@ export default function usePayment() {
     }
   
 
-    async function initializeTransaction(data: TransactionData) {
+    async function initializeTransaction(data: TransactionData) {        
         const response = await Paystack.initializeTransaction(data);
         setTransactionRef(response.reference)
 
@@ -36,7 +50,7 @@ export default function usePayment() {
             toolbarColor: primary
         })
     
-        setResult(result)
+        setResult(result) 
     }
 
     const { mutateAsync: initializeTransactionForPaystack } = useMutation({

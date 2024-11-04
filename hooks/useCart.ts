@@ -9,6 +9,8 @@ interface CartItem {
   menu_item_id: number;
   quantity: number;
   user_id: string;
+  addon_name?: string;
+  addon_price?: number;
   menu_item: {
     resturant_id: number,
     price: number,
@@ -23,6 +25,8 @@ interface AddToCartData {
   menu_item_id: number;
   quantity: number;
   user_id: string;
+  addon_name?: string;
+  addon_price?: number;
 }
 
 export default function useCart(userId: string) {
@@ -36,6 +40,8 @@ export default function useCart(userId: string) {
         menu_item_id,
         quantity,
         user_id,
+        addon_name,
+        addon_price,
         menu_items:menu_item_id (
           resturant_id,
           price,
@@ -59,6 +65,8 @@ export default function useCart(userId: string) {
       quantity: item.quantity,
       user_id: item.user_id,
       menu_item: item.menu_items as any,
+      addon_name: item.addon_name,
+      addon_price: item.addon_price,
       restaurant_subaccount_code: (item.menu_items as any).restaurant.subaccount_code
     })) as CartItem[];
   }
