@@ -10,6 +10,7 @@ import Header from "../../components/Header";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Entypo } from "@expo/vector-icons";
 import useSingleRestaurant from "@/hooks/useSingleResturant";
+import { scale } from "react-native-size-matters";
 
 export default function VendorDetailPage() {
 
@@ -44,22 +45,28 @@ export default function VendorDetailPage() {
                         <Text style={{ color: "#fff", marginVertical: 16, marginHorizontal: 16, fontSize: 20, fontWeight: "700" }}>{restaurant?.name}</Text>
                         <ImageBackground source={require("../../assets/images/food.png")} style={[Styles.ImageBackground]}/>
 
-                        <View style={{ marginHorizontal: 16, marginBottom: 16 }}>
-                            <Searchbar/>
+                        <View style={{ marginHorizontal: 24, marginVertical: 16, alignItems: 'flex-end' }}>
+                            <Searchbar width= {scale(70)}/>
                         </View>
+                    </View>
+
+                    <View style={{marginHorizontal: 16}}>      
+                        <Text style={styles.subtitle}>Select item, then add to cart</Text>
                     </View>
 
                     <View style={{ marginHorizontal: 16 }}>
                         <CategoriesList onChange={(category) => router.setParams({ category })}/>
                     </View>
 
-                    <View style={[Styles.DefaultPaddingX, Styles.DefaultSpaceY, { marginHorizontal: 16 }]}>
+                    <View style={[Styles.DefaultPaddingX, Styles.DefaultSpaceY]}>
                         {
                             isLoading ? <ActivityIndicator/> :
                             !category || category == "all" ?
                             availableCategories.map((category, index) => (
                                 <View key={category}>
-                                    <Text style={[priceTagColor, { fontWeight: "600", fontSize: 20  }]}>{category}</Text>
+                                    <View style={{paddingTop: 4, paddingBottom: 24}}>
+                                        <Text style={[priceTagColor, { fontWeight: "700", fontSize: 20  }]}>{category}</Text>
+                                    </View>
                                     {
                                         menuItemsSorted![category]?.map((dish, index) => (
                                             <Pressable 
@@ -74,12 +81,10 @@ export default function VendorDetailPage() {
                                                 })}                                            
                                             >
                                                 <View style={{ width: "70%" }}>
-                                                    <Text>{dish.name}</Text>
-                                                    <Text>{dish.quantity} available</Text>
+                                                    <Text style={{fontWeight: 600, fontSize: 16}}>{dish.name}</Text>
                                                 </View>
                                                 <View style={[styles.priceTag, priceTagColor]}>
                                                     <Text style={[priceTagColor]}>N {dish.price}</Text>
-
                                                 </View>
                                             </Pressable>
                                         ))
@@ -88,7 +93,7 @@ export default function VendorDetailPage() {
                             ))
                             :
                             <View>
-                                <Text style={[priceTagColor, { fontWeight: "600" }]}>{category}</Text>
+                                <Text style={[priceTagColor, { fontWeight: "700" }]}>{category}</Text>
                                 {
                                     menuItemsSorted![category as string]?.map((dish, index) => (
                                         <Pressable 
@@ -103,8 +108,7 @@ export default function VendorDetailPage() {
                                             })}
                                         >
                                             <View style={{ width: "70%" }}>
-                                                <Text>{dish.name}</Text>
-                                                <Text>{dish.quantity} available</Text>
+                                                <Text style={{fontWeight: 600, fontSize: 16}}>{dish.name}</Text>
                                             </View>
                                             <Text style={[styles.priceTag, priceTagColor]}>N {dish.price}</Text>
                                         </Pressable>
@@ -131,16 +135,21 @@ const styles = StyleSheet.create({
     },
     listItem: {
         display: "flex",
-        alignItems: "center",
         flexDirection: "row",
         justifyContent: "space-between",
-        height: 90
+        height: 54,
     },
     priceTag: {
+        height: '60%',
         paddingHorizontal: 12,
         paddingVertical: 5,
         borderWidth: 1,
         borderRadius: 20,
         backgroundColor: "#F72F2F4C"
-    }
+    },
+    subtitle: { 
+        textAlign: 'right', 
+        marginBottom: 4 
+    },
+
 })

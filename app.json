@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "food-court",
-    "slug": "food-court",
+    "name": "SC: FoodCourt",
+    "slug": "SC: FoodCourt",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

@@ -4,10 +4,10 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
 const Styles = StyleSheet.create({
     DefaultPaddingX: {
-        paddingHorizontal: 12
+        paddingHorizontal: 16
     },
     DefaultSpaceY: {
-        marginVertical: 12
+        marginVertical: 16
     },
     ImageBackground: { 
         width: "100%", 

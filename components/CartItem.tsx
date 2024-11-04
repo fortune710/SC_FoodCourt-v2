@@ -104,13 +104,13 @@ const styles = StyleSheet.create({
   actionsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     width: '27%',
-    marginTop:10,
   },
   actionButton: {
     backgroundColor: '#f7941e',
-    width: 30,
-    height: 25,
+    width: 32,
+    height: 32,
     borderRadius: 7,
     alignItems: 'center',
     justifyContent: 'center',
