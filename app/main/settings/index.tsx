@@ -24,11 +24,11 @@ export default function SettingsPage() {
         <Drawer.Screen options={{ header: () => null }} />
         <View style={{backgroundColor: '#f72f2f', height: 180, zIndex: 0}}>
           <View style={{flexDirection: 'row',justifyContent:'space-between', width: '95%', alignItems: 'center',alignSelf:'center', marginTop:60}}>
-            <DrawerButton iconColor='#fff'/>
+            {/* <DrawerButton iconColor='#fff'/>
             <Text style={{fontWeight:'bold', fontSize: 24, textAlign:'center', color: '#fff'}}>Settings</Text> 
             <Pressable>
               <MaterialIcons name="shopping-cart" size={26} color="#fff" />
-            </Pressable>
+            </Pressable> */}
           </View>
         </View>
 

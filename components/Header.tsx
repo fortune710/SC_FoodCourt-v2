@@ -7,14 +7,15 @@ import DrawerButton from "./DrawerButton";
 interface HeaderProps {
     pageTitle: string
     altColor?: boolean
+    altBack?: boolean
 }
 
-const Header: React.FC<HeaderProps> = ({ pageTitle, altColor }) => {
+const Header: React.FC<HeaderProps> = ({ pageTitle, altColor, altBack }) => {
     const primaryColor = useThemeColor({}, "primary");
 
     return (
-        <View style={styles.header}>
-            <DrawerButton iconColor={primaryColor}/>
+        <View style={{...styles.header, backgroundColor: altBack ? "#f72f2f" : "#fff"}}>
+            <DrawerButton iconColor={altColor ? "#fff" : primaryColor}/>
             <Link href="/cart/shopping-cart-full" asChild>
                 <MaterialCommunityIcons size={25} name="cart" color={altColor ? "#fff" : primaryColor}/>
             </Link>

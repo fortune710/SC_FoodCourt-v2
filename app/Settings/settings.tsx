@@ -15,11 +15,11 @@ export default function SettingsPage() {
 
   return (
       <Page>
-        <View style={{backgroundColor: '#f72f2f', height: 180, zIndex: 0}}>
+        {/* <View style={{backgroundColor: '#f72f2f', height: 180, zIndex: 0}}> */}
           {/* <View style={{flexDirection: 'row',justifyContent:'space-between', width: '95%', alignItems: 'center',alignSelf:'center', marginTop:30}}> */}
-            <Text style={{fontWeight:'bold', fontSize: 24, textAlign:'center', color: '#fff'}}>Settings</Text> 
+            {/* <Text style={{fontWeight:'bold', fontSize: 24, textAlign:'center', color: '#fff'}}>Settings</Text>  */}
           {/* </View> */}
-        </View>
+        {/* </View> */}
 
         <View style={{width: '90%', backgroundColor: '#fff', borderRadius: 25, marginTop: -50, alignSelf:'center', elevation: 3}}>
           <View style={{padding: 30}}>
