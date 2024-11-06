@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-between",
         paddingHorizontal: 8,
-        paddingTop: 40,
-        // height: 70,
+        paddingTop: 45,
+        backgroundColor: '#fff'
     },
     title: {
         fontWeight: "900",

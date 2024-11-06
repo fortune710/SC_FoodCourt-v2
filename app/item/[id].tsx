@@ -22,6 +22,14 @@ export default function MenuItemDetail() {
   const menuItem = getSingleMenuItem(Number(id));
   const [quantity, setQuantity] = useState(1);
   const { currentUser } = useCurrentUser();
+  const [selectedAddon, setAddon] = useState<{ name: string, price: number }|null>(null);
+
+  const placeAddOn = (data: {name: string, price: number }|null) => {
+    if (!selectedAddon || selectedAddon.name !== data?.name) {
+      return setAddon(data);
+    }
+    return setAddon(null);
+  }
 
   const { addItem, updateItem, getSingleCartItem } = useCart(currentUser?.id!);
 
@@ -44,10 +52,12 @@ export default function MenuItemDetail() {
         user_id: currentUser?.id!,
         menu_item_id: menuItem?.id!,
         quantity: quantity,
+        addon_name: selectedAddon?.name,
+        addon_price: selectedAddon?.price,
       });
     }
   };
-  const totalPrice = (menuItem?.price || 0) * quantity;
+  const totalPrice = (menuItem?.price || 0) * quantity + (selectedAddon?.price || 0);
 
   return (
     <SafeAreaView>
@@ -66,8 +76,6 @@ export default function MenuItemDetail() {
                     <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
                 </View>
             </Pressable>
-            {/* <Text className="text-black text-2xl font-semibold">{menuItem?.name}</Text> */}
-            {/* <FontAwesome name="shopping-cart" size={24} color="red" /> */}
             </View>
           </ImageBackground>
         </View>
@@ -77,7 +85,7 @@ export default function MenuItemDetail() {
             <View className="w-2/3">
               <Text className="text-xl font-semibold">{menuItem?.name}</Text>
               <Text className="text-gray-500">
-                {menuItem?.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+                {menuItem?.description || "No description available for this item."}
               </Text>
             </View>
 
@@ -103,7 +111,11 @@ export default function MenuItemDetail() {
             <Text>{menuItem?.preparation_time || '15 mins'}</Text>
           </View>
 
-          <MenuItemAddons addons={menuItem?.add_ons!} />
+          <MenuItemAddons 
+            addons={menuItem?.add_ons!} 
+            selectedAddon={selectedAddon}
+            placeAddOn={placeAddOn}
+          />
 
           <TouchableOpacity
             onPress={addItemToCart}

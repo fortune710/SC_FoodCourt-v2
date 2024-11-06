@@ -9,6 +9,8 @@ import HomeSearch from "@/components/HomeSearch";
 import RestaurantsList from "@/components/Restaurants/RestaurantsList";
 import RecentOrdersList from "@/components/RecentOrders/RecentOrdersList";
 import useOrders from "@/hooks/useOrders";
+import Styles from "@/constants/Styles";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 const Recents = [
     {
@@ -51,6 +53,7 @@ export default function HomePage() {
 
 
     const { isLoading, data: restaurant } = useRestaurant();
+    const { currentUser } = useCurrentUser();
     const { getRecentOrders } = useOrders();
     const recentOrders = getRecentOrders();
 
@@ -63,26 +66,28 @@ export default function HomePage() {
     }
 
     return (
-        <Page style={styles.pagePadding}>
+        <Page>
             <ScrollView contentInset={{ bottom: 128 }} showsVerticalScrollIndicator={false}>
 
-                <View>
-                    <Text>Hi There</Text>
+                <View style={styles.pagePadding}>
+                    <Text style={{fontSize: 20, fontFamily: "Montserrat", fontWeight: 500}}>
+                        Hi, {currentUser?.full_name! || "User's Name"}
+                    </Text>
                     <Text style={styles.greetingText}>What will we be having today?</Text>
                 </View>
 
-                <Pressable onPress={() => setIsSearchActive(true)}>
+                <Pressable onPress={() => setIsSearchActive(true)} style={Styles.DefaultPaddingX}>
                     <Searchbar disable={false}/>
                 </Pressable>
 
                 <CategoriesList/>
 
-                <View>
+                <View style={[Styles.DefaultSpaceY, Styles.DefaultPaddingX, {marginTop: 0}]}>
                     <Text style={styles.recentsText}>Recents</Text>
                     <RecentOrdersList recentOrders={recentOrders!} />
                 </View>
 
-                <View>
+                <View style={Styles.DefaultPaddingX}>
                     <Text style={styles.vendorText}>Vendor</Text>
                     {
                         isLoading ? <ActivityIndicator/> :
@@ -99,7 +104,7 @@ export default function HomePage() {
 
 const styles = StyleSheet.create({
     recentsText: { fontWeight: "900", marginVertical: 16, fontSize: 20 },
-    greetingText: { fontWeight: "900", marginVertical: 16, fontSize: 20 },
+    greetingText: { fontWeight: "700", marginTop: 8, marginBottom: 24, fontSize: 32, fontFamily: "Lato"},
     vendorText: { fontWeight: "900", marginVertical: 16, fontSize: 20 },
-    pagePadding: { paddingHorizontal: 16 }
+    pagePadding: { paddingHorizontal: 16, paddingTop: 16 }
 })

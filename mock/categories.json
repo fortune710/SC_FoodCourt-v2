@@ -2,17 +2,17 @@
     {
         "id": "1",
         "name": "Rice",
-        "image": "require(\"../assets/images/pasta.svg\")"
+        "image": "require(\"../assets/images/rice-new.svg\")"
     },
     {
         "id": "2",
         "name": "Pasta",
-        "image": "require(\"../assets/images/pasta.svg\")"
+        "image": "require(\"../assets/images/pasta-new.svg\")"
     },
     {
         "id": "3",
         "name": "Sharwama",
-        "image": "require(\"../assets/images/sharwama.svg\")"
+        "image": "require(\"../assets/images/sharwama-new.svg\")"
     },
     {
         "id": "4",
@@ -22,21 +22,21 @@
     {
         "id": "5",
         "name": "Desserts",
-        "image": "require(\"../assets/images/rice-bowl.svg\")"
+        "image": "require(\"../assets/images/waffles-new.svg\")"
     },
     {
         "id": "6",
         "name": "Grills",
-        "image": "require(\"../assets/images/grills.svg\")"
+        "image": "require(\"../assets/images/grills-new.svg\")"
     },
     {
         "id": "7",
         "name": "Sandwiches",
-        "image": "require(\"../assets/images/rice-bowl.svg\")"
+        "image": "require(\"../assets/images/rice-new.svg\")"
     },
     {
         "id": "8",
         "name": "Burgers",
-        "image": "require(\"../assets/images/burger.svg\")"
+        "image": "require(\"../assets/images/burger-new.svg\")"
     }
 ]
