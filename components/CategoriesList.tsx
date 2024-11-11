@@ -6,21 +6,20 @@ import Styles from "../constants/Styles";
 import { X } from "lucide-react-native";
 import { Category } from "@/types";
 import { CATEGORIES } from "@/utils/constants";
-import {verticalScale, scale} from 'react-native-size-matters'
+import { verticalScale, scale } from 'react-native-size-matters'
 
 
-export type CategoryName = typeof CATEGORIES[number]['name'];
 
 interface CategoriesListProps {
-    onChange?: (category: CategoryName|"all") => void,
+    onChange?: (category: string|"all") => void,
     filteredCategories?: Category[]
 }
 
 const CategoriesList: React.FC<CategoriesListProps> = ({ onChange, filteredCategories }) => {
-    const [_, setCategory] = useState<CategoryName>();
+    const [_, setCategory] = useState<string>();
     const data = filteredCategories ? filteredCategories : CATEGORIES;
 
-    const handleChange = (category: CategoryName) => {
+    const handleChange = (category: string) => {
         if (category === _) {
             setCategory(undefined);
             onChange && onChange("all");
