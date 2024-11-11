@@ -1,3 +1,5 @@
+import { Category } from "@/types";
+
 export const CATEGORIES = [
     {
         id: "1",
@@ -39,4 +41,4 @@ export const CATEGORIES = [
         name: "Burgers",
         image: require("../assets/images/burger.svg")
     }
-] as const
+] as Category[]

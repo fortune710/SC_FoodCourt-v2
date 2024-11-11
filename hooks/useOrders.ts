@@ -69,12 +69,12 @@ export default function useOrders() {
 
   const getRecentOrders = () => {
     return orders?.slice(0, 5).map((order) => ({
-      id: order.id,
-      name: order.order_items.length > 1 ?
-       `${((order.order_items[0].menu_items) as any).name} + ${order.order_items.length - 1} more` : 
-       ((order.order_items[0].menu_items) as any).name,
-      restaurant: ((order.order_items[0].menu_items) as any).restaurant.name,
-      status: order.status
+      id: order?.id,
+      name: order?.order_items?.length > 1 ?
+       `${((order?.order_items[0]?.menu_items) as any)?.name} + ${order?.order_items?.length - 1} more` : 
+       ((order?.order_items[0]?.menu_items) as any)?.name,
+      restaurant: ((order?.order_items[0]?.menu_items) as any)?.restaurant?.name,
+      status: order?.status
     }))
   }
 
