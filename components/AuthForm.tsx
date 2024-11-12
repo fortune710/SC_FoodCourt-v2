@@ -104,6 +104,7 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                     autoCapitalize="none"
                     style={{ padding: 16 }}
                     icon={<Mail stroke={primaryColor}/>}
+                    keyboardType='email-address'
                 />
                 
                 <Input

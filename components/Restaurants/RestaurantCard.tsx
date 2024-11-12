@@ -1,8 +1,9 @@
 import { useRouter } from "expo-router"
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
 import { Image } from "expo-image";
 import { Text } from "@/components/Themed";
+import { Scale, verticalScale } from "react-native-size-matters";
 
 
 const RestaurantCard = ({ id, name }: { id: number, name: string }) => {
@@ -19,7 +20,18 @@ const RestaurantCard = ({ id, name }: { id: number, name: string }) => {
                 style={styles.backgroundImage} 
                 source={require("@/assets/images/food.png")}
             />
-            <Text style={styles.text}>{name}</Text>
+            <View style={{flexDirection: 'row', padding: 16, gap: 16, borderWidth: 1, borderColor: 'blue'}}>
+                <Image
+                    style={styles.restaurantLogo} 
+                    source={require("@/assets/images/food.png")}
+                />
+                {/* <View style={{backgroundColor: 12}}/> */}
+                <View>
+                    {/* <Text style={[styles.text, {fontSize: 20}]}>{name}</Text> */}
+                    <Text style={styles.text}>{name}</Text>
+
+                </View>
+            </View>
         </TouchableOpacity>
     )
 }
@@ -32,13 +44,13 @@ const styles = StyleSheet.create({
         marginRight: 12,
     },
     vendorCard: {
-        backgroundColor: "red",
+        backgroundColor: "black",
         marginRight: 0,
-        height: 100,
+        height: verticalScale(150),
         borderRadius: 12,
         marginVertical: 7,
-        justifyContent: "center",
-        position: "relative"
+        justifyContent: "flex-end",
+        alignItems: 'flex-start'
     },
     backgroundImage: { 
         width: "100%", 
@@ -47,7 +59,14 @@ const styles = StyleSheet.create({
         zIndex: -10, 
         borderRadius: 12 
     },
-    text: { color: "#fff" }
+    text: { color: "#fff", fontSize: 20 },
+    restaurantLogo: {
+        width: 40,
+        height: 40,
+        borderRadius: 82,
+        borderWidth: 3,
+        borderColor: 'white'
+    }
 })
 
 export default RestaurantCard;

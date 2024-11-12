@@ -11,6 +11,7 @@ import RecentOrdersList from "@/components/RecentOrders/RecentOrdersList";
 import useOrders from "@/hooks/useOrders";
 import Styles from "@/constants/Styles";
 import useCurrentUser from "@/hooks/useCurrentUser";
+import {scale, verticalScale} from 'react-native-size-matters'
 
 const Recents = [
     {
@@ -90,7 +91,7 @@ export default function HomePage() {
                 <View style={Styles.DefaultPaddingX}>
                     <Text style={styles.vendorText}>Vendor</Text>
                     {
-                        isLoading ? <ActivityIndicator/> :
+                        // isLoading ? <ActivityIndicator/> :
                         <RestaurantsList restaurants={restaurant!}/>
                     }
                 </View>
