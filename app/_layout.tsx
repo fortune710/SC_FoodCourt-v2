@@ -73,7 +73,7 @@ function RootLayoutNav() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <StatusBar/>
+        <StatusBar style='dark' />
         <Stack initialRouteName={ (session && session.user) ? "main" : "login" } screenOptions={{ headerShown: false }}>
           <Stack.Screen name="main"/>
           <Stack.Screen name="login"/>
