@@ -6,7 +6,7 @@ import { Text } from "@/components/Themed";
 import { Scale, verticalScale } from "react-native-size-matters";
 
 
-const RestaurantCard = ({ id, name }: { id: number, name: string }) => {
+const RestaurantCard = ({ id, name, image_url }: { id: number, name: string, image_url: string | null }) => {
     const router = useRouter();
 
     const moveToVendorPage = () => router.push(`/vendor/${id}`)
@@ -16,15 +16,31 @@ const RestaurantCard = ({ id, name }: { id: number, name: string }) => {
             onPress={moveToVendorPage} 
             style={[styles.horizontalListItem, styles.vendorCard]}
         >
-            <Image 
-                style={styles.backgroundImage} 
-                source={require("@/assets/images/food.png")}
-            />
-            <View style={{flexDirection: 'row', padding: 16, gap: 16, borderWidth: 1, borderColor: 'blue'}}>
-                <Image
-                    style={styles.restaurantLogo} 
+            {
+                !image_url ? 
+                <Image 
+                    style={styles.backgroundImage} 
                     source={require("@/assets/images/food.png")}
                 />
+                :
+                <Image 
+                    style={styles.backgroundImage} 
+                    source={{ uri: image_url }}
+                />
+            }
+            <View style={{flexDirection: 'row', padding: 16, gap: 16, }}>
+                {
+                    !image_url ?
+                    <Image
+                        style={styles.restaurantLogo} 
+                        source={require("@/assets/images/food.png")}
+                    />
+                    :
+                    <Image 
+                        style={styles.restaurantLogo} 
+                        source={{ uri: image_url }}
+                    />
+                }
                 {/* <View style={{backgroundColor: 12}}/> */}
                 <View>
                     {/* <Text style={[styles.text, {fontSize: 20}]}>{name}</Text> */}

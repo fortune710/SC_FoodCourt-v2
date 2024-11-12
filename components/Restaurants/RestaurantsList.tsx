@@ -1,7 +1,7 @@
 import React from "react"
 import RestaurantCard from "./RestaurantCard"
 
-const RestaurantsList = ({ restaurants }: { restaurants: { id: number, name: string }[] }) => {
+const RestaurantsList = ({ restaurants }: { restaurants: { id: number, name: string, image_url: string | null }[] }) => {
     return (
         <>
             {
@@ -10,6 +10,7 @@ const RestaurantsList = ({ restaurants }: { restaurants: { id: number, name: str
                         key={restaurant.id} 
                         id={restaurant.id} 
                         name={restaurant.name} 
+                        image_url={restaurant.image_url}
                     />
                 )
             }

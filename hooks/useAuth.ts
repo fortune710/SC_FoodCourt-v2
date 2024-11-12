@@ -63,6 +63,11 @@ export default function useAuth() {
         if (error) throw new Error(error?.message);
     }
 
+    const signOut = async () => {
+        const { error } = await supabase.auth.signOut();
+        if (error) throw new Error(error?.message);
+    }
+
     return {
         signIn,
         signUpWithEmail,
@@ -70,5 +75,6 @@ export default function useAuth() {
         sendResetEmail,
         changePassword,
         updateUser,
+        signOut
     }
 }

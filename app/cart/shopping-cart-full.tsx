@@ -87,6 +87,7 @@ export default function CartFullPage() {
           <View>
             {localCartItems?.map((foodItem) => (
               <CartItem
+                id={foodItem.id}
                 key={foodItem.id}
                 name={foodItem.menu_item.name}
                 description={foodItem.menu_item.description}

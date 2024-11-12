@@ -12,6 +12,7 @@ export default function useRestaurant() {
             return data as {
                 name: string;
                 id: number;
+                image_url: string | null;
             }[];
         }
     })

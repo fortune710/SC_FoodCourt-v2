@@ -4,12 +4,21 @@ import { StyleSheet } from "react-native";
 import { OrderStatus } from "@/types";
 
 const RecentOrderCard = ({ name, restaurant, status }: { name: string, restaurant: string, status: number }) => {
+    const statusColors = {
+        0: "bg-yellow-300",
+        1: "bg-[#FFD686]",
+        2: "bg-[#FFD686]",
+        3: "bg-green-300",
+        4: "bg-green-600",
+    }
+
+    
     return (
         <TouchableOpacity style={[styles.horizontalListItem, styles.cardStyle]}>
             <Text style={styles.mediumText}>{name}</Text>
             <Text style={styles.semiboldText}>{restaurant}</Text>
 
-            <View style={styles.statusContainer}>
+            <View className={statusColors[status as 0 | 1 | 2 | 3 | 4]} style={styles.statusContainer}>
                 <Text style={styles.statusText}>{OrderStatus[status]}</Text>
             </View>
         </TouchableOpacity>
@@ -37,10 +46,9 @@ const styles = StyleSheet.create({
     mediumText: { alignSelf: "flex-start", fontWeight: "500" },
     semiboldText: { alignSelf: "flex-start", fontWeight: "700" },
     statusContainer: { 
-        backgroundColor: "#FFD686", 
         alignSelf: "flex-end", 
         padding: 6, 
         borderRadius: 16 
     },
-    statusText: { color: "#000", textTransform: "capitalize", fontWeight: "700" }
+    statusText: { color: "#000", fontSize: 12, textTransform: "capitalize", fontWeight: "700" }
 })
