@@ -20,7 +20,7 @@ const RestaurantCard = ({ id, name }: { id: number, name: string }) => {
                 style={styles.backgroundImage} 
                 source={require("@/assets/images/food.png")}
             />
-            <View style={{flexDirection: 'row', padding: 16, gap: 16, borderWidth: 1, borderColor: 'blue'}}>
+            <View style={{flexDirection: 'row', alignItems: 'center', padding: 16, gap: 16}}>
                 <Image
                     style={styles.restaurantLogo} 
                     source={require("@/assets/images/food.png")}

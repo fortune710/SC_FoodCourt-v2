@@ -68,7 +68,7 @@ export default function HomePage() {
 
     return (
         <Page>
-            <ScrollView contentInset={{ bottom: 300 }} showsVerticalScrollIndicator={false}>
+            <ScrollView contentInset={{ bottom: 150 }} showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 150}}>
 
                 <View style={styles.pagePadding}>
                     <Text style={{fontSize: 20, fontFamily: "Montserrat", fontWeight: 500}}>
