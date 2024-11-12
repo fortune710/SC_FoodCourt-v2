@@ -3,10 +3,15 @@ import { Text } from '../components/Themed';
 import React, { useState } from 'react';
 import { View, StyleSheet, Pressable } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
+import { Button, ListItem } from '@rneui/themed';
+import useThemeColor from '@/hooks/useThemeColor';
+import useCart from '@/hooks/useCart';
+import useCurrentUser from '@/hooks/useCurrentUser';
 
 
 
 interface CartItemProps {
+  id: number;
   name: string;
   description: string;
   price: number;
@@ -16,8 +21,11 @@ interface CartItemProps {
   onQuantityChange: (newQuantity: number) => void;
 }
   
-const CartItem: React.FC<CartItemProps> = ({ name, addon, description, price, quantity, restaurantId, onQuantityChange }) => {
+const CartItem: React.FC<CartItemProps> = ({ id, name, addon, description, price, quantity, restaurantId, onQuantityChange }) => {
   const { data: restaurants } = useRestaurant();
+  const { currentUser } = useCurrentUser();
+  const primary = useThemeColor({}, "primary");
+  const { removeItem } = useCart(currentUser?.id!);
 
   const restaurant = restaurants?.find(({ id }) => id === restaurantId);
 
@@ -35,54 +43,76 @@ const CartItem: React.FC<CartItemProps> = ({ name, addon, description, price, qu
   };
 
   return (
-    <View style={styles.container}>
-      <View style = {{flexDirection: 'row', justifyContent:'space-between'}}>
-        <View style = {{flexDirection: 'row'}}>
-          <Text style={styles.title}>{name} - </Text>
-          <Text style={{fontWeight: 'bold',fontSize: 15, color:'#f72f2f'}}>{restaurant?.name}</Text>
-        </View>
-        <View style={styles.priceContainer}>
-          <Text style={styles.priceLabel}>N {(price * quantity) + (addon?.price || 0)}</Text>
-        </View>
-      </View>
-
-      {
-        !description ? null : (
-          <View style={styles.descriptionContainer}>
-            <Text style={styles.description}>{description}</Text>
-          </View>
+    <ListItem.Swipeable
+      rightContent={
+        () => (
+          <Button 
+            containerStyle={{
+              flex: 1,
+              justifyContent: "center",
+              backgroundColor: primary,
+              paddingVertical: 12
+            }}
+            type="clear"
+            icon={{ name: "delete-outline" }}
+            onPress={() => removeItem(id)}
+          >
+            <Text>Delete</Text>
+          </Button>
         )
       }
+    >
+      <ListItem.Content style={{ padding: 0 }}>
+        <View style={styles.container}>
+          <View style = {{flexDirection: 'row', justifyContent:'space-between'}}>
+            <View style = {{flexDirection: 'row'}}>
+              <Text style={styles.title}>{name} - </Text>
+              <Text style={{fontWeight: 'bold',fontSize: 15, color:'#f72f2f'}}>{restaurant?.name}</Text>
+            </View>
+            <View style={styles.priceContainer}>
+              <Text style={styles.priceLabel}>N {(price * quantity) + (addon?.price || 0)}</Text>
+            </View>
+          </View>
 
-      {
-        !addon ? null : (
-          <View style={styles.descriptionContainer}>
-            <Text style={styles.description}>
-              Selected Addon: {addon.name} - {addon.price}
-            </Text>
+          {
+            !description ? null : (
+              <View style={styles.descriptionContainer}>
+                <Text style={styles.description}>{description}</Text>
+              </View>
+            )
+          }
+
+          {
+            !addon ? null : (
+              <View style={styles.descriptionContainer}>
+                <Text style={styles.description}>
+                  Selected Addon: {addon.name} - {addon.price}
+                </Text>
+              </View>
+            )
+          }
+          <View style={styles.actionsContainer}>
+            <Pressable onPress={handleIncrement} style={styles.actionButton}>
+              <View style={styles.iconContainer}>
+                <Feather name="plus-circle" size={18} color="white" />
+              </View>
+            </Pressable>
+            <Text style={styles.amountText}>{quantity}</Text>
+            <Pressable onPress={handleDecrement} style={styles.actionButton}>
+              <View style={styles.iconContainer}>
+                <Feather name="minus-circle" size={18} color="white" />
+              </View>
+            </Pressable>
           </View>
-        )
-      }
-      <View style={styles.actionsContainer}>
-        <Pressable onPress={handleIncrement} style={styles.actionButton}>
-          <View style={styles.iconContainer}>
-            <Feather name="plus-circle" size={18} color="white" />
-          </View>
-        </Pressable>
-        <Text style={styles.amountText}>{quantity}</Text>
-        <Pressable onPress={handleDecrement} style={styles.actionButton}>
-          <View style={styles.iconContainer}>
-            <Feather name="minus-circle" size={18} color="white" />
-          </View>
-        </Pressable>
-      </View>
-    </View>
+        </View>
+      </ListItem.Content>
+    </ListItem.Swipeable>
   );
 };
   
 const styles = StyleSheet.create({
   container: {
-    width: '90%',
+    width: '100%',
     height: 100,
     alignSelf: 'center',
     marginBottom: 20,

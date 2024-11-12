@@ -119,7 +119,8 @@ export default function MenuItemDetail() {
 
           <TouchableOpacity
             onPress={addItemToCart}
-            className="bg-primary rounded-3xl py-4 flex flex-row items-center justify-center mt-32"
+            disabled={menuItem?.quantity! < menuItem?.warning_stock_value!}
+            className="bg-primary disabled:bg-red-600 rounded-3xl py-4 flex flex-row items-center justify-center mt-32"
           >
             <RnText className="text-white font-medium">Add to Cart (₦{totalPrice})</RnText>
           </TouchableOpacity>

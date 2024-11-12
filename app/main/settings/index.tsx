@@ -8,6 +8,8 @@ import React, { useState } from 'react';
 import DrawerButton from '@/components/DrawerButton';
 import { useRouter } from 'expo-router';
 import Drawer from 'expo-router/drawer';
+import useAuth from '@/hooks/useAuth';
+import Toast from 'react-native-toast-message';
 
 
 
@@ -15,6 +17,19 @@ import Drawer from 'expo-router/drawer';
 export default function SettingsPage() {
 
   const [switchValue, setSwitchValue] = useState(true);
+  const { signOut } = useAuth();
+
+  const logout = async () => {
+    try {
+      await signOut();
+      return router.replace('/login');
+    } catch (e: any) {
+      return Toast.show({
+        type: "error",
+        text1: e.message
+      })
+    }
+  }
 
   const router = useRouter();
 
@@ -23,13 +38,7 @@ export default function SettingsPage() {
       <Page>
         <Drawer.Screen options={{ header: () => null }} />
         <View style={{backgroundColor: '#f72f2f', height: 180, zIndex: 0}}>
-          <View style={{flexDirection: 'row',justifyContent:'space-between', width: '95%', alignItems: 'center',alignSelf:'center', marginTop:60}}>
-            {/* <DrawerButton iconColor='#fff'/>
-            <Text style={{fontWeight:'bold', fontSize: 24, textAlign:'center', color: '#fff'}}>Settings</Text> 
-            <Pressable>
-              <MaterialIcons name="shopping-cart" size={26} color="#fff" />
-            </Pressable> */}
-          </View>
+          <View style={{flexDirection: 'row',justifyContent:'space-between', width: '95%', alignItems: 'center',alignSelf:'center', marginTop:60}}/>
         </View>
 
         <View style={{width: '90%', backgroundColor: '#fff', borderRadius: 25, marginTop: -50, alignSelf:'center', elevation: 3}}>
@@ -137,7 +146,7 @@ export default function SettingsPage() {
         <View style={{width: '90%', backgroundColor: '#fff', borderRadius: 30, marginTop: 20, alignSelf:'center', borderColor: '#7E7E7E66', borderWidth: 1}}>
           <View style={{paddingHorizontal: 30, paddingVertical: 20}}>
             <TouchableOpacity
-              onPress={() => {}}
+              onPress={logout}
               style={{flexDirection:'row', alignItems: 'center'}}
             >
               <Ionicons name="log-out-outline" size={28} color="#f72f2f" />
