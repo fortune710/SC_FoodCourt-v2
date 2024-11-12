@@ -91,7 +91,7 @@ export default function HomePage() {
                 <View style={Styles.DefaultPaddingX}>
                     <Text style={styles.vendorText}>Vendor</Text>
                     {
-                        // isLoading ? <ActivityIndicator/> :
+                        isLoading ? <ActivityIndicator/> :
                         <RestaurantsList restaurants={restaurant!}/>
                     }
                 </View>
