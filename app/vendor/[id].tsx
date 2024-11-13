@@ -51,7 +51,7 @@ export default function VendorDetailPage() {
                         <Text style={{ color: "#fff", marginVertical: 16, marginHorizontal: 16, fontSize: 20, fontWeight: "700" }}>{restaurant?.name}</Text>
                         <ImageBackground source={require("../../assets/images/food.png")} style={[Styles.ImageBackground]}/>
 
-                        <View style={{ marginHorizontal: 24, marginVertical: 16, alignItems: 'flex-end' }}>
+                        <View style={{ marginHorizontal: 16, marginVertical: 16, alignItems: 'flex-end' }}>
                             <Searchbar width= {scale(70)}/>
                         </View>
                     </View>
@@ -60,9 +60,7 @@ export default function VendorDetailPage() {
                         <Text style={styles.subtitle}>Select item, then add to cart</Text>
                     </View>
 
-                    <View style={{ marginHorizontal: 16 }}>
-                        <CategoriesList onChange={(category) => router.setParams({ category })}/>
-                    </View>
+                    <CategoriesList onChange={(category) => router.setParams({ category })}/>
 
                     <View style={[Styles.DefaultPaddingX, Styles.DefaultSpaceY]}>
                         {

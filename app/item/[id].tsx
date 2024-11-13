@@ -57,7 +57,10 @@ export default function MenuItemDetail() {
         addon_price: selectedAddon?.price,
       });
     }
+
+    router.back() //Usiere- it'a too quick
   };
+
   const totalPrice = (menuItem?.price || 0) * quantity + (selectedAddon?.price || 0);
 
   return (
@@ -126,6 +129,7 @@ export default function MenuItemDetail() {
             onPress={addItemToCart}
             disabled={menuItem?.quantity! < menuItem?.warning_stock_value!}
             className="bg-primary disabled:bg-red-600 rounded-3xl py-4 flex flex-row items-center justify-center mt-32"
+            style={{borderRadius: 50}}
           >
             <RnText className="text-white font-medium text-lg">Add to Cart (₦ {totalPrice})</RnText>
           </TouchableOpacity>
