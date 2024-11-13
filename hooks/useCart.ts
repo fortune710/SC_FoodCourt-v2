@@ -118,7 +118,7 @@ export default function useCart(userId: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart", userId] });
       Toast.show({
-        text1: "Item added to cart",
+        text1: "Item Added to Cart Successfully.",
         type: "success"
       });
     },
@@ -136,7 +136,7 @@ export default function useCart(userId: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart", userId] });
       Toast.show({
-        text1: "Cart item updated",
+        text1: "Cart Updated Successfully.",
         type: "success"
       });
     },

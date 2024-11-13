@@ -1,8 +1,9 @@
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { Page, Text } from "../../components/Themed";
 import useThemeColor from "../../hooks/useThemeColor";
-import { useLocalSearchParams, useRouter, router } from "expo-router";
+import { Link, useLocalSearchParams, useRouter, router } from "expo-router";
 import { Image, ImageBackground } from "expo-image";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons"
 import Styles from "../../constants/Styles";
 import Searchbar from "../../components/Searchbar";
 import CategoriesList from "../../components/CategoriesList";
@@ -33,15 +34,20 @@ export default function VendorDetailPage() {
                 <ScrollView>
                     {/* <Header pageTitle="Vendor"/> */}
                     <View style={{ position: "relative", width: "100%" }}>
-                        <Pressable
-                            onPress={() => router.back()}
-                            style={{marginTop: 16, marginLeft: 10}}
-                        >
-                            <View style={{width: 50, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center', }}>
-                            <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
-                            <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
-                            </View>
-                        </Pressable>
+
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 16, marginHorizontal: 12}}>
+                            <Pressable onPress={() => router.back()}>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems:'center' }}>
+                                    <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
+                                    <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
+                                </View>
+                            </Pressable>
+
+                            <Link href="/cart/shopping-cart-full" asChild>
+                                <MaterialCommunityIcons size={25} name="cart" color={primaryColor}/>
+                            </Link>
+                        </View>
+
                         <Text style={{ color: "#fff", marginVertical: 16, marginHorizontal: 16, fontSize: 20, fontWeight: "700" }}>{restaurant?.name}</Text>
                         <ImageBackground source={require("../../assets/images/food.png")} style={[Styles.ImageBackground]}/>
 

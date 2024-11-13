@@ -1,8 +1,9 @@
 import { Pressable, ScrollView, View, Text as RnText, TouchableOpacity } from "react-native";
 import { Page, Text } from "../../components/Themed";
 import useThemeColor from "../../hooks/useThemeColor";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter, Link } from "expo-router";
 import { ImageBackground } from "expo-image";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons"
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import useSingleRestaurant from "@/hooks/useSingleResturant";
 import useCart from "@/hooks/useCart";
@@ -67,16 +68,20 @@ export default function MenuItemDetail() {
             source={require("@/assets/images/food.png")}
             style={[Styles.ImageBackground]}
           >
-            <View className="absolute top-0 left-0 p-4 flex-row justify-between items-center w-full">
-            <Pressable
-                onPress={() => router.back()}
-            >
-                <View style={{width: 50, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center', }}>
+
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 16, marginHorizontal: 12}}>
+            <Pressable onPress={() => router.back()}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems:'center' }}>
                     <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
                     <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
                 </View>
             </Pressable>
-            </View>
+
+            <Link href="/cart/shopping-cart-full" asChild>
+                <MaterialCommunityIcons size={25} name="cart" color={primary}/>
+            </Link>
+          </View>
+
           </ImageBackground>
         </View>
 
@@ -122,7 +127,7 @@ export default function MenuItemDetail() {
             disabled={menuItem?.quantity! < menuItem?.warning_stock_value!}
             className="bg-primary disabled:bg-red-600 rounded-3xl py-4 flex flex-row items-center justify-center mt-32"
           >
-            <RnText className="text-white font-medium">Add to Cart (₦{totalPrice})</RnText>
+            <RnText className="text-white font-medium text-lg">Add to Cart (₦ {totalPrice})</RnText>
           </TouchableOpacity>
         </ScrollView>
       </Page>
