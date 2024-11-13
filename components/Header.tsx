@@ -5,7 +5,7 @@ import { Link } from "expo-router";
 import DrawerButton from "./DrawerButton";
 
 interface HeaderProps {
-    pageTitle: string
+    pageTitle: 'Home' | 'Profile' | 'Order History' | 'Settings'
     altColor?: boolean
     altBack?: boolean
 }
@@ -16,6 +16,9 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, altColor, altBack }) => {
     return (
         <View style={{...styles.header, backgroundColor: altBack ? "#f72f2f" : "#fff"}}>
             <DrawerButton iconColor={altColor ? "#fff" : primaryColor}/>
+
+            {pageTitle === 'Order History' ? <Text style= {{fontSize: 20, fontWeight: 600}}>{pageTitle}</Text> : null }
+
             <Link href="/cart/shopping-cart-full" asChild>
                 <MaterialCommunityIcons size={25} name="cart" color={altColor ? "#fff" : primaryColor}/>
             </Link>

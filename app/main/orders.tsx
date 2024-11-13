@@ -30,8 +30,7 @@ export default function OrdersPage() {
             <OrderSearchbar setSearchResults={setSearchResults} />
             {
                 isLoading ? <ActivityIndicator/> : 
-                <ScrollView style={{flex: 1}}>
-                    <View style={{ height: 16 }} />
+                <ScrollView style={{flex: 1, marginTop: 16}}>
                     {
                         orders?.map((order, index) => (
                             <OrderListItem key={index} order={order} />

@@ -28,7 +28,7 @@ const RestaurantCard = ({ id, name, image_url }: { id: number, name: string, ima
                     source={{ uri: image_url }}
                 />
             }
-            <View style={{flexDirection: 'row', alignItems: 'center', padding: 16, gap: 16, }}>
+            <View style={{flexDirection: 'row', alignItems: 'center', padding: 16, gap: 12, }}>
                 {
                     !image_url ?
                     <Image
@@ -73,9 +73,14 @@ const styles = StyleSheet.create({
         height: "100%", 
         position: "absolute", 
         zIndex: -10, 
-        borderRadius: 12 
+        borderRadius: 12 ,
+        tintColor: "#11111",
     },
-    text: { color: "#fff", fontSize: 20 },
+    text: { 
+        color: "#fff", 
+        fontSize: 16, 
+        fontWeight: 600
+    },
     restaurantLogo: {
         width: 40,
         height: 40,

@@ -68,7 +68,7 @@ export default function HomePage() {
 
     return (
         <Page>
-            <ScrollView contentInset={{ bottom: 150 }} showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 150}}>
+            <ScrollView contentInset={{ bottom: 10 }} showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 100}}>
 
                 <View style={styles.pagePadding}>
                     <Text style={{fontSize: 20, fontFamily: "Montserrat", fontWeight: 500}}>
@@ -83,7 +83,7 @@ export default function HomePage() {
 
                 <CategoriesList/>
 
-                <View style={[Styles.DefaultSpaceY, Styles.DefaultPaddingX, {marginTop: 0}]}>
+                <View style={[Styles.DefaultSpaceY, {marginTop: 0}]}>
                     <Text style={styles.recentsText}>Recents</Text>
                     <RecentOrdersList recentOrders={recentOrders!} />
                 </View>
@@ -104,8 +104,8 @@ export default function HomePage() {
 
 
 const styles = StyleSheet.create({
-    recentsText: { fontWeight: "900", marginVertical: 16, fontSize: 20 },
+    recentsText: { fontWeight: "900", marginVertical: 16, fontSize: 20, marginHorizontal: 16 },
     greetingText: { fontWeight: "700", marginTop: 8, marginBottom: 24, fontSize: 32, fontFamily: "Lato"},
     vendorText: { fontWeight: "900", marginVertical: 16, fontSize: 20 },
-    pagePadding: { paddingHorizontal: 16, paddingTop: 16 }
+    pagePadding: { paddingHorizontal: 16, marginTop: 24 }
 })

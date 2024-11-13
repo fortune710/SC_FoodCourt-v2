@@ -84,7 +84,7 @@ export default function CartFullPage() {
         </View>
 
         <ScrollView contentInset={{ bottom: 192 }}>
-          <View>
+          <View style={{paddingBottom: 16}}>
             {localCartItems?.map((foodItem) => (
               <CartItem
                 id={foodItem.id}
@@ -102,19 +102,19 @@ export default function CartFullPage() {
             ))}
           </View>
 
-          <View style={{borderBottomWidth: 1.5, borderTopWidth: 1.5, borderColor: '#fe0000', width: '90%', alignSelf:'center', alignItems: 'center'}}>
-              <View style={{justifyContent: 'space-between',flexDirection:'row', width:'95%', marginVertical:15}}>
+          <View style={{borderBottomWidth: 1.5, borderTopWidth: 1.5, borderColor: '#fe0000', marginHorizontal: 16, gap: 16}}>
+              <View style={{justifyContent: 'space-between',flexDirection:'row', marginTop: 16}}>
                 <Text style={{fontSize: 16, fontWeight: 500}}>Subtotal</Text>
                 <Text style={{fontWeight:'bold', fontSize: 16}}>N {totalPrice}</Text>
               </View>
 
-              <View style={{justifyContent: 'space-between',flexDirection:'row', width:'95%', marginBottom:20}}>
+              <View style={{justifyContent: 'space-between',flexDirection:'row', marginBottom: 16}}>
                 <Text style={{fontSize: 16, fontWeight: 500}}>Service Charge</Text>
                 <Text style={{fontWeight:'bold', fontSize: 16}}>N {subCharge}</Text>
               </View>
           </View>
 
-          <View style={{justifyContent: 'space-between',flexDirection:'row', width:'85%', marginTop:10, marginBottom: 48, alignSelf: 'center'}}>
+          <View style={{justifyContent: 'space-between', flexDirection:'row', marginTop:16, marginBottom: 48, marginHorizontal: 16}}>
               <Text style={{fontWeight:'bold', fontSize: 18}}>Total</Text>
               <Text style={{fontWeight:'bold', fontSize: 18}}>N {totalPrice + subCharge}</Text>
           </View>

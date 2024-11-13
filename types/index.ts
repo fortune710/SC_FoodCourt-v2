@@ -84,7 +84,7 @@ export enum OrderStatus {
     New = 0,
     Accepted = 1,
     Preparing = 2,
-    Completed = 3,
+    Ready = 3,
     Collected = 4,
     Cancelled = 5,
 }

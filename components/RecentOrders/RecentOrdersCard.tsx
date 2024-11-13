@@ -6,17 +6,20 @@ import { OrderStatus } from "@/types";
 const RecentOrderCard = ({ name, restaurant, status }: { name: string, restaurant: string, status: number }) => {
     const statusColors = {
         0: "bg-yellow-300",
-        1: "bg-[#FFD686]",
-        2: "bg-[#FFD686]",
+        1: "bg-[#F7E11E]",
+        2: "bg-[#F7E11E]",
         3: "bg-green-300",
         4: "bg-green-600",
+        5: "bg-[#F72F2F]",
     }
 
     
     return (
         <TouchableOpacity style={[styles.horizontalListItem, styles.cardStyle]}>
-            <Text style={styles.mediumText}>{name}</Text>
-            <Text style={styles.semiboldText}>{restaurant}</Text>
+            <View style={{gap: 4}}>
+                <Text style={styles.mediumText}>{name}</Text>
+                <Text style={styles.semiboldText}>{restaurant}</Text>
+            </View>
 
             <View className={statusColors[status as 0 | 1 | 2 | 3 | 4]} style={styles.statusContainer}>
                 <Text style={styles.statusText}>{OrderStatus[status]}</Text>
@@ -33,6 +36,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         alignItems: "center",
         marginRight: 12,
+        left: 16
     },
     cardStyle: {
         backgroundColor: "#fff",
@@ -41,14 +45,16 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingVertical: 8,
         paddingHorizontal: 12,
-        gap: 8 
+        gap: 16,
     },
     mediumText: { alignSelf: "flex-start", fontWeight: "500" },
     semiboldText: { alignSelf: "flex-start", fontWeight: "700" },
     statusContainer: { 
         alignSelf: "flex-end", 
+        alignItems: "center",
         padding: 6, 
-        borderRadius: 16 
+        borderRadius: 16, 
+        width: 88
     },
     statusText: { color: "#000", fontSize: 12, textTransform: "capitalize", fontWeight: "700" }
 })

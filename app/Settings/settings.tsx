@@ -126,7 +126,7 @@ export default function SettingsPage() {
         <View style={{width: '90%', backgroundColor: '#fff', borderRadius: 30, marginTop: 20, alignSelf:'center', borderColor: '#7E7E7E66', borderWidth: 1}}>
           <View style={{paddingHorizontal: 30, paddingVertical: 20}}>
             <Pressable
-                    onPress={() => {}}
+                    onPress={() => {}} // Usiere- e no gree me to sign out
                     style={{flexDirection:'row', alignItems: 'center'}}
                 >
 

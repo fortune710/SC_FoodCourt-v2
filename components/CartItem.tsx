@@ -51,13 +51,13 @@ const CartItem: React.FC<CartItemProps> = ({ id, name, addon, description, price
               flex: 1,
               justifyContent: "center",
               backgroundColor: primary,
-              paddingVertical: 12
+              paddingVertical: 4
             }}
             type="clear"
-            icon={{ name: "delete-outline" }}
+            icon={{ name: "delete-outline", color: 'white' }}
             onPress={() => removeItem(id)}
           >
-            <Text>Delete</Text>
+            <Text style={{fontSize: 16, fontWeight: 600, color: 'white'}}>Delete</Text>
           </Button>
         )
       }
@@ -115,7 +115,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 100,
     alignSelf: 'center',
-    marginBottom: 20,
   },
   title: {
     fontWeight: 'bold',

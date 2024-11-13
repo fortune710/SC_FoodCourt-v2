@@ -47,7 +47,7 @@ export default function DrawerLayout() {
                     name="orders"
                     options={{
                         drawerLabel: "Orders",
-                        header: () => <Header pageTitle="Orders" />
+                        header: () => <Header pageTitle="Order History" />
                     }}
                 />
 
