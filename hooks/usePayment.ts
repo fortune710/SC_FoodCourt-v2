@@ -19,6 +19,8 @@ export default function usePayment() {
     const { refreshCart } = useCart(currentUser?.id!);
     const router = useRouter();
 
+    
+
     useEffect(() => {
         if (!result || result.type !== "cancel" || !transactionRef) return
         
