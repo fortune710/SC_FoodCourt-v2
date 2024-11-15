@@ -54,7 +54,7 @@ export default function EditProfilePage() {
 
     return (
         <Page>
-            <Drawer.Screen options={{ header: () => <Header pageTitle="" /> }} />
+            <Drawer.Screen options={{ header: () => <Header pageTitle="Profile" /> }} />
 
             <EditProfilePhoto imageUrl={imageUrl} />
 
