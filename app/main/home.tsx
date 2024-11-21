@@ -68,8 +68,6 @@ export default function HomePage() {
 
     return (
         <Page>
-            <ScrollView contentInset={{ bottom: 10 }} showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 100}}>
-
                 <View style={styles.pagePadding}>
                     <Text style={{fontSize: 20, fontFamily: "Montserrat", fontWeight: 500}}>
                         Hi, {currentUser?.full_name! || "User's Name"}
@@ -95,9 +93,6 @@ export default function HomePage() {
                         <RestaurantsList restaurants={restaurant!}/>
                     }
                 </View>
-
-            </ScrollView>
-
         </Page>
     )
 }
