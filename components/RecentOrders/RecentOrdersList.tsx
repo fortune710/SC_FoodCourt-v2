@@ -15,7 +15,7 @@ const RecentOrdersList = ({ recentOrders }: { recentOrders: any[] }) => {
 
     if (recentOrders?.length === 0) {
         return (
-            <View className="py-6 px-3 w-full flex flex-row item-center justify-center border border-zinc-800 rounded-2xl">
+            <View className="py-6 px-3 mx-3 flex flex-row item-center justify-center border border-zinc-800 rounded-2xl">
                 <Text>You have not made any recent orders</Text>
             </View>
         )
