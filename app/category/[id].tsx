@@ -11,6 +11,7 @@ import { Product } from '@/types';
 import MenuItem from '@/components/MenuItem';
 import useThemeColor from '@/hooks/useThemeColor';
 import CategorySearchbar from '@/components/CategorySearch';
+import { Page } from '@/components/Themed';
 
 const CategoryPage = () => {
   const router = useRouter();
@@ -38,7 +39,7 @@ const CategoryPage = () => {
   }, [categoryProducts]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Page style={styles.container}>
       <View style={{flexDirection: 'row', gap: 16, alignItems: 'center'}}>
             <Pressable
                   onPress={() => router.back()}
@@ -82,7 +83,7 @@ const CategoryPage = () => {
                 </View>
             )})}
       </ScrollView>
-    </SafeAreaView>
+    </Page>
   );
 };
 

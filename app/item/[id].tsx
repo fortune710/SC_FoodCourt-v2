@@ -64,77 +64,75 @@ export default function MenuItemDetail() {
   const totalPrice = (menuItem?.price || 0) * quantity + (selectedAddon?.price || 0);
 
   return (
-    <SafeAreaView>
-      <Page className="flex-1 bg-white h-screen">
-        <View className="relative h-48">
-          <ImageBackground
-            source={require("@/assets/images/food.png")}
-            style={[Styles.ImageBackground]}
-          >
+    <Page className="flex-1 bg-white h-screen">
+      <View className="relative h-48">
+        <ImageBackground
+          source={require("@/assets/images/food.png")}
+          style={[Styles.ImageBackground]}
+        >
 
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 16, marginHorizontal: 12}}>
-            <Pressable onPress={() => router.back()}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems:'center' }}>
-                    <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
-                    <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
-                </View>
-            </Pressable>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 16, marginHorizontal: 12}}>
+          <Pressable onPress={() => router.back()}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems:'center' }}>
+                  <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
+                  <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
+              </View>
+          </Pressable>
 
-            <Link href="/cart/shopping-cart-full" asChild>
-                <MaterialCommunityIcons size={25} name="cart" color={primary}/>
-            </Link>
-          </View>
-
-          </ImageBackground>
+          <Link href="/cart/shopping-cart-full" asChild>
+              <MaterialCommunityIcons size={25} name="cart" color={primary}/>
+          </Link>
         </View>
 
-        <ScrollView className="p-4 space-y-4">
-          <View className="flex flex-row items-center justify-between">
-            <View className="w-2/3">
-              <Text className="text-xl font-semibold">{menuItem?.name}</Text>
-              <Text className="text-gray-500">
-                {menuItem?.description || "No description available for this item."}
-              </Text>
-            </View>
+        </ImageBackground>
+      </View>
 
-            <View className="flex flex-row items-center gap-2">
-              <TouchableOpacity onPress={reduceQuantity} className="p-2 border border-primary rounded-full">
-                <Minus stroke={primary} className="text-primary" />
-              </TouchableOpacity>
-
-              <Text className="text-xl">{quantity}</Text>
-
-              <TouchableOpacity onPress={increaseQuantity} className="p-2 border border-primary rounded-full">
-                <Plus stroke={primary} className="text-primary" />
-              </TouchableOpacity>
-            </View>
+      <ScrollView className="p-4 space-y-4">
+        <View className="flex flex-row items-center justify-between">
+          <View className="w-2/3">
+            <Text className="text-xl font-semibold">{menuItem?.name}</Text>
+            <Text className="text-gray-500">
+              {menuItem?.description || "No description available for this item."}
+            </Text>
           </View>
 
-          <View className="my-3 flex flex-col">
-            <Text className="font-medium">Category: {menuItem?.category}</Text>
+          <View className="flex flex-row items-center gap-2">
+            <TouchableOpacity onPress={reduceQuantity} className="p-2 border border-primary rounded-full">
+              <Minus stroke={primary} className="text-primary" />
+            </TouchableOpacity>
+
+            <Text className="text-xl">{quantity}</Text>
+
+            <TouchableOpacity onPress={increaseQuantity} className="p-2 border border-primary rounded-full">
+              <Plus stroke={primary} className="text-primary" />
+            </TouchableOpacity>
           </View>
+        </View>
 
-          <View className="flex flex-row items-center gap-2 my-3">
-            <Clock stroke={primary} />
-            <Text>{menuItem?.preparation_time || '15 mins'}</Text>
-          </View>
+        <View className="my-3 flex flex-col">
+          <Text className="font-medium">Category: {menuItem?.category}</Text>
+        </View>
 
-          <MenuItemAddons 
-            addons={menuItem?.add_ons!} 
-            selectedAddon={selectedAddon}
-            placeAddOn={placeAddOn}
-          />
+        <View className="flex flex-row items-center gap-2 my-3">
+          <Clock stroke={primary} />
+          <Text>{menuItem?.preparation_time || '15 mins'}</Text>
+        </View>
 
-          <TouchableOpacity
-            onPress={addItemToCart}
-            disabled={menuItem?.quantity! < menuItem?.warning_stock_value!}
-            className="bg-primary disabled:bg-red-600 rounded-3xl py-4 flex flex-row items-center justify-center mt-32"
-            style={{borderRadius: 50}}
-          >
-            <RnText className="text-white font-medium text-lg">Add to Cart (₦ {totalPrice})</RnText>
-          </TouchableOpacity>
-        </ScrollView>
-      </Page>
-    </SafeAreaView>
+        <MenuItemAddons 
+          addons={menuItem?.add_ons!} 
+          selectedAddon={selectedAddon}
+          placeAddOn={placeAddOn}
+        />
+
+        <TouchableOpacity
+          onPress={addItemToCart}
+          disabled={menuItem?.quantity! < menuItem?.warning_stock_value!}
+          className="bg-primary disabled:bg-red-600 rounded-3xl py-4 flex flex-row items-center justify-center mt-32"
+          style={{borderRadius: 50}}
+        >
+          <RnText className="text-white font-medium text-lg">Add to Cart (₦ {totalPrice})</RnText>
+        </TouchableOpacity>
+      </ScrollView>
+    </Page>
   );
 }
