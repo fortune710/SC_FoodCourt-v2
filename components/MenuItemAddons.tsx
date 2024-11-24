@@ -28,7 +28,7 @@ const MenuItemAddons = ({ addons, placeAddOn, selectedAddon }: {
                     <ListItem key={item.foodName} bottomDivider>
                         <ListItem.Content>
                             <ListItem.Title>{item.foodName}</ListItem.Title>
-                            <ListItem.Subtitle>{item.price}</ListItem.Subtitle>
+                            <ListItem.Subtitle>+ {item.price}</ListItem.Subtitle>
                         </ListItem.Content>
                         <ListItem.CheckBox
                             checked={selectedAddon && selectedAddon.name === item.foodName}

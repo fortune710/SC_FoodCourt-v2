@@ -45,12 +45,13 @@ export function groupCartItemsByRestaurant(cartItems: CartItemAlt[]): GroupedCar
 }
 
 export function calculateServiceCharge(amount: number) {
-  const baseCharge = 100;
-  const paystackCharge = 0.015 * amount;
+  const paystackCharge = amount < 2500 
+    ? 0.015 * amount 
+    : 0.015 * amount + 100;
 
-  if (amount < 2500) {
-    return paystackCharge + baseCharge
-  }
+  const baseCharge = amount <= 3500 
+    ? 160 
+    : 210;
 
-  return paystackCharge + 100 + baseCharge
+  return paystackCharge + baseCharge;
 }

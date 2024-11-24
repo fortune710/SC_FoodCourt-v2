@@ -17,8 +17,6 @@ export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
 } from 'expo-router';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import DrawerLayout from './main/_layout';
 
 // export const unstable_settings = {
 //   initialRouteName: "login"
@@ -28,7 +26,6 @@ import DrawerLayout from './main/_layout';
 SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient();
-const NativeStack = createNativeStackNavigator();
 
 
 export default function RootLayout() {
@@ -55,11 +52,7 @@ export default function RootLayout() {
     return null;
   }
 
-  return (
-    <NavigationContainer>
-      <RootLayoutNav />
-    </NavigationContainer>
-  )
+  return <RootLayoutNav />
 }
 
 function RootLayoutNav() {
@@ -78,18 +71,16 @@ function RootLayoutNav() {
   }, [])
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <StatusBar style='dark' />
-        <Stack initialRouteName={ (session && session.user) ? "main" : "login" } screenOptions={{ headerShown: false }}>
-          <NativeStack.Navigator>
-            <NativeStack.Screen name="main" component={DrawerLayout}/>
-          </NativeStack.Navigator>
-          <Stack.Screen name="login"/>
-          <Stack.Screen name="create-account"/>
-        </Stack>
-        <Toast position='top' />
-      </ThemeProvider>
-    </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <StatusBar style='dark' />
+          <Stack initialRouteName={ (session && session.user) ? "main" : "login" } screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="main"/>
+            <Stack.Screen name="login"/>
+            <Stack.Screen name="create-account"/>
+          </Stack>
+          <Toast position='top' />
+        </ThemeProvider>
+      </QueryClientProvider>
   );
 }
