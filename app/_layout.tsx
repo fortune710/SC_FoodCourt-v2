@@ -3,7 +3,7 @@ import { supabase } from '@/utils/supabase';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { DarkTheme, DefaultTheme, NavigationContainer, ThemeProvider } from '@react-navigation/native';
 import { Session } from '@supabase/supabase-js';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
@@ -17,6 +17,8 @@ export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
 } from 'expo-router';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import DrawerLayout from './main/_layout';
 
 // export const unstable_settings = {
 //   initialRouteName: "login"
@@ -26,6 +28,7 @@ export {
 SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient();
+const NativeStack = createNativeStackNavigator();
 
 
 export default function RootLayout() {
@@ -52,7 +55,11 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <NavigationContainer>
+      <RootLayoutNav />
+    </NavigationContainer>
+  )
 }
 
 function RootLayoutNav() {
@@ -75,7 +82,9 @@ function RootLayoutNav() {
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <StatusBar style='dark' />
         <Stack initialRouteName={ (session && session.user) ? "main" : "login" } screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="main"/>
+          <NativeStack.Navigator>
+            <NativeStack.Screen name="main" component={DrawerLayout}/>
+          </NativeStack.Navigator>
           <Stack.Screen name="login"/>
           <Stack.Screen name="create-account"/>
         </Stack>
