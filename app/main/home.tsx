@@ -1,6 +1,6 @@
 import React from "react"
 import { ScrollView, StyleSheet, Pressable, View, ActivityIndicator } from "react-native";
-import { Page, Text } from "../../components/Themed";
+import { Page, PageScroll, Text } from "../../components/Themed";
 import Searchbar from "../../components/Searchbar";
 import CategoriesList from "../../components/CategoriesList";
 import { useState } from "react";
@@ -67,33 +67,33 @@ export default function HomePage() {
     }
 
     return (
-        <Page>
-                <View style={styles.pagePadding}>
-                    <Text style={{fontSize: 20, fontFamily: "Montserrat", fontWeight: 500}}>
-                        Hi, {currentUser?.full_name! || "User's Name"}
-                    </Text>
-                    <Text style={styles.greetingText}>What will we be having today?</Text>
-                </View>
+        <PageScroll>
+            <View style={styles.pagePadding}>
+                <Text style={{fontSize: 20, fontFamily: "Montserrat", fontWeight: 500}}>
+                    Hi, {currentUser?.full_name! || "User's Name"}
+                </Text>
+                <Text style={styles.greetingText}>What will we be having today?</Text>
+            </View>
 
-                <Pressable onPress={() => setIsSearchActive(true)} style={Styles.DefaultPaddingX}>
-                    <Searchbar disable={false}/>
-                </Pressable>
+            <Pressable onPress={() => setIsSearchActive(true)} style={Styles.DefaultPaddingX}>
+                <Searchbar disable={false}/>
+            </Pressable>
 
-                <CategoriesList/>
+            <CategoriesList/>
 
-                <View style={[Styles.DefaultSpaceY, {marginTop: 0}]}>
-                    <Text style={styles.recentsText}>Recents</Text>
-                    <RecentOrdersList recentOrders={recentOrders!} />
-                </View>
+            <View style={[Styles.DefaultSpaceY]}>
+                <Text style={styles.recentsText}>Recents</Text>
+                <RecentOrdersList recentOrders={recentOrders!} />
+            </View>
 
-                <View style={Styles.DefaultPaddingX}>
-                    <Text style={styles.vendorText}>Vendor</Text>
-                    {
-                        isLoading ? <ActivityIndicator/> :
-                        <RestaurantsList restaurants={restaurant!}/>
-                    }
-                </View>
-        </Page>
+            <View style={Styles.DefaultPaddingX}>
+                <Text style={styles.vendorText}>Vendor</Text>
+                {
+                    isLoading ? <ActivityIndicator/> :
+                    <RestaurantsList restaurants={restaurant!}/>
+                }
+            </View>
+        </PageScroll>
     )
 }
 

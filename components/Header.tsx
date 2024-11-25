@@ -25,9 +25,10 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, altColor, altBack }) => {
         >
             <DrawerButton iconColor={altColor ? "#fff" : primaryColor}/>
 
-            {pageTitle === 'Order History' ? <Text style= {{fontSize: 20, fontWeight: 600}}>{pageTitle}</Text> : null }
+            {pageTitle === 'Order History' || 'Settings' ? <Text style= {{fontSize: 20, fontWeight: 600, color: pageTitle ===  'Order History' ? '#000' : "#fff"}}>{pageTitle}</Text> : null }
 
-            <Link href="/cart/shopping-cart-full" asChild>
+            {/* <Link href="/cart/shopping-cart-full" asChild> */}
+            <Link href="/cart/shopping-cart-empty" asChild>
                 <MaterialCommunityIcons size={25} name="cart" color={altColor ? "#fff" : primaryColor}/>
             </Link>
         </View>
@@ -41,8 +42,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-between",
         paddingHorizontal: 8,
-        paddingTop: 45,
-        backgroundColor: '#fff'
+        paddingTop: 16,
     },
     title: {
         fontWeight: "900",

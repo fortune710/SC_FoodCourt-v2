@@ -3,10 +3,11 @@ import { StyleProp, StyleSheet, TextInput, View, ViewStyle } from "react-native"
 
 interface InputProps extends React.ComponentProps<typeof TextInput> {
     icon?: React.ReactNode,
+    iconRight?: React.ReactNode,
     containerStyle?: StyleProp<ViewStyle>
 }
 
-const Input: React.FC<InputProps> = ({ icon, containerStyle, ...restProps }) => {
+const Input: React.FC<InputProps> = ({ icon, iconRight, containerStyle, ...restProps }) => {
     const primaryColor = useThemeColor({}, "primary");
     const { style, ...rest } = restProps;
 
@@ -20,8 +21,9 @@ const Input: React.FC<InputProps> = ({ icon, containerStyle, ...restProps }) => 
             <TextInput 
                 {...rest}
                 style={[styles.defaultInputStyles, style]}
-                placeholderTextColor="#33333350"
+                placeholderTextColor="#7e7e7e"
             />
+            { iconRight && <>{iconRight}</> }
         </View>
     )
 }
@@ -29,7 +31,7 @@ const Input: React.FC<InputProps> = ({ icon, containerStyle, ...restProps }) => 
 const styles = StyleSheet.create({
     inputContainer: {
         borderRadius: 30,
-        height: 50,
+        height: 56,
         width: "100%",
         borderWidth: 1,
         flexDirection: "row",
@@ -40,7 +42,8 @@ const styles = StyleSheet.create({
         minWidth: "90%"
     },
     padding: {
-        paddingHorizontal: 16
+        paddingHorizontal: 32,
+        paddingVertical: 16
     }
 })
 

@@ -38,7 +38,7 @@ const EditProfilePhoto: React.FC<{ imageUrl: string }> = ({ imageUrl }) => {
         <View className="flex-1 items-center justify-center gap-3">
             <Image
                 source={{ uri: imageUri || imageUrl }}
-                style={{ width: 200, height: 200, borderRadius: 999 }}
+                style={{ width: 100, height: 100, borderRadius: 999 }}
             />
 
             <Button 

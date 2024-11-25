@@ -40,42 +40,50 @@ export default function ForgotPasswordPage() {
               style={{marginTop: 10, marginLeft: 10}}
             >
               <View style={{width: 50, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center', }}>
-                <Entypo name="chevron-small-left" size={22} color="black" />
-                <Text style={{fontSize:15, textAlign:'center'}}>Back</Text>
+                <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
+                <Text style={{fontSize:15, textAlign:'center', color: "#f72f2f"}}>Back</Text>
               </View>
           </TouchableOpacity>
-          <View style={{ width:"90%", height:"27%", alignSelf: 'center'}}>
+
+          <View style={{ height:"24%", marginTop: 32, marginHorizontal: 24 }}>
             <Image
                 source={require("@/assets/images/forgot-password.svg")}
-                style={{ height: '100%', width: '95%', resizeMode: 'contain', marginLeft:10 }}
+                style={{ height: '96%' }}
             />
           </View>
-          <View style={{width:'90%',paddingLeft:30, marginTop:10}}>
-            <Text style={styles.boldText}>Forgot password?</Text>
-            <Text style={StyleSheet.compose(styles.mediumText, { marginTop: 5})}>
-              Enter the email associated with this account and we’ll send you a link to reset your password.
+
+          <View style={{marginHorizontal: 24, marginTop:8}}>
+            <Text style={styles.boldText}>Forgot Password?</Text>
+
+            <Text style={StyleSheet.compose(styles.mediumText, { marginTop: 16})}>
+              Enter your email and we'll send you a link to reset your password.
             </Text>
           </View>
           
+          <View style={{marginTop: 32}}>
+            <Input
+              placeholder="Email"
+              onChangeText={(emailPassword) => setEmailPassword(emailPassword)}
+              containerStyle={styles.inputCon}
+              style={{}}
+              icon={
+                <Image
+                  source={require("@/assets/images/email_icon.svg")}
+                  style={{ height: 13, width: 17, resizeMode: 'contain', paddingRight: 45}}
+                />
+              }
+            />
 
-          <Input
-            placeholder="Email"
-            onChangeText={(emailPassword) => setEmailPassword(emailPassword)}
-            containerStyle={styles.inputCon}
-            style={{}}
-            icon={<Image
-                source={require("@/assets/images/email_icon.svg")}
-                style={{ height: 13, width: 17, resizeMode: 'contain', paddingRight: 45, marginLeft: 80}}
-              />}
-          />
-          <View style={{ width:'100%', alignItems: "center", marginTop: 40}}>
             <Button
+              // loading={loading} 
               title="Continue"
+              color="#F72F2F" 
               onPress={resetPassword}
-              buttonStyle={{backgroundColor:'#fe0000',width:160, marginTop:50}}
-              titleStyle={{color:'#fff', fontSize:15}}
-              />
+              buttonStyle={{paddingHorizontal: 40, marginTop: 40}}
+              titleStyle={{color:'#fff', fontSize: 16}}
+            />
           </View>
+
       </Page>
   )
 }
@@ -91,7 +99,7 @@ const styles = StyleSheet.create({
 
   mediumText: {
       fontWeight: "500",
-      color: '#333333',
+      color: '#5c5c5c',
   },
 
   inputCon: {
@@ -105,8 +113,7 @@ const styles = StyleSheet.create({
     elevation:5,
     shadowOpacity: 0.2,
     shadowRadius: 1,
-    shadowColor: '#52006A',
-    marginTop: 60,
+    shadowColor: '#52006A'
   },
 
 })

@@ -48,13 +48,13 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
           email: email,
           password: password,
         })
-    
+
         setLoading(false)
         if (error) return Alert.alert(error.message)
-    
+
         return router.replace("/main/home")
       }
-    
+
       async function signUpWithEmail() {
         setLoading(true)
 
@@ -65,11 +65,11 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
             name: fullName,
             password,
             email,
-            phone_number: phoneNumber
+            // phone_number: phoneNumber
         })
-        
+
         if (error) return Alert.alert(error.message)
-            
+
         if (session) Alert.alert('Please check your inbox for email verification!')
         setLoading(false)
 
@@ -78,68 +78,88 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
 
     return (
         <KeyboardAvoidingView behavior="padding">
-            <View style={{ gap: 16 }}>
+            <View style={{ gap: 24, paddingHorizontal: 16 }}>
                 {
                     formType !== "sign-up" ? null :
                     <>
                         <Input
-                            placeholder="Full Name"
+                            placeholder="Name"
                             onChangeText={(fullName) => setFullName(fullName)}
-                            style={{ padding: 16 }}
+                            style={{ marginLeft: 16 }}
                             icon={<User stroke={primaryColor}/>}
                         />
 
-                        <Input  
+                        {/* <Input  
                             placeholder="Phone Number"
                             inputMode="numeric"
                             onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
                             style={{ padding: 16 }}
                             icon={<Phone stroke={primaryColor}/>}
-                        />
+                        /> */}
                     </>
                 }
                 <Input
                     placeholder="Email"
                     onChangeText={(email) => setEmail(email)}
                     autoCapitalize="none"
-                    style={{ padding: 16 }}
+                    style={{ marginLeft: 16 }}
                     icon={<Mail stroke={primaryColor}/>}
-                    keyboardType='email-address'
+                    keyboardType="email-address"
                 />
-                
+
                 <Input
                     placeholder="Password"
                     secureTextEntry={true}
                     onChangeText={(password) => setPassword(password)}
-                    style={{ padding: 16 }}
+                    style={{ marginLeft: 16 }}
                     icon={<Lock stroke={primaryColor}/>}
+                    // iconRight={<Lock stroke={primaryColor}/>}
                 />
             </View>
 
-            <View className="flex flex-row py-3 items-center justify-between">
-                <CheckBox
-                    checked={rememberMe}
-                    onPress={() => setRememberMe(!rememberMe)}
-                    iconType="material-community"
-                    checkedIcon="checkbox-marked"
-                    uncheckedIcon="checkbox-blank-outline"
-                    checkedColor={primaryColor}
-                    title="Remember Me"
-                    containerStyle={{ borderRadius: 5, padding: 0 }}
-                    center={true}
-                />
+            {   
+                formType !== "sign-up" ? 
+                    <View className="flex flex-row py-3 items-center justify-between" style={{ paddingHorizontal: 16 }}>
+                        <CheckBox
+                            checked={rememberMe}
+                            onPress={() => setRememberMe(!rememberMe)}
+                            iconType="ionicon"
+                            checkedIcon="checkbox-outline"
+                            uncheckedIcon="checkbox"
+                            checkedColor={primaryColor}
+                            title="Remember Me"
+                            containerStyle={{ borderRadius: 5, padding: 0 }}
+                            center={true}
+                        />
+                        <Link href="/forgot-password">Forgot Password?</Link>
+                    </View>
+                :   
+                    
+                    <View className="flex flex-row py-3 items-center justify-between" style={{ paddingHorizontal: 16 }}> 
+                        {/* Usiere, help fix abeg */}
+                        <CheckBox
+                            checked={rememberMe}
+                            onPress={() => setRememberMe(!rememberMe)} 
+                            iconType="ionicon"
+                            checkedIcon="checkbox"
+                            uncheckedIcon="checkbox-outline"
+                            checkedColor={primaryColor}
+                            title="I have read and accepted the Terms and Conditions"
+                            textStyle={{borderWidth: 1, alignItems: "center"}}
+                            containerStyle={{ borderRadius: 5}}
+                            center={true}
+                            // titleProps={}
+                            // wrapperStyle={{borderWidth: 1}}
+                        />
+                    </View>
+            }
 
-                {
-                    formType !== "login" ? null :
-                    <Link href="/forgot-password">Forgot Password?</Link>
-                }
-            </View>
-            
             <Button 
                 loading={loading} 
                 color="#F72F2F" 
-                style={{ alignSelf: "center", width: "100%" }} 
-                titleStyle={{ textAlign: "center", padding: 32 }} 
+                style={{ alignSelf: "center" }} 
+                buttonStyle={{ paddingHorizontal: 40, marginTop: 40 }} 
+                titleStyle={{ textAlign: "center", fontSize: 16 }} 
                 onPress={formType === "login" ? signInWithEmail : signUpWithEmail}
             >
                 Continue

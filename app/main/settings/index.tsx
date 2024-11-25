@@ -36,12 +36,12 @@ export default function SettingsPage() {
 
   return (
       <Page>
-        <Drawer.Screen options={{ header: () => null }} />
-        <View style={{backgroundColor: '#f72f2f', height: 180, zIndex: 0}}>
-          <View style={{flexDirection: 'row',justifyContent:'space-between', width: '95%', alignItems: 'center',alignSelf:'center', marginTop:60}}/>
-        </View>
+        <View style={{backgroundColor: '#f72f2f', height: 100}}/>
 
-        <View style={{width: '90%', backgroundColor: '#fff', borderRadius: 25, marginTop: -50, alignSelf:'center', elevation: 3}}>
+        <View style={{
+          backgroundColor: '#fff', borderRadius: 25, marginTop: -50, elevation: 3, marginHorizontal: 24, shadowColor: "#7e7e7e", shadowOffset: {width: 0, height: 2}, shadowOpacity: 0.12, shadowRadius: 6,
+          // borderBottomWidth: 1, borderLeftWidth: 1, borderRightWidth: 1 
+        }}>
           <View style={{padding: 30}}>
             {/* INTERFACE */}
             <View style={{paddingBottom: 40}}>
@@ -143,7 +143,7 @@ export default function SettingsPage() {
           </View>
         </View>
         
-        <View style={{width: '90%', backgroundColor: '#fff', borderRadius: 30, marginTop: 20, alignSelf:'center', borderColor: '#7E7E7E66', borderWidth: 1}}>
+        <View style={{ backgroundColor: '#fff', borderRadius: 30, marginTop: 20, marginHorizontal: 24, borderColor: '#7E7E7E', borderWidth: 1}}>
           <View style={{paddingHorizontal: 30, paddingVertical: 20}}>
             <TouchableOpacity
               onPress={logout}
@@ -154,7 +154,7 @@ export default function SettingsPage() {
             </TouchableOpacity>
           </View>
         </View>
-          
+
       </Page>
   )
 }

@@ -36,6 +36,17 @@ export function Page(props: ViewProps) {
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
 
   return (
+      <SafeAreaView style={{flex: 1}}>
+        <DefaultView style={[{ backgroundColor, minHeight: height }, style]} {...otherProps} />
+      </SafeAreaView>
+  )
+}
+
+export function PageScroll(props: ViewProps) {
+  const { style, lightColor, darkColor, ...otherProps } = props;
+  const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
+
+  return (
     <ScrollView
       style={{ backgroundColor: props.scrollBg || '#FFF', flex: 1 }}
       contentInset={{ bottom: 10 }}
@@ -43,9 +54,9 @@ export function Page(props: ViewProps) {
       contentContainerStyle={{paddingBottom: props.scrollBottomPadding || 40}}
       bounces={false}
     >
-      <View>
+      <SafeAreaView>
         <DefaultView style={[{ backgroundColor, minHeight: height }, style]} {...otherProps} />
-      </View>
+      </SafeAreaView>
     </ScrollView>
   )
 }

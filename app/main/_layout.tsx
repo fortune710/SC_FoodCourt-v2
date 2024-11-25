@@ -31,6 +31,7 @@ export default function DrawerLayout() {
                     options={{
                         drawerLabel: "Home",
                         headerTitle: "Home",
+                        // headerShown: false,
                         header: () => <Header pageTitle="Home" />
                     }}
                 />
@@ -55,6 +56,8 @@ export default function DrawerLayout() {
                     name="settings/index"
                     options={{
                         drawerLabel: "Settings",
+                        headerTitle: "Settings",
+                        // headerShown: false,
                         header: () => <Header pageTitle="Settings" altBack={true} altColor={true} />
                     }}
                 />

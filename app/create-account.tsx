@@ -3,8 +3,9 @@ import useThemeColor from "@/hooks/useThemeColor";
 import { StyleSheet } from "react-native";
 import AuthForm from "@/components/AuthForm";
 import Button from "@/components/ui/Button";
+import { Image } from "expo-image";
 import { useRouter } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View } from "react-native";
 
 export default function CreateAccountPage() {
     const primary = useThemeColor({}, "primary");
@@ -13,34 +14,40 @@ export default function CreateAccountPage() {
     const moveToLogin = () => {
         return router.push("/login")
     }
-    
+
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <Page style={{ justifyContent: "center", paddingHorizontal: 16 }}>
-                <Text style={styles.loginText}>
-                    Create Account
-                </Text>
+        <Page>
+            <View className="flex-row justify-center mb-10" style={{marginTop: 24}}>
+                <Image
+                    source={require("../assets/images/login-image.png")}
+                    style={{ height: 233, width: 286 }}
+                />
+            </View>
+            
+            <Text style={styles.loginText}>
+                Sign Up
+            </Text>
 
-                <AuthForm formType="sign-up"/>
+            <AuthForm formType="sign-up"/>
 
-                <Button 
-                    onPress={moveToLogin} 
-                    type="outline" 
-                    color={primary}
-                    style={{ marginTop: 16 }}
-                >
-                    Already have an account? Log in            
-                </Button>
-                
-            </Page>
-        </SafeAreaView>
+            <Button 
+                type="outline" 
+                buttonStyle={{ borderColor: "#F72F2F", borderWidth: 1.2 }}
+                titleStyle={{ color: "#F72F2F" }}
+                style={{ marginTop: 16, alignSelf: "center" }}
+                onPress={moveToLogin}
+            >
+                Already have an account? Log in            
+            </Button>
+
+        </Page>
     )
 }
 
 const styles = StyleSheet.create({
     loginText: {
-        color: "#FF3551", 
+        color: "#F72F2F", 
         textAlign: "center", 
         fontSize: 30, 
         fontWeight: "700",

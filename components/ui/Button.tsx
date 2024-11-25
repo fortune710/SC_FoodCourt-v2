@@ -16,12 +16,15 @@ const Button: React.FC<ButtonProps> = ({ buttonStyle, titleStyle, ...restProps }
 
 const styles = StyleSheet.create({
     defaultButtonStyles: {
-        borderRadius: 24,
+        borderRadius: 32,
+        paddingVertical: 16,
+        paddingHorizontal: 32,
+        alignSelf: 'center'        
         // width: "70%",
     },
     defaultButtonTextStyle: {
         fontWeight: "500",
-        fontSize: 20,
+        fontSize: 15,
         fontFamily: "Inter"
     }
 });

@@ -13,15 +13,8 @@ export default function LoginPage() {
     const { top, bottom } = useSafeAreaInsets();
 
     return (
-        <Page
-            style={{ 
-                paddingTop: top + 80, 
-                paddingHorizontal: 16, 
-                paddingBottom: bottom 
-            }} 
-            scrollBg="#FFF"
-        >
-            <View className="flex-row justify-center mb-10">
+        <Page>
+            <View className="flex-row justify-center mb-10" style={{marginTop: 24}}>
                 <Image
                     source={require("../assets/images/login-image.png")}
                     style={{ height: 233, width: 286 }}
@@ -42,8 +35,8 @@ export default function LoginPage() {
                 onPress={() => router.push("/create-account")}
             >
                 New User? Create Account
-            </Button>                
-        </Page>
+            </Button> 
+        </Page>               
     )
 }
 
