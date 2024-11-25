@@ -2,6 +2,7 @@ import "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Header from "@/components/Header";
+import { StatusBar } from "expo-status-bar";
 
 const HIDDEN_ROUTES = [
     'settings/contact-us',
@@ -16,6 +17,7 @@ const HIDDEN_ROUTES = [
 export default function DrawerLayout() {
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
+            <StatusBar style="dark"/>
             <Drawer 
                 screenOptions={{
                     drawerStyle: {
