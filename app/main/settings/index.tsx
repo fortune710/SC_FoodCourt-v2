@@ -79,7 +79,7 @@ export default function SettingsPage() {
               <Text style ={{fontWeight: 'bold', fontSize: 14 }}>Legal</Text>
 
               <TouchableOpacity
-                onPress={() => router.push('/main/settings/terms-conditions')}
+                onPress={() => router.push('/terms-conditions')}
                 style={{flexDirection:'row', alignItems: 'center', justifyContent:'space-between', paddingTop: 20, paddingBottom: 10}}
               >
 
@@ -92,7 +92,7 @@ export default function SettingsPage() {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => router.push('/main/settings/privacy-policy')}
+                onPress={() => router.push('/privacy-policy')}
                 style={{flexDirection:'row', alignItems: 'center', justifyContent:'space-between', paddingTop: 20, paddingBottom: 10}}
               >
 
@@ -110,20 +110,20 @@ export default function SettingsPage() {
               <Text style ={{fontWeight: 'bold', fontSize: 14 }}>Support</Text>
 
               <TouchableOpacity
-                onPress={() => router.push('/main/settings/feedback')}
+                onPress={() => router.push('/feedback-2')}
                 style={{flexDirection:'row', alignItems: 'center', justifyContent:'space-between', paddingTop: 20, paddingBottom: 10}}
               >
 
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Fontisto name="smiley" size={24} color="#f72f2f" />
-                  <Text style ={{fontWeight: '500', fontSize: 14, paddingLeft: 10 }}>Feedback</Text>
+                <Text style ={{fontWeight: '500', fontSize: 14, paddingLeft: 10 }}>Feedback</Text>
                 </View>
 
                 <Ionicons name="chevron-forward" size={24} color="#f72f2f" />
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => router.push('/main/settings/feedback-2')}
+                onPress={() => router.push('/contact-us')}
                 style={{flexDirection:'row', alignItems: 'center', justifyContent:'space-between', paddingTop: 20, paddingBottom: 10}}
               >
 

@@ -5,12 +5,12 @@ import Header from "@/components/Header";
 import { StatusBar } from "expo-status-bar";
 
 const HIDDEN_ROUTES = [
-    'settings/contact-us',
+    'contact-us',
     'profile/edit',
-    'settings/feedback-1',
-    'settings/feedback-2',
-    'settings/privacy-policy',
-    'settings/terms-conditions'
+    'feedback-1',
+    'feedback-2',
+    'privacy-policy',
+    'terms-conditions'
   ];
   
 
@@ -59,19 +59,18 @@ export default function DrawerLayout() {
                     options={{
                         drawerLabel: "Settings",
                         headerTitle: "Settings",
-                        // headerShown: false,
                         header: () => <Header pageTitle="Settings" altBack={true} altColor={true} />
                     }}
                 />
 
                 {HIDDEN_ROUTES.map((route) => (
                         <Drawer.Screen
-                        key={route}
-                        name={route}
-                        options={{
-                            drawerItemStyle: { display: 'none' },
-                            headerShown: false
-                        }}
+                            key={route}
+                            name={route}
+                            options={{
+                                drawerItemStyle: { display: 'none' },
+                                headerShown: false
+                            }}
                         />
                     ))}
             </Drawer>

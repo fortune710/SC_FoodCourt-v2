@@ -3,18 +3,19 @@ import { Text, Page } from '@/components/Themed';
 import { Image } from "expo-image";
 import { Pressable, View } from "react-native";
 import { Entypo, Ionicons } from '@expo/vector-icons';
+import { useRouter } from "expo-router";
 
 
 
 
 export default function ContactUsPage() {
-
+  const router= useRouter()
   return (
       <Page>
         <View style={{flexDirection: 'row',justifyContent:'space-between', width: '65%', alignItems: 'center', marginTop:40}}>
           <View>
             <Pressable
-                  onPress={() => {}}
+                  onPress={() => router.back()}
                   style={{marginTop: 10, marginLeft: 10}}
               >
                 <View style={{width: 50, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center', }}>

@@ -2,18 +2,18 @@
 import { Text, Page } from '@/components/Themed';
 import { Pressable, View, ScrollView, TextInput} from "react-native";
 import { Feather, MaterialIcons, Entypo,Ionicons } from '@expo/vector-icons';
-import Button from "components/ui/Button";
+import Button from "@/components/ui/Button";
 
 
 
 
 
 
-export default function Feedback2Page() {
+export default function Feedback1Page() {
 
   return (
       <Page>
-        <View style={{flexDirection: 'row',justifyContent:'space-between', width: '65%', alignItems: 'center', marginTop:40}}>
+        <View style={{flexDirection: 'row',justifyContent:'space-between', width: '65%', alignItems: 'center'}}>
           <View>
             <Pressable
                   onPress={() => {}}
@@ -33,19 +33,20 @@ export default function Feedback2Page() {
         
 
         <View style={{alignSelf:"center", margin: 20,marginTop:30, alignItems:'center'}}>
-          <Text style={{fontSize: 18}}>Your feedback shapes the student food court experience. We're all ears, ready to enhance your time. 
+          <Text style={{fontSize: 18}}>
+            Your feedback shapes the student food court experience. We're all ears, ready to enhance your time. 
             Share your thoughts, suggestions, and experiences - let's make every visit more enjoyable, one order at a time. 
             Your input matters!
           </Text>
           <TextInput
-            style={{borderColor:'black', borderWidth: 2, borderRadius: 10, maxWidth: '100%', minWidth:'90%', padding:15, textAlignVertical:"top", marginTop: 40, maxHeight: 170}}
+            style={{borderColor:'black', borderWidth: 2, borderRadius: 10, maxWidth: '100%', padding:15, textAlignVertical:"top", marginTop: 40, maxHeight: 170}}
             multiline = {true}
             numberOfLines={9}
-            placeholder="What could we improve?"  
+            placeholder="What did/didn’t you like about your foodcourt experience?"  
           />
 
           <Button
-              title="Send"
+              title="Continue"
               onPress={() => {
                     // Handle button press
               }}
