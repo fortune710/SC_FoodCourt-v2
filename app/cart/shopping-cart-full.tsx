@@ -82,7 +82,7 @@ export default function CartFullPage() {
         />
       </View>
 
-      <ScrollView contentInset={{ bottom: 192 }} contentContainerStyle={{ paddingBottom: 40 }}>
+      <ScrollView contentInset={{ bottom: 192 }} contentContainerStyle={{ paddingBottom: 192 }}>
         <View style={{paddingBottom: 16}}>
           {localCartItems?.map((foodItem) => (
             <CartItem
