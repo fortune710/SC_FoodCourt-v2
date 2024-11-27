@@ -1,7 +1,7 @@
 import Button from "../../components/ui/Button";
 import { Text, Page } from '../../components/Themed';
 import { Image } from "expo-image";
-import { Pressable, View, ScrollView} from "react-native";
+import { Pressable, View, ScrollView, Dimensions} from "react-native";
 import { Feather, MaterialIcons, Entypo } from '@expo/vector-icons';
 import { useEffect, useState } from "react";
 import CartItem from '../../components/CartItem';
@@ -21,6 +21,8 @@ export default function CartFullPage() {
   const { cartItems: dbCartItems, refreshCart } = useCart(currentUser?.id!);
   const [localCartItems, setLocalCartItems] = useState(dbCartItems || []);
   const { initializeTransactionForPaystack } = usePayment();
+
+  const { height } = Dimensions.get('screen');
 
   useEffect(() => {
     setLocalCartItems(dbCartItems || []);
@@ -60,7 +62,7 @@ export default function CartFullPage() {
   }
 
   return (
-    <Page>
+    <Page style={{ height, paddingBottom: 192 }}>
       <View style={{flexDirection: 'row',justifyContent:'space-between', width: '55%', alignItems: 'center', marginTop: 12}}>
         <Pressable
           onPress={() => router.back()}
@@ -82,7 +84,7 @@ export default function CartFullPage() {
         />
       </View>
 
-      <ScrollView contentInset={{ bottom: 192 }} contentContainerStyle={{ paddingBottom: 192 }}>
+      <ScrollView contentInset={{ bottom: 192 }}>
         <View style={{paddingBottom: 16}}>
           {localCartItems?.map((foodItem) => (
             <CartItem
