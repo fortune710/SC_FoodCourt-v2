@@ -2,16 +2,19 @@
 import { Text, Page } from '@/components/Themed';
 import { Pressable, View, ScrollView} from "react-native";
 import { Feather, MaterialIcons, Entypo,Ionicons } from '@expo/vector-icons';
+import { router, useRouter } from 'expo-router';
 
 
-export default function TCPage() {
 
+
+export default function PrivacyPolicyPage() {
+  const router= useRouter()
   return (
       <Page>
-        <View style={{flexDirection: 'row',justifyContent:'space-between', width: '85%', alignItems: 'center', marginTop:40}}>
+        <View style={{flexDirection: 'row',justifyContent:'space-between', width: '70%', alignItems: 'center', marginTop:40}}>
           <View>
             <Pressable
-                  onPress={() => {}}
+                  onPress={() => router.back()}
                   style={{marginTop: 10, marginLeft: 10}}
               >
                 <View style={{width: 50, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center', }}>
@@ -21,7 +24,7 @@ export default function TCPage() {
             </Pressable>
           </View>
     
-          <Text style={{fontWeight:'bold', fontSize: 26, textAlign:'center'}}>Terms & Conditions</Text>
+          <Text style={{fontWeight:'bold', fontSize: 26, textAlign:'center'}}>Privacy Policy</Text>
         </View>
 
        

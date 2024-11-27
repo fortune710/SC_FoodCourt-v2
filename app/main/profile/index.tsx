@@ -15,13 +15,13 @@ export default function ProfilePage() {
     const profile = [
         { name: "Name", value: currentUser?.full_name },
         { name: "Email", value: currentUser?.email },
-        { name: "Username", value: "@" + currentUser?.username },
+        { name: "Phone Number", value: currentUser?.phone_number },
     ]
 
     const imageUrl = currentUser?.image_url ?? `https://api.dicebear.com/9.x/adventurer/png?seed=${currentUser?.full_name}`;
 
     return (
-        <Page scrollBg="#F72F2F" scrollBottomPadding={0}>
+        <Page>
 
             <EditProfilePhoto imageUrl={imageUrl} />
 
@@ -64,5 +64,11 @@ const styles = StyleSheet.create({
         borderBottomColor: "#fff",
         width: "100%"
     },
-    header: { color: "#fff", textAlign: "center", fontWeight: "700", paddingVertical: 16, fontSize: 20 }
+    header: { 
+        color: "#fff", 
+        textAlign: "center", 
+        fontWeight: "700", 
+        paddingVertical: 16, 
+        fontSize: 20 
+    }
 })

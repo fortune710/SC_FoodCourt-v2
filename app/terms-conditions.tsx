@@ -1,19 +1,21 @@
 
-import { Text, Page } from '@/components/Themed';
+import { Text, PageScroll } from '@/components/Themed';
 import { Pressable, View, ScrollView} from "react-native";
 import { Feather, MaterialIcons, Entypo,Ionicons } from '@expo/vector-icons';
+import { useRouter } from "expo-router";
+import { BrickWall } from 'lucide-react-native';
 
 
 
-
-export default function PrivacyPolicyPage() {
+export default function TCPage() {
+  const router = useRouter();
 
   return (
-      <Page>
-        <View style={{flexDirection: 'row',justifyContent:'space-between', width: '70%', alignItems: 'center', marginTop:40}}>
+      <PageScroll stickyHeaderIndices={[0]}>
+        <View style={{flexDirection: 'row', justifyContent:'space-between', width: '85%', alignItems: 'center'}}>
           <View>
             <Pressable
-                  onPress={() => {}}
+                  onPress={() => router.back()}
                   style={{marginTop: 10, marginLeft: 10}}
               >
                 <View style={{width: 50, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center', }}>
@@ -23,10 +25,10 @@ export default function PrivacyPolicyPage() {
             </Pressable>
           </View>
     
-          <Text style={{fontWeight:'bold', fontSize: 26, textAlign:'center'}}>Privacy Policy</Text>
-        </View>
+          <Text style={{fontWeight:'bold', fontSize: 20, textAlign:'center'}}>Terms & Conditions</Text>
 
-       
+          <View/>
+        </View>
         
 
         <ScrollView style={{alignSelf:"center", marginTop: 40, margin: 20}}>
@@ -51,6 +53,6 @@ export default function PrivacyPolicyPage() {
           Impedit a repellendus magni voluptas! Sequi illo iusto, iste magni nihil corrupti harum est placeat voluptatibus incidunt ipsum libero inventore vero, eum laudantium ducimus vitae facilis atque voluptate repudiandae reiciendis.
           Corrupti voluptates at doloremque nihil vel ratione deleniti molestiae accusamus minima ullam quibusdam voluptas harum, consectetur aperiam molestias. Assumenda omnis voluptate maiores illum cum et numquam reprehenderit mollitia dolores. Numquam?</Text>
         </ScrollView>
-      </Page>
+      </PageScroll>
   )
 }
