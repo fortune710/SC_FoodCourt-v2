@@ -21,7 +21,7 @@ const Paystack = {
             code: string
         }[]
     },
-    initializeTransaction: async function (data: TransactionData) {
+    initializeTransaction: async function (data: TransactionData) {        
         const response = await this.api.post("/transaction/initialize", {
             currency: "NGN",
             email: data.email,
@@ -37,6 +37,7 @@ const Paystack = {
                 customer_name: data.customerName,
             }
         })
+
 
         return response.data.data as {
             authorization_url: string,
