@@ -92,15 +92,15 @@ const CartItem: React.FC<CartItemProps> = ({ id, name, addon, description, price
             )
           }
           <View style={styles.actionsContainer}>
-            <Pressable onPress={handleIncrement} style={styles.actionButton}>
-              <View style={styles.iconContainer}>
-                <Feather name="plus-circle" size={18} color="white" />
-              </View>
-            </Pressable>
-            <Text style={styles.amountText}>{quantity}</Text>
             <Pressable onPress={handleDecrement} style={styles.actionButton}>
               <View style={styles.iconContainer}>
                 <Feather name="minus-circle" size={18} color="white" />
+              </View>
+            </Pressable>
+            <Text style={styles.amountText}>{quantity}</Text>
+            <Pressable onPress={handleIncrement} style={styles.actionButton}>
+              <View style={styles.iconContainer}>
+                <Feather name="plus-circle" size={18} color="white" />
               </View>
             </Pressable>
           </View>
