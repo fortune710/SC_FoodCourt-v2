@@ -34,7 +34,7 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, altColor, altBack }) => {
                 {pageTitle === 'Order History' || 'Settings' ? <Text style= {{fontSize: 20, fontWeight: 600, color: pageTitle ===  'Order History' ? '#000' : "#fff"}}>{pageTitle}</Text> : null }
 
                 {/* <Link href="/cart/shopping-cart-full" asChild> */}
-                <Link href={dbCartItems!.length > 0 ? "/cart/shopping-cart-full" : "/cart/shopping-cart-empty"} disabled={isLoading} asChild>
+                <Link href={dbCartItems && dbCartItems?.length > 0 ? "/cart/shopping-cart-full" : "/cart/shopping-cart-empty"} disabled={isLoading} asChild>
                     <MaterialCommunityIcons size={25} name="cart" color={altColor ? "#fff" : primaryColor}/>
                 </Link>
             </View>

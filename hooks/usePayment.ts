@@ -42,7 +42,7 @@ export default function usePayment() {
     }
   
 
-    async function initializeTransaction(data: TransactionData) {        
+    async function initializeTransaction(data: TransactionData) {   
         const response = await Paystack.initializeTransaction(data);
         setTransactionRef(response.reference)
 
