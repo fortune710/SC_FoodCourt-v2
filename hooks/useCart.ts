@@ -111,6 +111,7 @@ export default function useCart(userId: string) {
     queryKey: ["cart", userId],
     queryFn: getCartItems,
     enabled: !!userId,
+    staleTime: Infinity
   });
 
   const { mutateAsync: addItem } = useMutation({

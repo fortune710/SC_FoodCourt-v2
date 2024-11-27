@@ -102,5 +102,5 @@ const styles = StyleSheet.create({
     recentsText: { fontWeight: "900", marginVertical: 16, fontSize: 20, marginHorizontal: 16 },
     greetingText: { fontWeight: "700", marginTop: 8, marginBottom: 24, fontSize: 32, fontFamily: "Lato"},
     vendorText: { fontWeight: "900", marginVertical: 16, fontSize: 20 },
-    pagePadding: { paddingHorizontal: 16, marginTop: 24 }
+    pagePadding: { paddingHorizontal: 16 }
 })

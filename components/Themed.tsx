@@ -52,7 +52,6 @@ export function PageScroll(props: ViewProps) {
       contentInset={{ bottom: 10 }}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{paddingBottom: props.scrollBottomPadding || 40}}
-      bounces={false}
     >
       <SafeAreaView>
         <DefaultView style={[{ backgroundColor, minHeight: height }, style]} {...otherProps} />
