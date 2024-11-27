@@ -38,7 +38,7 @@ const Styles = StyleSheet.create({
         paddingVertical: 8,
         paddingBottom: 24,
         //maxHeight: 350,
-        flex: 2.5
+        flex: 2
     }
 })
 
