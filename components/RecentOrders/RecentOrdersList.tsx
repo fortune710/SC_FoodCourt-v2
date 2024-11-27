@@ -7,7 +7,7 @@ const RecentOrdersList = ({ recentOrders }: { recentOrders: any[] }) => {
     
     if (!recentOrders) {
         return (
-            <View className="py-6 px-3 mx-3 flex flex-row item-center justify-center border border-zinc-800 rounded-2xl">
+            <View className="py-6 px-4 mx-4 flex flex-row item-center justify-center border border-zinc-800 rounded-2xl">
                 <ActivityIndicator/>
             </View>
         )
