@@ -41,7 +41,7 @@ const Searchbar: React.FC<{setQuery?: React.Dispatch<React.SetStateAction<any>>,
 
 const styles = StyleSheet.create({
     searchInput: { flex: 1, marginLeft: 8},
-    searchbar: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, borderWidth: 1, borderRadius: 24, backgroundColor: 'f72f2f4c', height: scale(40)    }
+    searchbar: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, borderWidth: 1, borderRadius: 24, height: scale(40), width: '90%'    }
 })
 
 export default Searchbar;
