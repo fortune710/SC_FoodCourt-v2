@@ -71,12 +71,18 @@ export default function OrderListItem({ order }: { order: any }) {
             </View>
 
             <View style={{borderTopWidth: 1, paddingTop: 8, flexDirection: 'row', justifyContent: 'space-between'}}>
+                {/*
+                Usiere- Please Fix
+                
                 <Button 
                     buttonStyle={styles.button}
                     titleStyle={{color: '#000', fontSize: 14}}
+                    onPress={() => console.log('Fortune oh')}
                 >
                     Order Again
-                </Button>
+                </Button> */}
+                
+                <View/>
 
                 <View style={{flexDirection: 'row', gap: 40}}>
                     <View style={{borderWidth: 0, gap: 8}}>
@@ -113,7 +119,7 @@ const styles = StyleSheet.create({
     },
     date: {
         fontSize: 16,
-        fontWeight: "bold",
+        // fontWeight: "bold",
         color: '#000'
     },
     customerLabel: {
@@ -123,7 +129,7 @@ const styles = StyleSheet.create({
     },
     time: {
         textAlign: "right",
-        fontWeight: "bold"
+        // fontWeight: "bold"
     },
     statusContainer: { 
         alignSelf: "flex-end", 
