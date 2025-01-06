@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { View, FlatList, Pressable, Text, StyleSheet } from "react-native";
+import { View, FlatList, Pressable, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Image } from "expo-image";
 import {Link, router, useRouter} from "expo-router";
 import Styles from "../constants/Styles";
@@ -12,21 +12,15 @@ import { verticalScale, scale } from 'react-native-size-matters'
 
 interface CategoriesListProps {
     onChange?: (category: string|"all") => void,
-    filteredCategories?: Category[]
+    filteredCategories?: Category[],
+    restaurantId?: number
 }
 
-const CategoriesList: React.FC<CategoriesListProps> = ({ onChange, filteredCategories }) => {
-    const [_, setCategory] = useState<string>();
+const CategoriesList: React.FC<CategoriesListProps> = ({ onChange, filteredCategories, restaurantId }) => {
     const data = filteredCategories ? filteredCategories : CATEGORIES;
 
     const handleChange = (category: string) => {
-        if (category === _) {
-            setCategory(undefined);
-            onChange && onChange("all");
-            return
-        }
-        setCategory(category);
-        onChange && onChange(category)
+        return onChange && onChange(category)
     }
 
     return (
@@ -39,20 +33,19 @@ const CategoriesList: React.FC<CategoriesListProps> = ({ onChange, filteredCateg
                 data={data}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item: category }) => (
-                    <Link href={{
-                        pathname: '/category/[id]',
-                        params: { id: category.id }
-                    }} asChild>
-                        <Pressable onPress={() => handleChange(category.name)} style={styles.horizontalListItem}>
+                    <Link 
+                        href={{
+                            pathname: '/category/[id]',
+                            params: { id: category.name, vendor: restaurantId }
+                        }} 
+                        asChild
+                    >
+                        <TouchableOpacity onPress={() => handleChange(category.name)} style={styles.horizontalListItem}>
                             <View style={styles.itemContainer}>
-                                {
-                                    category.name === _ ? <X /> :
-
-                                    <Image style={{ width: 32, height: 32 }} source={category.image}/>
-                                }
+                                <Image style={{ width: 32, height: 32 }} source={category.image}/>
                             </View>
                             <Text>{category.name}</Text>
-                        </Pressable>
+                        </TouchableOpacity>
                     </Link>
                 )}
             />

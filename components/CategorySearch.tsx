@@ -8,25 +8,14 @@ import Searchbar from './Searchbar';
 
 
 
-const CategorySearchbar: React.FC<{setSearchResults: React.Dispatch<React.SetStateAction<Product[]>>, products: Product[]}> = ({setSearchResults, products}) => {
-  const primary = useThemeColor({}, "primary");
+const CategorySearchbar: React.FC = () => {
   const [categoryQuery, setCategoryQuery] = useState("");
   const debouncedQuery = useDebounce(categoryQuery, 500);
 
   useEffect(() => {
     router.setParams({ query: debouncedQuery });
 
-    if (debouncedQuery.trim() === '') {
-      setSearchResults([]);
-      return;
-    }
-
-    const filteredResults = products.filter(item =>
-        item.name.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
-        item.description.toLowerCase().includes(debouncedQuery.toLowerCase())
-    );
-
-    setSearchResults(filteredResults as Product[]);
+    if (!debouncedQuery.trim()) return;
   }, [debouncedQuery]);
 
 

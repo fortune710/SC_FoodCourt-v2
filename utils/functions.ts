@@ -17,6 +17,35 @@ export function groupArrayBy(array: any[], key: string) {
     }, {});
 }
 
+
+export function groupArrayAsArray<T extends string>(array: any[], key: T) {
+  return array?.reduce((result, currentItem) => {
+    // Get the value of the key we're grouping by
+    const value = currentItem[key];
+    const valueId = value?.id || value; // Handle both object and primitive values
+    
+    // Find existing group by value id or value itself
+    const existingGroup = result.find((item: any) => {
+      const itemValue = item[key];
+      const itemId = itemValue?.id || itemValue;
+      return itemId === valueId;
+    });
+    
+    if (!existingGroup) {
+      // Create new group if it doesn't exist
+      result.push({ 
+        [key]: value,
+        items: [currentItem] 
+      });
+    } else {
+      // Add item to existing group
+      existingGroup.items.push(currentItem);
+    }
+    
+    return result;
+  }, []);
+}
+
 interface GroupedCartItems {
   restaurant_subaccount_code: string;
   total_price: number;

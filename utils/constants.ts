@@ -38,7 +38,7 @@ export const CATEGORIES = [
     },
     {
         id: "8",
-        name: "Waffles",
+        name: "Breakfast",
         image: require("../assets/images/waffles.svg")
     },
     {

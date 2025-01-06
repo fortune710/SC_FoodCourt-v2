@@ -17,9 +17,9 @@ import Styles from "@/constants/Styles";
 
 export default function MenuItemDetail() {
   const router = useRouter();
-  const { id, resturantId } = useLocalSearchParams();
+  const { id, restaurantId } = useLocalSearchParams();
 
-  const { getSingleMenuItem } = useSingleRestaurant(Number(resturantId));
+  const { getSingleMenuItem } = useSingleRestaurant(Number(restaurantId));
   const menuItem = getSingleMenuItem(Number(id));
   const [quantity, setQuantity] = useState(1);
   const { currentUser } = useCurrentUser();
@@ -126,7 +126,7 @@ export default function MenuItemDetail() {
 
         <TouchableOpacity
           onPress={addItemToCart}
-          disabled={menuItem?.quantity! < menuItem?.warning_stock_value!}
+          disabled={(menuItem?.quantity! < menuItem?.warning_stock_value!) || (menuItem?.price === 0 && !selectedAddon)}
           className="bg-primary disabled:bg-red-600 rounded-3xl py-4 flex flex-row items-center justify-center mt-32"
           style={{borderRadius: 50}}
         >

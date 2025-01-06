@@ -30,35 +30,40 @@ export default function VendorDetailPage() {
 
     return (
         <PageScroll>
-                {/* <Header pageTitle="Vendor"/> */}
-                <View style={{ position: "relative", width: "100%" }}>
-
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 16, marginHorizontal: 12}}>
-                        <Pressable onPress={() => router.back()}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems:'center' }}>
-                                <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
-                                <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
-                            </View>
-                        </Pressable>
-
-                        <Link href="/cart/shopping-cart-full" asChild>
-                            <MaterialCommunityIcons size={25} name="cart" color={primaryColor}/>
-                        </Link>
+            <View className="flex flex-row justify-between my-4 mx-4 bg-white">
+                <Pressable onPress={() => router.back()}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems:'center' }}>
+                        <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
+                        <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
                     </View>
+                </Pressable>
 
-                    <Text style={{ color: "#fff", marginVertical: 16, marginHorizontal: 16, fontSize: 20, fontWeight: "700" }}>{restaurant?.name}</Text>
+                <Link href="/cart/shopping-cart-full" asChild>
+                    <MaterialCommunityIcons size={25} name="cart" color={primaryColor}/>
+                </Link>
+            </View>
+
+            <View style={{ position: "relative", width: "100%" }}>
+
+                
+
+                {
+                    !restaurant?.image_url ?
                     <ImageBackground source={require("../../assets/images/food.png")} style={[Styles.ImageBackground]}/>
+                    : <ImageBackground source={{ uri: restaurant?.image_url }} style={[Styles.ImageBackground]}/>
+                }
 
-                    <View style={{ marginHorizontal: 16, marginVertical: 16, alignItems: 'flex-end' }}>
-                        <Searchbar width= {scale(70)}/>
-                    </View>
+                <View style={{ marginHorizontal: 8, marginTop: 0, marginBottom: 16 }}>
+                    <Text style={{ color: "#fff", marginVertical: 16, marginHorizontal: 16, fontSize: 20, fontWeight: "700" }}>{restaurant?.name}</Text>
+                    <Searchbar width= {scale(70)}/>
                 </View>
+            </View>
 
                 <View style={{marginHorizontal: 16}}>      
                     <Text style={styles.subtitle}>Select item, then add to cart</Text>
                 </View>
 
-                <CategoriesList onChange={(category) => router.setParams({ category })}/>
+                <CategoriesList restaurantId={restaurant?.id} onChange={(category) => router.setParams({ category, vendor: restaurant?.id })}/>
 
                 <View style={[Styles.DefaultPaddingX, Styles.DefaultSpaceY]}>
                     {
