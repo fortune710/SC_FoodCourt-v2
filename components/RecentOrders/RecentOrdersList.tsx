@@ -27,12 +27,13 @@ const RecentOrdersList = ({ recentOrders }: { recentOrders: any[] }) => {
             horizontal
             data={recentOrders}
             showsHorizontalScrollIndicator={false}
-            renderItem={({ item: { name, restaurant, status } }) => (
-                <RecentOrderCard
-                    name={name}
-                    restaurant={restaurant}
-                    status={status}
-                />
+            renderItem={({ item: { quantity, name, restaurant, status } }) => (
+                    <RecentOrderCard
+                        quantity={quantity}
+                        name={name}
+                        restaurant={restaurant}
+                        status={status}
+                    />
             )}
         />
     )

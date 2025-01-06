@@ -73,6 +73,7 @@ export default function useOrders() {
       name: order?.order_items?.length > 1 ?
        `${((order?.order_items[0]?.menu_items) as any)?.name} + ${order?.order_items?.length - 1} more` : 
        ((order?.order_items[0]?.menu_items) as any)?.name,
+      quantity: order?.order_items[0]?.quantity,
       restaurant: ((order?.order_items[0]?.menu_items) as any)?.restaurant?.name,
       status: order?.status
     }))

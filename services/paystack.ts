@@ -26,6 +26,7 @@ const Paystack = {
             currency: "NGN",
             email: data.email,
             amount: data.amount * 100,
+            callback_url: "http://scfoodcourt.startupcampushq.com/main/home",
             split: {
                 type: "flat",
                 bearer_type: "account",

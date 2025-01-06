@@ -27,7 +27,10 @@ export default function OrdersPage() {
     return (
         <Page style={{ paddingHorizontal: 16, paddingTop: 16 }}>
 
-            <OrderSearchbar setSearchResults={setSearchResults} />
+            <View style={{flexDirection: 'row', gap: 16, alignItems: 'center'}}>
+                <OrderSearchbar setSearchResults={setSearchResults} />
+                <FilterModal/>
+            </View>
             {
                 isLoading ? <ActivityIndicator/> : 
                 <ScrollView style={{flex: 1, marginTop: 16}}>
@@ -47,16 +50,17 @@ export default function OrdersPage() {
 
 const FilterModal: React.FC = () => {
     const [modalOpen, setModalOpen] = useState(false);
+    const [filterIcon, setFilterIcon] = useState(0)
     const primaryColor = useThemeColor({}, "primary");
+
 
     return (
         <>
             <Pressable onPress={() => setModalOpen(!modalOpen)}>
-                <Text>Filter</Text>
-                <MaterialCommunityIcons 
+                <Ionicons 
                     color={primaryColor} 
-                    size={23}
-                    name="filter-variant" 
+                    size={24}
+                    name="filter" 
                 />
             </Pressable>
         

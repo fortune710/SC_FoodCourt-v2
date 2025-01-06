@@ -70,7 +70,7 @@ const CartItem: React.FC<CartItemProps> = ({ id, name, addon, description, price
               <Text style={{fontWeight: 'bold',fontSize: 15, color:'#f72f2f'}}>{restaurant?.name}</Text>
             </View>
             <View style={styles.priceContainer}>
-              <Text style={styles.priceLabel}>N {(price * quantity) + (addon?.price || 0)}</Text>
+              <Text style={styles.priceLabel}>₦ {(price * quantity) + (addon?.price || 0)}</Text>
             </View>
           </View>
 
@@ -92,15 +92,15 @@ const CartItem: React.FC<CartItemProps> = ({ id, name, addon, description, price
             )
           }
           <View style={styles.actionsContainer}>
-            <Pressable onPress={handleIncrement} style={styles.actionButton}>
-              <View style={styles.iconContainer}>
-                <Feather name="plus-circle" size={18} color="white" />
-              </View>
-            </Pressable>
-            <Text style={styles.amountText}>{quantity}</Text>
             <Pressable onPress={handleDecrement} style={styles.actionButton}>
               <View style={styles.iconContainer}>
                 <Feather name="minus-circle" size={18} color="white" />
+              </View>
+            </Pressable>
+            <Text style={styles.amountText}>{quantity}</Text>
+            <Pressable onPress={handleIncrement} style={styles.actionButton}>
+              <View style={styles.iconContainer}>
+                <Feather name="plus-circle" size={18} color="white" />
               </View>
             </Pressable>
           </View>

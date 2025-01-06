@@ -13,41 +13,6 @@ import Styles from "@/constants/Styles";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import {scale, verticalScale} from 'react-native-size-matters'
 
-const Recents = [
-    {
-        name: "Mexican Sharwama",
-        restaurant: "W Sauce",
-        status: 4
-    },
-    {
-        name: "Mexican Sharwama",
-        restaurant: "W Sauce",
-        status: 4
-    },
-    {
-        name: "Mexican Sharwama",
-        restaurant: "W Sauce",
-        status: 4
-    },
-    {
-        name: "Mexican Sharwama",
-        restaurant: "W Sauce",
-        status: 4
-    },
-    {
-        name: "Mexican Sharwama",
-        restaurant: "W Sauce",
-        status: 4
-    },
-    {
-        name: "Mexican Sharwama",
-        restaurant: "W Sauce",
-        status: 4
-    },
-]
-
-
-
 
 export default function HomePage() {
     const [isSearchActive, setIsSearchActive] = useState(false);

@@ -96,8 +96,8 @@ export default function VendorDetailPage() {
                                             <View style={{ width: "70%" }}>
                                                 <Text style={{fontWeight: 600, fontSize: 16}}>{dish.name}</Text>
                                             </View>
-                    -                        <View style={[styles.priceTag, priceTagColor]}>
-                                                <Text style={[priceTagColor]}>N {dish.price}</Text>
+                                            <View style={[styles.priceTag, priceTagColor]}>
+                                                <Text style={[priceTagColor, {fontWeight: 600, fontSize: 16}]}>₦ {dish.price}</Text>
                                             </View>
                                         </Pressable>
                                     ))
