@@ -23,7 +23,10 @@ export default function ForgotPasswordPage() {
   const resetPassword = async () => {
     try {
       await sendResetEmail(emailPassword);
-      return router.push('/forgot-password/confirmation')
+      return router.push({
+        pathname: '/forgot-password/confirmation',
+        params: { email: emailPassword }
+      })
     } catch (e: any) {
       return Toast.show({
         text1: e.message,

@@ -12,7 +12,7 @@ import { Lock, Mail, Phone, User } from "lucide-react-native";
 import useAuth from "@/hooks/useAuth";
 
 interface FormProps {
-    formType: "login"|"sign-up"
+    formType: "login" | "sign-up" | "forgot-password"
 }
 
 // Tells Supabase Auth to continuously refresh the session automatically if
@@ -43,6 +43,10 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
 
 
     async function signInWithEmail() {
+        if (!email.trim() || !password.trim()) {
+            return Alert.alert("Missing email or Password")
+        }
+
         setLoading(true)
         const { error } = await supabase.auth.signInWithPassword({
           email: email,
@@ -53,15 +57,16 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
         if (error) return Alert.alert(error.message)
 
         return router.replace("/main/home")
-      }
+    }
 
-      async function signUpWithEmail() {
+    async function signUpWithEmail() {
+        if (!email.trim() || !password.trim()) {
+            return Alert.alert("Missing email or Password")
+        }
+
         setLoading(true)
 
-        const {
-            data: { session },
-            error,
-        } = await signUp({
+        const { data: { session }, error } = await signUp({
             name: fullName,
             password,
             email,
@@ -69,12 +74,12 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
         })
 
         if (error) return Alert.alert(error.message)
-
         if (session) Alert.alert('Please check your inbox for email verification!')
+
         setLoading(false)
 
-        router.replace("/login")
-      }
+        return router.replace("/login")
+    }
 
     return (
         <KeyboardAvoidingView behavior="padding">
@@ -107,17 +112,21 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                     keyboardType="email-address"
                 />
 
-                <Input
-                    placeholder="Password"
-                    secureTextEntry={true}
-                    onChangeText={(password) => setPassword(password)}
-                    style={{ marginLeft: 16 }}
-                    icon={<Lock stroke={primaryColor}/>}
-                    // iconRight={<Lock stroke={primaryColor}/>}
-                />
+                {
+                    formType !== "forgot-password" &&
+                    <Input
+                        placeholder="Password"
+                        secureTextEntry={true}
+                        onChangeText={(password) => setPassword(password)}
+                        style={{ marginLeft: 16 }}
+                        icon={<Lock stroke={primaryColor}/>}
+                        // iconRight={<Lock stroke={primaryColor}/>}
+                    />
+                }
             </View>
 
             {   
+                formType === "forgot-password" ?  null :
                 formType !== "sign-up" ? 
                     <View className="flex flex-row py-3 items-center justify-between" style={{ paddingHorizontal: 16 }}>
                         <CheckBox
