@@ -67,15 +67,17 @@ const CategoryPage = () => {
             {
               !query ? 
               menuItems?.map((menuItem: any, index: number) => {
-                const vendor = (menuItem.restaurant as any).name;
-                const vendorId = (menuItem.restaurant as any).id;
+                const vendor = (menuItem.restaurant as any)?.name;
+                const vendorId = (menuItem.restaurant as any)?.id;
+
+                if (!vendorId && !vendor) return null;
     
                 return (
                     <View key={vendorId + index} style={{ marginBottom: 20 }}>
                       <Text style={styles.restaurantName}>{vendor}</Text>
                         {
                           menuItem.items.map((item: Product) => (
-                            <MenuItem restaurantId={vendorId} key={item.id} item={item}/>
+                            <MenuItem restaurantId={vendorId} key={item?.id} item={item}/>
                           ))
                         }
                     </View>
@@ -84,20 +86,20 @@ const CategoryPage = () => {
               :
               menuItems?.filter((menuItem: any) => {
                 const filteredItems = menuItem.items.filter((menuItem: { name: string }) => {
-                  return menuItem.name.toLowerCase().includes((query as string).toLowerCase())
+                  return menuItem?.name.toLowerCase().includes((query as string).toLowerCase())
                 })
                 return filteredItems.length > 0
               })
               .map((menuItem: any, index: number) => {
-                const vendor = (menuItem.restaurant as any).name;
-                const vendorId = (menuItem.restaurant as any).id;
+                const vendor = (menuItem.restaurant as any)?.name;
+                const vendorId = (menuItem.restaurant as any)?.id;
     
                 return (
                     <View key={vendorId + index} style={{ marginBottom: 20 }}>
                       <Text style={styles.restaurantName}>{vendor}</Text>
                         {
                           menuItem.items.map((item: Product) => (
-                            <MenuItem restaurantId={vendorId} key={item.id} item={item}/>
+                            <MenuItem restaurantId={vendorId} key={item?.id} item={item}/>
                           ))
                         }
                     </View>

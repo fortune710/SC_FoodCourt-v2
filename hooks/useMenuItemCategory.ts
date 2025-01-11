@@ -23,12 +23,14 @@ export default function useMenuItemCategory(categoryName: string, vendor?: strin
                     category,
                     restaurant:resturant_id (
                         name,
-                        id
+                        id,
+                        is_disabled
                     )
                 `)
                 .eq('category', categoryName)
                 .eq('is_disabled', false)
                 .eq('is_deleted', false)
+                .eq('restaurant.is_disabled', false);
 
             groupedResults = groupArrayAsArray(data!, "restaurant");
             fetchError = error;
@@ -46,13 +48,15 @@ export default function useMenuItemCategory(categoryName: string, vendor?: strin
                     category,
                     restaurant:resturant_id (
                         name,
-                        id
+                        id,
+                        is_disabled
                     )
                 `)
                 .eq('category', categoryName)
                 .eq('resturant_id', Number(vendor))
                 .eq('is_disabled', false)
                 .eq('is_deleted', false)
+                .eq('restaurant.is_disabled', false);
 
             groupedResults = groupArrayAsArray(data!, "restaurant");
             fetchError = error;
