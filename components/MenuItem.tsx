@@ -29,7 +29,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, restaurantId }) => {
 
                     <View style={[styles.priceTag, priceTagColor]}>
                         <Text style={[priceTagColor, {fontWeight: 600, fontSize: 16}]}>
-                            ₦ {item.price}
+                            ₦ {new Intl.NumberFormat('en-US').format(item.price)}
                         </Text>
                     </View>
                 </View>

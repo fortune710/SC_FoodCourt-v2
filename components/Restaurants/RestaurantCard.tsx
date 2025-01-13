@@ -29,13 +29,13 @@ const RestaurantCard = ({ id, name, image_url }: { id: number, name: string, ima
                 <View style={{flexDirection: 'row', alignItems: 'center', padding: 16, gap: 12}}>
                     {
                         <Image 
-                            style={styles.restaurantLogo} 
                             source={
                                 image_url ? 
-                                    { uri: image_url } 
+                                { uri: image_url } 
                                 : 
-                                    require("@/assets/images/food.png") 
+                                require("@/assets/images/food.png") 
                             }
+                            style={styles.restaurantLogo} 
                         />
                     }
 

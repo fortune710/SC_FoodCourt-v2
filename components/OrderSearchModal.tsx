@@ -33,7 +33,7 @@ const OrderSearchbar: React.FC<{setSearchResults: React.Dispatch<React.SetStateA
 
 
   return (
-    <Searchbar setQuery={setOrderQuery} query={orderQuery} />
+    <Searchbar setQuery={setOrderQuery} query={orderQuery} showIcon width={'90%'}/>
   );
 };
 

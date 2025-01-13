@@ -108,7 +108,8 @@ export default function VendorDetailPage() {
                                                 <Text style={{fontWeight: 600, fontSize: 16}}>{dish.name}</Text>
                                             </View>
                                             <View style={[styles.priceTag, priceTagColor]}>
-                                                <Text style={[priceTagColor, {fontWeight: 600, fontSize: 16}]}>₦ {dish.price}</Text>
+                                                <Text style={[priceTagColor, {fontWeight: 600, fontSize: 16}]}>
+                                                ₦ {new Intl.NumberFormat('en-US').format(dish.price)}</Text>
                                             </View>
                                         </Pressable>
                                     ))

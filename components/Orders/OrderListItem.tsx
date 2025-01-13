@@ -63,8 +63,12 @@ export default function OrderListItem({ order }: { order: any }) {
                         </View>
 
                         <View key={menu_item_id} style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8}}>
-                            <Text style={styles.itemPrice}>{quantity}x {(menu_items as any).name}</Text>
-                            <Text style={styles.itemPrice}>₦ {(menu_items as any).price}</Text>
+                            <View style={{flexDirection: 'row', gap: 12}}>
+                                <Text style={styles.itemPrice}>{quantity}x</Text>   
+                                <Text style={styles.itemPrice}>{(menu_items as any).name}</Text>
+                            </View>
+
+                            <Text style={styles.itemPrice}>₦ {new Intl.NumberFormat('en-US').format((menu_items as any).price)}</Text>
                         </View>
                     </View>
                 ))}
@@ -92,9 +96,9 @@ export default function OrderListItem({ order }: { order: any }) {
                     </View>
 
                     <View style={{borderWidth: 0, gap: 8}}>
-                        <Text style={styles.orderPriceBreaks}> ₦ {order?.total_amount}</Text>
-                        <Text style={styles.orderPriceBreaks}> ₦ {subCharge}</Text>
-                        <Text style={[styles.orderPriceBreaks, {fontWeight: 700}]}> ₦ {order?.total_amount + subCharge }</Text>
+                        <Text style={styles.orderPriceBreaks}> ₦ {new Intl.NumberFormat('en-US').format(order?.total_amount)}</Text>
+                        <Text style={styles.orderPriceBreaks}> ₦ {new Intl.NumberFormat('en-US').format(subCharge)}</Text>
+                        <Text style={[styles.orderPriceBreaks, {fontWeight: 700}]}> ₦ {new Intl.NumberFormat('en-US').format(order?.total_amount + subCharge)}</Text>
                     </View>
                 </View>
             </View>
