@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import useDebounce from "@/hooks/useDebounce";
 import { scale, verticalScale } from "react-native-size-matters";
 
-const Searchbar: React.FC<{setQuery?: React.Dispatch<React.SetStateAction<any>>, query?: any, disable?: any, width?: string | number}> = ({query, setQuery, disable}, width= '100%') => {
+const Searchbar: React.FC<{setQuery?: React.Dispatch<React.SetStateAction<any>>, query?: any, disable?: any, width?: string | number, showIcon?: any}> = ({query, setQuery, disable, showIcon}, width= '100%') => {
 
     const primary = useThemeColor({}, "primary");
     // const [query, setQuery] = useState("");
@@ -22,8 +22,8 @@ const Searchbar: React.FC<{setQuery?: React.Dispatch<React.SetStateAction<any>>,
 
     return (
         <View style={[styles.searchbar, searchbarStyle]}>
-            <FontAwesome color={primary} name="search" size={24}/>
-            {/* <Text className="flex-1 font-semibold ml-2" style={{color: primary}}>Search</Text> */}
+            {showIcon ? <FontAwesome color={primary} name="search" size={24}/> : null}
+
             <TextInput 
                 style={styles.searchInput}
                 placeholder="Search" 
@@ -41,7 +41,7 @@ const Searchbar: React.FC<{setQuery?: React.Dispatch<React.SetStateAction<any>>,
 
 const styles = StyleSheet.create({
     searchInput: { flex: 1, marginLeft: 8},
-    searchbar: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, borderWidth: 1, borderRadius: 24, height: scale(40), width: '90%'    }
+    searchbar: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, borderWidth: 1, borderRadius: 24, height: scale(40), width: '100%'    }
 })
 
 export default Searchbar;

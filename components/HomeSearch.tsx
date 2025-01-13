@@ -10,6 +10,10 @@ import products from "@/mock/products.json";
 import MenuItem from '@/components/MenuItem';
 import CategoriesList from './CategoriesList';
 import { Product, Vendor, Category } from '@/types';
+import { scale, verticalScale } from "react-native-size-matters";
+import Searchbar from './Searchbar';
+import { PageScroll } from './Themed';
+
 
 type SearchResult = 
   | (Product & { vendorName: string; categoryName: string; type: string })
@@ -23,7 +27,7 @@ const HomeSearch: React.FC<{setIsSearchActive: React.Dispatch<React.SetStateActi
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const searchbarStyle = {
     borderColor: primary
-  };
+}
 
   useEffect(() => {
     router.setParams({ query: debouncedQuery });
@@ -64,25 +68,34 @@ const HomeSearch: React.FC<{setIsSearchActive: React.Dispatch<React.SetStateActi
   const vendorResults = searchResults.filter(result => result.type === 'vendor') as Vendor[];
   const categoryResults = searchResults.filter(result => result.type === 'category') as Category[];
 
+
+
   return (
-    <View className="flex-1">
-      <View style={[styles.searchbar, searchbarStyle]} className="flex-row items-center rounded-full border-2 h-11 px-3 mb-2">
-        <Pressable onPress={() => setIsSearchActive(false)} className="mr-2">
-            <FontAwesome name="arrow-left" size={16} color={primary} />
+    <View>
+
+      <View style={{ flexDirection: 'row', gap: 8}}>
+        <View style={[styles.searchbar, searchbarStyle, {width: '85%'}]}>
+          <TextInput 
+            placeholder="Search..." 
+            style={{flex: 1, marginLeft: 8}}
+            className="flex-1 font-semibold ml-4"
+            placeholderTextColor={primary}
+            onChangeText={setQuery}
+            value={query}
+          />
+        </View>
+        
+        <Pressable style={{justifyContent: 'center'}} onPress={()=> setIsSearchActive(false)}>
+          <Text style={{fontSize: 16, fontWeight: 600}}>Cancel</Text>
         </Pressable>
-        <TextInput 
-          placeholder="Search..." 
-          style={{flex: 1, marginLeft: 8}}
-          className="flex-1 font-semibold ml-4"
-          placeholderTextColor={primary}
-          onChangeText={setQuery}
-          value={query}
-        />
+        
       </View>
+
+
       {searchResults.length === 0 && query !== '' ? (
-        <View className="flex-1 justify-center items-center">
-          <Image source={require('@/assets/images/no-results.png')} style={{width: 150, height: 150}} />
-          <Text className="text-gray-500 mt-4">Sorry this item cannot be found</Text>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Image source={require('@/assets/images/no-results.svg')}/>
+          <Text style={{fontSize: 16, fontWeight: 500}}>Sorry this item cannot be found</Text>
         </View>
       ) : ( query !== '' && (
         <View>
@@ -121,21 +134,21 @@ const HomeSearch: React.FC<{setIsSearchActive: React.Dispatch<React.SetStateActi
           </View>
         </View>)
       )}
+
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-    searchbar: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        borderRadius: 20,
-        borderWidth: 1,
-        height: 44,
-        paddingHorizontal: 10,
-        marginBottom: 8,
-    },
+    searchbar: { 
+      flexDirection: 'row', 
+      alignItems: 'center', 
+      paddingHorizontal: 16, 
+      borderWidth: 1, 
+      borderRadius: 24, 
+      height: scale(40), 
+    }
+    
 })
 
 export default HomeSearch;
