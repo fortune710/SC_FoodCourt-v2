@@ -70,7 +70,7 @@ const CartItem: React.FC<CartItemProps> = ({ id, name, addon, description, price
               <Text style={{fontWeight: 'bold',fontSize: 15, color:'#f72f2f'}}>{restaurant?.name}</Text>
             </View>
             <View style={styles.priceContainer}>
-              <Text style={styles.priceLabel}>₦ {(price * quantity) + (addon?.price || 0)}</Text>
+              <Text style={styles.priceLabel}>₦ {new Intl.NumberFormat('en-US').format((price * quantity) + (addon?.price || 0))}</Text>
             </View>
           </View>
 
@@ -86,7 +86,7 @@ const CartItem: React.FC<CartItemProps> = ({ id, name, addon, description, price
             !addon ? null : (
               <View style={styles.descriptionContainer}>
                 <Text style={styles.description}>
-                  Selected Addon: {addon.name} - {addon.price}
+                  Selected Addon: {addon.name} - {new Intl.NumberFormat('en-US').format(addon.price)}
                 </Text>
               </View>
             )

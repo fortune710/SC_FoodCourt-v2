@@ -106,18 +106,18 @@ export default function CartFullPage() {
         <View style={{borderBottomWidth: 1.5, borderTopWidth: 1.5, borderColor: '#fe0000', marginHorizontal: 16, gap: 16}}>
             <View style={{justifyContent: 'space-between',flexDirection:'row', marginTop: 16}}>
               <Text style={{fontSize: 16, fontWeight: 500}}>Subtotal</Text>
-              <Text style={{fontWeight:'bold', fontSize: 16}}>₦ {totalPrice}</Text>
+              <Text style={{fontWeight:'bold', fontSize: 16}}>₦ {new Intl.NumberFormat('en-US').format(totalPrice)}</Text>
             </View>
 
             <View style={{justifyContent: 'space-between',flexDirection:'row', marginBottom: 16}}>
               <Text style={{fontSize: 16, fontWeight: 500}}>Service Charge</Text>
-              <Text style={{fontWeight:'bold', fontSize: 16}}>₦ {subCharge}</Text>
+              <Text style={{fontWeight:'bold', fontSize: 16}}>₦ {new Intl.NumberFormat('en-US').format(subCharge)}</Text>
             </View>
         </View>
 
         <View style={{justifyContent: 'space-between', flexDirection:'row', marginTop:16, marginBottom: 48, marginHorizontal: 16}}>
             <Text style={{fontWeight:'bold', fontSize: 18}}>Total</Text>
-            <Text style={{fontWeight:'bold', fontSize: 18}}>₦ {totalPrice + subCharge}</Text>
+            <Text style={{fontWeight:'bold', fontSize: 18}}>₦ {new Intl.NumberFormat('en-US').format(totalPrice + subCharge)}</Text>
         </View>
         <Button 
           color="#F72F2F" 
