@@ -14,9 +14,10 @@ interface CategoriesListProps {
     onChange?: (category: string|"all") => void,
     filteredCategories?: Category[],
     restaurantId?: number
+    style?: object
 }
 
-const CategoriesList: React.FC<CategoriesListProps> = ({ onChange, filteredCategories, restaurantId }) => {
+const CategoriesList: React.FC<CategoriesListProps> = ({ onChange, filteredCategories, restaurantId, style }) => {
     const data = filteredCategories ? filteredCategories : CATEGORIES;
 
     const handleChange = (category: string) => {
@@ -24,8 +25,8 @@ const CategoriesList: React.FC<CategoriesListProps> = ({ onChange, filteredCateg
     }
 
     return (
-        <View style={[Styles.DefaultSpaceY, {marginTop: 24}]}>
-            <Text style={{ marginBottom: 16, fontWeight: "900", fontSize: 24, paddingHorizontal: 16 }}>
+        <View style={[Styles.DefaultSpaceY, style, {gap: 16}]}>
+            <Text style={{ fontWeight: "900", fontSize: 24, paddingHorizontal: 16 }}>
                 Categories
             </Text>
             <FlatList

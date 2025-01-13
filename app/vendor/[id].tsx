@@ -30,7 +30,7 @@ export default function VendorDetailPage() {
 
     return (
         <PageScroll>
-            <View className="flex flex-row justify-between my-4 mx-4 bg-white">
+            <View className="flex flex-row justify-between my-4 bg-white" style={{paddingHorizontal: 8}}>
                 <Pressable onPress={() => router.back()}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems:'center' }}>
                         <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
@@ -43,20 +43,31 @@ export default function VendorDetailPage() {
                 </Link>
             </View>
 
-            <View style={{ position: "relative", width: "100%" }}>
-
-                
-
-                {
-                    !restaurant?.image_url ?
-                    <ImageBackground source={require("../../assets/images/food.png")} style={[Styles.ImageBackground]}/>
-                    : <ImageBackground source={{ uri: restaurant?.image_url }} style={[Styles.ImageBackground]}/>
-                }
-
-                <View style={{ marginHorizontal: 8, marginTop: 0, marginBottom: 16 }}>
-                    <Text style={{ color: "#fff", marginVertical: 16, marginHorizontal: 16, fontSize: 20, fontWeight: "700" }}>{restaurant?.name}</Text>
-                    <Searchbar width= {scale(70)}/>
-                </View>
+            <View style={{ position: "relative", width: "100%", height: 160}}>
+                <ImageBackground 
+                    source={
+                        restaurant?.image_url ?
+                            { uri: restaurant?.image_url }  
+                        :
+                            require("../../assets/images/food.png")
+                    } 
+                    style={[
+                        Styles.ImageBackground, 
+                        {
+                            paddingHorizontal: 16, 
+                            paddingTop: 8, 
+                            paddingBottom: 16
+                        }
+                    ]}
+                >
+                    <View style={{ height: '100%', justifyContent: 'space-between'}}>
+                        <Text style={{ color: "#fff", marginVertical: 16, fontSize: 24, fontWeight: "600" }}>{restaurant?.name}</Text>
+                        
+                        <View style={{ alignItems: 'flex-end'}}>
+                            <Searchbar showIcon width={'80%'} color={'#fff'}/>
+                        </View>
+                    </View>
+                </ImageBackground>
             </View>
 
                 <View style={{marginHorizontal: 16}}>      

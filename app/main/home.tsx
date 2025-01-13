@@ -44,9 +44,9 @@ export default function HomePage() {
                 <Searchbar disable={false} showIcon/>
             </Pressable>
 
-            <CategoriesList/>
+            <CategoriesList style={{marginTop: 24}}/>
 
-            <View style={[Styles.DefaultSpaceY]}>
+            <View style={[Styles.DefaultSpaceY, {gap: 16}]}>
                 <Text style={styles.recentsText}>Recents</Text>
                 <RecentOrdersList recentOrders={recentOrders!} />
             </View>
@@ -64,7 +64,7 @@ export default function HomePage() {
 
 
 const styles = StyleSheet.create({
-    recentsText: { fontWeight: "900", marginVertical: 16, fontSize: 20, marginHorizontal: 16 },
+    recentsText: { fontWeight: "900", fontSize: 20, marginHorizontal: 16 },
     greetingText: { fontWeight: "700", marginTop: 8, marginBottom: 24, fontSize: 32, fontFamily: "Lato"},
     vendorText: { fontWeight: "900", marginVertical: 16, fontSize: 20 },
     pagePadding: { paddingHorizontal: 16 }
