@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, AppState, KeyboardAvoidingView, View } from "react-native"
+import { Alert, AppState, KeyboardAvoidingView, View, Text, TouchableOpacity } from "react-native"
 import Input from "@/components/ui/Input";
 import { useState } from "react";
 import Button from "./ui/Button";
@@ -8,8 +8,10 @@ import { supabase } from "@/utils/supabase";
 import { CheckBox } from "@rneui/themed"
 import useThemeColor from "@/hooks/useThemeColor";
 import { Link, useRouter } from "expo-router";
-import { Lock, Mail, Phone, User } from "lucide-react-native";
+import { Lock, Mail, Eye, EyeOff, User } from "lucide-react-native";
 import useAuth from "@/hooks/useAuth";
+
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 interface FormProps {
     formType: "login" | "sign-up" | "forgot-password"
@@ -31,14 +33,16 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [fullName, setFullName] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
+    const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [isFormComplete, setIsFormComplete] = useState(true);
+
     const { signUpWithEmail: signUp } = useAuth();
 
     const router = useRouter()
 
 
-    const [rememberMe, setRememberMe] = useState(false);
+    const [isSelected, setIsSelected] = useState(false);
     const primaryColor = useThemeColor({}, "primary");
 
 
@@ -116,51 +120,54 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                     formType !== "forgot-password" &&
                     <Input
                         placeholder="Password"
-                        secureTextEntry={true}
+                        secureTextEntry={!isVisible}
                         onChangeText={(password) => setPassword(password)}
                         style={{ marginLeft: 16 }}
                         icon={<Lock stroke={primaryColor}/>}
-                        // iconRight={<Lock stroke={primaryColor}/>}
+                        iconRight={
+                            <TouchableOpacity onPress={()=>setIsVisible(!isVisible)}> 
+                                {isVisible ? 
+                                    <Eye stroke={primaryColor}/> 
+                                : 
+                                    <EyeOff stroke={primaryColor}/>}
+                             </TouchableOpacity>
+                        }
                     />
                 }
             </View>
 
             {   
                 formType === "forgot-password" ?  null :
-                formType !== "sign-up" ? 
                     <View className="flex flex-row py-3 items-center justify-between" style={{ paddingHorizontal: 16 }}>
                         <CheckBox
-                            checked={rememberMe}
-                            onPress={() => setRememberMe(!rememberMe)}
-                            iconType="ionicon"
-                            checkedIcon="checkbox-outline"
-                            uncheckedIcon="checkbox"
+                            checked={isSelected}
+                            onPress={() => setIsSelected(!isSelected)}
+                            iconType="material-community"
+                            checkedIcon="checkbox-marked"
+                            uncheckedIcon="checkbox-blank-outline"
                             checkedColor={primaryColor}
-                            title="Remember Me"
+                            uncheckedColor={primaryColor}
+                            title={
+                                formType !== "sign-up" ? 
+
+                                "Remember Me" : 
+                                <Text>
+                                    I have read and accepted the
+
+                                    <TouchableOpacity onPress={() => router.push('./terms-conditions')}>
+                                        <Text style={{ color: '#F72F2F', fontWeight: 600 }}> Terms and Conditions</Text>
+                                    </TouchableOpacity>
+                                </Text>
+                            }
                             containerStyle={{ borderRadius: 5, padding: 0 }}
                             center={true}
                         />
-                        <Link href="/forgot-password">Forgot Password?</Link>
+
+                        {formType !== "sign-up" ? 
+                            <Link href="/forgot-password">Forgot Password?</Link> : null 
+                        }
                     </View>
-                :   
-                    
-                    <View className="flex flex-row py-3 items-center justify-between" style={{ paddingHorizontal: 16 }}> 
-                        {/* Usiere, help fix abeg */}
-                        <CheckBox
-                            checked={rememberMe}
-                            onPress={() => setRememberMe(!rememberMe)} 
-                            iconType="ionicon"
-                            checkedIcon="checkbox"
-                            uncheckedIcon="checkbox-outline"
-                            checkedColor={primaryColor}
-                            title="I have read and accepted the Terms and Conditions"
-                            textStyle={{alignItems: "center"}}
-                            containerStyle={{ borderRadius: 5}}
-                            center={true}
-                            // titleProps={}
-                            // wrapperStyle={{borderWidth: 1}}
-                        />
-                    </View>
+                
             }
 
             <Button 
@@ -169,6 +176,7 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                 style={{ alignSelf: "center" }} 
                 buttonStyle={{ paddingHorizontal: 40, marginTop: 40 }} 
                 titleStyle={{ textAlign: "center", fontSize: 16 }} 
+                disabled={formType=== "sign-up" ? (isFormComplete === false ? true : false) : false}
                 onPress={formType === "login" ? signInWithEmail : signUpWithEmail}
             >
                 Continue

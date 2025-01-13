@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         display: "flex",
     },
     defaultInputStyles: {
-        minWidth: "90%"
+        minWidth: "80%"
     },
     padding: {
         paddingHorizontal: 32,

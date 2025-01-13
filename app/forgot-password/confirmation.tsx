@@ -27,8 +27,8 @@ export default function ConfirmationPage() {
                     style={{ marginLeft: 12, marginTop: 8}}
                 >
                     <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems:'center', }}>
-                    <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
-                    <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
+                        <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
+                        <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
                     </View>
                 </TouchableOpacity>
             </View>
