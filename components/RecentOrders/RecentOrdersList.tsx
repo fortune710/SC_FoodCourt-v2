@@ -35,6 +35,7 @@ const RecentOrdersList = ({ recentOrders }: { recentOrders: any[] }) => {
                         status={status}
                     />
             )}
+            contentContainerStyle={{gap: 12, marginHorizontal: 16}}
         />
     )
 }

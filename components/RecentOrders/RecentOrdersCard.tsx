@@ -37,8 +37,7 @@ const styles = StyleSheet.create({
     horizontalListItem: {
         display: "flex",
         flexDirection: "column",
-        marginRight: 12,
-        left: 16
+        // marginRight: 12,
     },
     cardStyle: {
         backgroundColor: "#fff",
