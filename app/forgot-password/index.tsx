@@ -10,10 +10,13 @@ import { Entypo } from "@expo/vector-icons";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "expo-router";
 import Toast from "react-native-toast-message";
+import { Mail } from "lucide-react-native";
+import useThemeColor from "@/hooks/useThemeColor";
 
 
 
 export default function ForgotPasswordPage() {
+  const primaryColor = useThemeColor({}, "primary");
 
   const [emailPassword, setEmailPassword] = useState("");
   const router = useRouter();
@@ -63,18 +66,13 @@ export default function ForgotPasswordPage() {
             </Text>
           </View>
           
-          <View style={{marginTop: 32}}>
+          <View style={{marginTop: 32, marginHorizontal: 24}}>
             <Input
               placeholder="Email"
               onChangeText={(emailPassword) => setEmailPassword(emailPassword)}
               containerStyle={styles.inputCon}
-              style={{}}
-              icon={
-                <Image
-                  source={require("@/assets/images/email_icon.svg")}
-                  style={{ height: 13, width: 17, resizeMode: 'contain', paddingRight: 45}}
-                />
-              }
+              style={{ marginLeft: 16 }}
+              icon={<Mail stroke={primaryColor}/>}
             />
 
             <Button
@@ -106,12 +104,9 @@ const styles = StyleSheet.create({
   },
 
   inputCon: {
-    width: '90%',
+    width: '100%',
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems:'center',
     backgroundColor:'white',
-    alignSelf: "center", 
     overflow: "hidden",
     elevation:5,
     shadowOpacity: 0.2,
