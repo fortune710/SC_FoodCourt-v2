@@ -5,6 +5,7 @@ export interface Product {
     price: number,
     categoryId: string,
     vendorId: string,
+    vendorName: string,
     image?: string
 }
 

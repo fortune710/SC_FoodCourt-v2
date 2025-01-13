@@ -71,9 +71,9 @@ const HomeSearch: React.FC<{setIsSearchActive: React.Dispatch<React.SetStateActi
 
 
   return (
-    <View>
+    <View >
 
-      <View style={{ flexDirection: 'row', gap: 8}}>
+      <View style={{ flexDirection: 'row', gap: 8, paddingHorizontal: 8}}>
         <View style={[styles.searchbar, searchbarStyle, {width: '85%'}]}>
           <TextInput 
             placeholder="Search..." 
@@ -91,7 +91,6 @@ const HomeSearch: React.FC<{setIsSearchActive: React.Dispatch<React.SetStateActi
         
       </View>
 
-
       {searchResults.length === 0 && query !== '' ? (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <Image source={require('@/assets/images/no-results.svg')}/>
@@ -99,8 +98,23 @@ const HomeSearch: React.FC<{setIsSearchActive: React.Dispatch<React.SetStateActi
         </View>
       ) : ( query !== '' && (
         <View>
-          <View className='mt-20' style={{marginTop: 20}}>
-            <Text style={{fontWeight: "900", fontSize: 20 }}>
+          <View style={{marginTop: 24, gap: 16}}>
+              <Text style={{fontWeight: "900", fontSize: 20, paddingHorizontal: 16 }}>
+                  Vendors
+              </Text>
+            {vendorResults.length > 0 ? (
+              vendorResults.map(vendor => (
+                <View key={vendor.id} style={{ paddingHorizontal: 16}}>
+                  <Text>{vendor.name}</Text>
+                </View>
+              ))
+            ) : (
+              <Text style={{ paddingHorizontal: 16}}>No vendors found</Text>
+            )}
+          </View>
+
+          <View style={{marginTop: 32, gap: 16}}>
+            <Text style={{fontWeight: "900", fontSize: 20, paddingHorizontal: 16 }}>
                 Products
             </Text>
             {productResults.length > 0 ? (
@@ -108,33 +122,20 @@ const HomeSearch: React.FC<{setIsSearchActive: React.Dispatch<React.SetStateActi
                 <MenuItem item={product} />
               ))
             ) : (
-              <Text>No products found</Text>
+              <Text style={{paddingHorizontal: 16}}> No products found</Text>
             )}
           </View>
-          <View style={{marginTop: 20}}>
+
+          {/* <View style={{marginHorizontal: -16}}>
             {categoryResults.length > 0 ? (
               <CategoriesList filteredCategories={categoryResults}/>
             ) : (
               <Text>No categories found</Text>
             )}
-          </View>
-          <View style={{marginTop: 20}}>
-              <Text style={{fontWeight: "900", fontSize: 20 }}>
-                  Vendors
-              </Text>
-            {vendorResults.length > 0 ? (
-              vendorResults.map(vendor => (
-                <View key={vendor.id}>
-                  <Text>{vendor.name}</Text>
-                </View>
-              ))
-            ) : (
-              <Text>No vendors found</Text>
-            )}
-          </View>
+          </View> */}
+
         </View>)
       )}
-
     </View>
   );
 };

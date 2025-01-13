@@ -1,26 +1,43 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
 import { Product } from '@/types';
+import useThemeColor from '@/hooks/useThemeColor';
 
 interface MenuItemProps {
     item: Product;
     restaurantId: number;
+    vendorName: Product;
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ item, restaurantId }) => {
+const MenuItem: React.FC<MenuItemProps> = ({ item, restaurantId, vendorName }) => {
+    const primaryColor = useThemeColor({}, "primary")
+
+    const priceTagColor = {
+        color: primaryColor,
+        borderColor: primaryColor,
+        // backgroundColor: primaryColor + "50"
+    }
+
     return (
         <Link href={`/item/${item.id}?restaurantId=${restaurantId}`} key={item.id}>
-            <View className="flex-row items-center justify-between p-4 border-b border-gray-200 w-full">
-                <View style={{ flex: 1, marginRight: 8 }}>
-                    <Text className="text-lg font-bold">{item.name}</Text>
-                    { item.description && <Text className="text-gray-500 mt-1">{item?.description}</Text> }
+            <View className="border-b border-gray-200 w-full gap-2" style={{paddingBottom: 16, paddingHorizontal: 16}}>
+                <View className="flex-row items-center justify-between">
+                    <View style={{ flex: 1, marginRight: 8 }}>
+                        <Text className="text-lg font-bold">{item.name}</Text>
+                        { item.description && <Text className="text-gray-500 mt-1">{item?.description}</Text> }
+                    </View>
+
+                    <View style={[styles.priceTag, priceTagColor]}>
+                        <Text style={[priceTagColor, {fontWeight: 600, fontSize: 16}]}>
+                            ₦ {item.price}
+                        </Text>
+                    </View>
                 </View>
 
+
                 <View>
-                    <Text className="text-white font-bold bg-red-500 p-2 rounded-full text-right">
-                        ₦ {item.price}
-                    </Text>
+                    <Text style={styles.vendorName}>{item.vendorName}</Text>
                 </View>
             </View>
         </Link>
@@ -28,3 +45,20 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, restaurantId }) => {
 };
 
 export default MenuItem;
+
+const styles= StyleSheet.create({
+    priceTag: {
+        height: '60%',
+        paddingHorizontal: 12,
+        paddingVertical: 5,
+        borderWidth: 1,
+        borderRadius: 20,
+        backgroundColor: "#F72F2F4C"
+    },
+
+    vendorName: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: '#f72f2f'
+    }
+})
