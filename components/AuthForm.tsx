@@ -154,7 +154,7 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                             uncheckedIcon="checkbox-outline"
                             checkedColor={primaryColor}
                             title="I have read and accepted the Terms and Conditions"
-                            textStyle={{borderWidth: 1, alignItems: "center"}}
+                            textStyle={{alignItems: "center"}}
                             containerStyle={{ borderRadius: 5}}
                             center={true}
                             // titleProps={}

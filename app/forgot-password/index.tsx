@@ -48,10 +48,10 @@ export default function ForgotPasswordPage() {
               </View>
           </TouchableOpacity>
 
-          <View style={{ height:"24%", marginTop: 32, marginHorizontal: 24 }}>
+          <View style={{ height:"27.2%", marginTop: 32, marginHorizontal: 24 }}>
             <Image
                 source={require("@/assets/images/forgot-password.svg")}
-                style={{ height: '96%' }}
+                style={{ height: '100%' }}
             />
           </View>
 
