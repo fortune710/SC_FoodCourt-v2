@@ -25,7 +25,9 @@ export default function HomePage() {
 
     if(isSearchActive) {
         return (
-            <HomeSearch setIsSearchActive={setIsSearchActive} />
+            <Page style={{paddingVertical: 16}}>
+                <HomeSearch setIsSearchActive={setIsSearchActive} />
+            </Page>
         )
     }
 

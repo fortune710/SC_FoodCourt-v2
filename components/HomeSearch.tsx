@@ -71,8 +71,7 @@ const HomeSearch: React.FC<{setIsSearchActive: React.Dispatch<React.SetStateActi
 
 
   return (
-    <View >
-
+    <View>
       <View style={{ flexDirection: 'row', gap: 8, paddingHorizontal: 8}}>
         <View style={[styles.searchbar, searchbarStyle, {width: '85%'}]}>
           <TextInput 
