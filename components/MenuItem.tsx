@@ -7,10 +7,9 @@ import useThemeColor from '@/hooks/useThemeColor';
 interface MenuItemProps {
     item: Product;
     restaurantId: number;
-    vendorName: Product;
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ item, restaurantId, vendorName }) => {
+const MenuItem: React.FC<MenuItemProps> = ({ item, restaurantId }) => {
     const primaryColor = useThemeColor({}, "primary")
 
     const priceTagColor = {
@@ -36,7 +35,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, restaurantId, vendorName }) =
                 </View>
 
 
-                <View>
+                <View style={{borderWidth: 1}}>
                     <Text style={styles.vendorName}>{item.vendorName}</Text>
                 </View>
             </View>
