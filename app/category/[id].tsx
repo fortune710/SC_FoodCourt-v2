@@ -27,12 +27,11 @@ const CategoryPage = () => {
     <Page style={styles.container}>
       <StatusBar style='light'/>
       <View style={{flexDirection: 'row', gap: 16, alignItems: 'center'}}>
-        <Pressable
-            onPress={() => router.back()}
-            style={{ marginLeft: 12, marginTop: 8}}
-          >
+        
+        <Pressable onPress={() => router.back()} style={{ marginLeft: 12, marginTop: 8}}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems:'center', }}>
               <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
+              
               <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
             </View>
         </Pressable>
@@ -46,7 +45,6 @@ const CategoryPage = () => {
       <View className='p-4'>
         <CategorySearchbar />
       </View>
-
 
       <Text style={styles.subtitle}>Select item, then add to cart</Text>
 
@@ -73,7 +71,7 @@ const CategoryPage = () => {
                 if (!vendorId && !vendor) return null;
     
                 return (
-                    <View key={vendorId + index} style={{ marginBottom: 20 }}>
+                    <View key={vendorId + index} style={{ gap: 16, marginTop: 16 }}>
                       <Text style={styles.restaurantName}>{vendor}</Text>
                         {
                           menuItem.items.map((item: Product) => (
@@ -83,7 +81,9 @@ const CategoryPage = () => {
                     </View>
                 )
               })
+
               :
+
               menuItems?.filter((menuItem: any) => {
                 const filteredItems = menuItem.items.filter((menuItem: { name: string }) => {
                   return menuItem?.name.toLowerCase().includes((query as string).toLowerCase())
@@ -95,7 +95,7 @@ const CategoryPage = () => {
                 const vendorId = (menuItem.restaurant as any)?.id;
     
                 return (
-                    <View key={vendorId + index} style={{ marginBottom: 20 }}>
+                    <View key={vendorId + index} style={{ gap: 16, marginTop: 16 }}>
                       <Text style={styles.restaurantName}>{vendor}</Text>
                         {
                           menuItem.items.map((item: Product) => (
@@ -114,11 +114,11 @@ const CategoryPage = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: 'white', paddingTop: Platform.OS === "ios" ? verticalScale(20) : verticalScale(40) },
+  container: { flex: 1, backgroundColor: 'white'},
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 16 },
   title: { fontSize: 24, fontWeight: 'bold' },
   searchContainer: { flexDirection: 'row', alignItems: 'center', margin: 16, padding: 8, borderWidth: 1, borderColor: 'red', borderRadius: 25 },
-  subtitle: { textAlign: 'center', marginBottom: 16 },
+  subtitle: { textAlign: 'center' },
   restaurantName: { fontSize: 20, fontWeight: 'bold', color: 'red', marginTop: 16, marginLeft: 16 },
 });
 
