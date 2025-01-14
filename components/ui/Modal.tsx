@@ -8,13 +8,18 @@ const Modal: React.FC<ModalProps> = ({ overlayStyle, ...restProps }) => {
         <Overlay
             {...restProps}
             overlayStyle={[styles.defaultOverlayStyle, overlayStyle]}
+            backdropStyle={[styles.defaultBackdropStyle]}
         />
     )
 }
 
 const styles = StyleSheet.create({
     defaultOverlayStyle: {
-        borderRadius: 8
+        borderRadius: 8,
+        margin: 24,
+    },
+    defaultBackdropStyle: {
+        backgroundColor: 'rgba(0,0,0,0.75)'
     }
 })
 

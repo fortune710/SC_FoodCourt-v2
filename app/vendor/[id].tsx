@@ -1,4 +1,4 @@
-import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Pressable, StyleSheet, View } from "react-native";
 import { PageScroll, Text } from "../../components/Themed";
 import useThemeColor from "../../hooks/useThemeColor";
 import { Link, useLocalSearchParams, useRouter, router } from "expo-router";
@@ -76,7 +76,7 @@ export default function VendorDetailPage() {
 
                 <CategoriesList restaurantId={restaurant?.id} onChange={(category) => router.setParams({ category, vendor: restaurant?.id })}/>
 
-                <View style={[Styles.DefaultPaddingX, Styles.DefaultSpaceY]}>
+                <View style={[Styles.DefaultSpaceY]}>
                     {
                         isLoading ? <ActivityIndicator/> :
                         !category || category == "all" ?
@@ -88,13 +88,14 @@ export default function VendorDetailPage() {
                         :
                         availableCategories.map((category, index) => (
                             <View key={category}>
-                                <View style={{paddingTop: 4, paddingBottom: 24}}>
+                                <View style={{paddingTop: 4, paddingBottom: 24, paddingHorizontal: 16}}>
                                     <Text style={[priceTagColor, { fontWeight: "700", fontSize: 20  }]}>{category}</Text>
                                 </View>
                                 {
                                     menuItemsSorted![category]?.map((dish, index) => (
                                         <Pressable 
                                             key={index} 
+                                            className="border-b border-gray-200 w-full gap-2"
                                             style={styles.listItem}
                                             onPress={() => router.push({
                                                 pathname: "/item/[id]",
@@ -107,7 +108,7 @@ export default function VendorDetailPage() {
                                             <View style={{ width: "70%" }}>
                                                 <Text style={{fontWeight: 600, fontSize: 16}}>{dish.name}</Text>
                                             </View>
-                                            <View style={[styles.priceTag, priceTagColor]}>
+                                            <View style={[styles.priceTag, priceTagColor, ]}>
                                                 <Text style={[priceTagColor, {fontWeight: 600, fontSize: 16}]}>
                                                 ₦ {new Intl.NumberFormat('en-US').format(dish.price)}</Text>
                                             </View>
@@ -135,7 +136,9 @@ export default function VendorDetailPage() {
                                         <View style={{ width: "70%" }}>
                                             <Text style={{fontWeight: 600, fontSize: 16}}>{dish.name}</Text>
                                         </View>
-                                        <Text style={[styles.priceTag, priceTagColor]}>N {dish.price}</Text>
+                                        <Text style={[styles.priceTag, priceTagColor]}>
+                                            ₦ {new Intl.NumberFormat('en-US').format(dish.price)}
+                                        </Text>
                                     </Pressable>
                                 ))
                             }
@@ -160,10 +163,12 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         height: 54,
+        paddingHorizontal: 16,
+        marginBottom: 16
     },
     priceTag: {
         height: '60%',
-        paddingHorizontal: 12,
+        paddingHorizontal: 16,
         paddingVertical: 5,
         borderWidth: 1,
         borderRadius: 20,

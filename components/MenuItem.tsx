@@ -48,7 +48,7 @@ export default MenuItem;
 const styles= StyleSheet.create({
     priceTag: {
         height: '60%',
-        paddingHorizontal: 12,
+        paddingHorizontal: 16,
         paddingVertical: 5,
         borderWidth: 1,
         borderRadius: 20,

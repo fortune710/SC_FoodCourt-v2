@@ -20,7 +20,7 @@ const CategorySearchbar: React.FC = () => {
 
 
   return (
-    <Searchbar setQuery={setCategoryQuery} query={categoryQuery} />
+    <Searchbar setQuery={setCategoryQuery} query={categoryQuery} showIcon/>
   );
 };
 

@@ -59,7 +59,8 @@ export interface MenuItem {
 
 export interface Vendor {
     id: string,
-    name: string
+    name: string,
+    image: string,
 }
 
 export interface TranactionSplitData {

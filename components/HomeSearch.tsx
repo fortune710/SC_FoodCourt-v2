@@ -95,27 +95,45 @@ const HomeSearch: React.FC<{setIsSearchActive: React.Dispatch<React.SetStateActi
           <Image source={require('@/assets/images/no-results.svg')}/>
           <Text style={{fontSize: 16, fontWeight: 500}}>Sorry this item cannot be found</Text>
         </View>
-      ) : ( query !== '' && (
+      ) 
+      
+      : 
+      
+      ( query !== '' && (
         <View>
           <View style={{marginTop: 24, gap: 16}}>
-              <Text style={{fontWeight: "900", fontSize: 20, paddingHorizontal: 16 }}>
-                  Vendors
-              </Text>
-            {vendorResults.length > 0 ? (
-              vendorResults.map(vendor => (
-                <View key={vendor.id} style={{ paddingHorizontal: 16}}>
-                  <Text>{vendor.name}</Text>
-                </View>
-              ))
-            ) : (
-              <Text style={{ paddingHorizontal: 16}}>No vendors found</Text>
-            )}
+            <Text style={{fontWeight: "900", fontSize: 20, paddingHorizontal: 16 }}>
+                Vendors
+            </Text>
+
+            <View style={{ paddingHorizontal: 16, flexDirection: 'row', gap: 16}}>
+              {vendorResults.length > 0 ? (
+                vendorResults.map(vendor => (
+                  <View key={vendor.id} style={{alignItems: 'center', gap: 8}}>
+                    <Image
+                      source={
+                        vendor.image ? 
+                        { uri: vendor.image } 
+                        : 
+                        require("@/assets/images/food.png") 
+                      }
+                      style={styles.restaurantLogo}
+                    />
+
+                    <Text style={{fontSize: 16, fontWeight: 500}}>{vendor.name}</Text>
+                  </View>
+                ))
+              ) : (
+                <Text style={{ paddingHorizontal: 16}}>No vendors found</Text>
+              )}
+            </View>
           </View>
 
           <View style={{marginTop: 32, gap: 16}}>
             <Text style={{fontWeight: "900", fontSize: 20, paddingHorizontal: 16 }}>
                 Products
             </Text>
+
             {productResults.length > 0 ? (
               productResults.map(product => (
                 <MenuItem item={product} />
@@ -147,7 +165,14 @@ const styles = StyleSheet.create({
       borderWidth: 1, 
       borderRadius: 24, 
       height: scale(40), 
-    }
+    },
+    restaurantLogo: {
+      width: 80,
+      height: 80,
+      borderRadius: 82,
+      borderWidth: 3,
+      borderColor: 'white'
+  }
     
 })
 
