@@ -14,12 +14,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import MenuItemAddons from "@/components/MenuItemAddons";
 import { Entypo } from "@expo/vector-icons";
 import Styles from "@/constants/Styles";
+import { StatusBar } from "expo-status-bar";
 
 export default function MenuItemDetail() {
   const router = useRouter();
   const { id, restaurantId } = useLocalSearchParams();
 
   const { getSingleMenuItem } = useSingleRestaurant(Number(restaurantId));
+
   const menuItem = getSingleMenuItem(Number(id));
   const [quantity, setQuantity] = useState(1);
   const { currentUser } = useCurrentUser();
@@ -58,13 +60,14 @@ export default function MenuItemDetail() {
       });
     }
 
-    router.back() //Usiere- it'a too quick
+    //router.back() //Usiere- it'a too quick
   };
 
   const totalPrice = (menuItem?.price || 0) * quantity + (selectedAddon?.price || 0);
 
   return (
     <Page className="flex-1 bg-white h-screen">
+      <StatusBar/>
       <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 16, marginHorizontal: 12}}>
         <Pressable onPress={() => router.back()}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems:'center' }}>
@@ -88,13 +91,13 @@ export default function MenuItemDetail() {
       <ScrollView className="p-4 space-y-4">
         <View className="flex flex-row items-center justify-between">
           <View className="w-2/3">
-            <Text className="text-xl font-semibold">{menuItem?.name}</Text>
-            <Text className="text-gray-500">
+            <Text className="text-2xl font-semibold">{menuItem?.name}</Text>
+            <Text className="text-gray-500 mt-2 text-lg">
               {menuItem?.description || "No description available for this item."}
             </Text>
           </View>
 
-          <View className="flex flex-row items-center gap-2">
+          <View className="flex flex-row items-center gap-3">
             <TouchableOpacity onPress={reduceQuantity} className="p-2 border border-primary rounded-full">
               <Minus stroke={primary} className="text-primary" />
             </TouchableOpacity>
@@ -108,7 +111,7 @@ export default function MenuItemDetail() {
         </View>
 
         <View className="my-3 flex flex-col">
-          <Text className="font-medium">Category: {menuItem?.category}</Text>
+          <Text className="font-medium text-lg">Category: {menuItem?.category}</Text>
         </View>
 
         <View className="flex flex-row items-center gap-2 my-3">
