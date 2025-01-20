@@ -1,0 +1,130 @@
+[
+    {
+      "title": "License Grant",
+      "children": [
+        {
+          "title": "License Grant",
+          "description": "The Company grants you a limited, non-exclusive, non-transferable, revocable license to use the App for personal, non-commercial purposes, strictly in accordance with this Agreement."
+        }
+      ]
+    },
+    {
+      "title": "License Restrictions",
+      "children": [
+        {
+          "title": "Modify, copy, or create derivative works",
+          "description": "You agree not to modify, copy, or create derivative works of the App."
+        },
+        {
+          "title": "Reverse engineering",
+          "description": "You agree not to reverse engineer, decompile, or attempt to extract the source code of the App."
+        },
+        {
+          "title": "Redistribution",
+          "description": "You agree not to rent, lease, lend, sell, sublicense, or redistribute the App."
+        },
+        {
+          "title": "Unlawful use",
+          "description": "You agree not to use the App for any unlawful purposes or in violation of any applicable laws."
+        }
+      ]
+    },
+    {
+      "title": "Ownership",
+      "children": [
+        {
+          "title": "Intellectual Property",
+          "description": "The App and all rights therein, including but not limited to intellectual property rights, are and will remain the exclusive property of Startup Campus Inc. This Agreement does not grant you any ownership rights to the App."
+        }
+      ]
+    },
+    {
+      "title": "Updates and Changes",
+      "children": [
+        {
+          "title": "Updates",
+          "description": "The Company may provide updates, enhancements, or modifications to the App at its discretion. You agree that the terms of this Agreement will apply to any updates."
+        },
+        {
+          "title": "Discontinuation",
+          "description": "The Company reserves the right to modify or discontinue the App or any part of it at any time."
+        }
+      ]
+    },
+    {
+      "title": "Data Collection and Privacy",
+      "children": [
+        {
+          "title": "Privacy Policy",
+          "description": "The App may collect and use your data in accordance with our Privacy Policy. By using the App, you consent to such collection and use of your data."
+        }
+      ]
+    },
+    {
+      "title": "User-Generated Content",
+      "children": [
+        {
+          "title": "License for Content",
+          "description": "You may have the opportunity to post reviews, feedback, or other content within the App. You grant the Company a worldwide, non-exclusive, royalty-free license to use, reproduce, and distribute your content."
+        },
+        {
+          "title": "Content Responsibility",
+          "description": "You are responsible for ensuring that your content does not violate any third-party rights or applicable laws."
+        }
+      ]
+    },
+    {
+      "title": "Termination",
+      "children": [
+        {
+          "title": "Agreement Termination",
+          "description": "This Agreement is effective until terminated by you or the Company. The Company may terminate this Agreement at any time without notice if you fail to comply with any term of this Agreement."
+        },
+        {
+          "title": "Post-Termination Obligations",
+          "description": "Upon termination, you must stop using the App and uninstall it from your device."
+        }
+      ]
+    },
+    {
+      "title": "Disclaimer of Warranties",
+      "children": [
+        {
+          "title": "As-Is Basis",
+          "description": "The App is provided 'as is' and 'as available' without any warranties of any kind, express or implied. The Company does not guarantee that the App will be error-free, secure, or uninterrupted."
+        }
+      ]
+    },
+    {
+      "title": "Limitation of Liability",
+      "children": [
+        {
+          "title": "Liability Disclaimer",
+          "description": "In no event shall the Company be liable for any indirect, incidental, or consequential damages arising out of your use or inability to use the App, even if the Company has been advised of the possibility of such damages."
+        }
+      ]
+    },
+    {
+      "title": "Governing Law",
+      "children": [
+        {
+          "title": "Jurisdiction",
+          "description": "This Agreement is governed by and construed in accordance with the laws of the Federal Republic of Nigeria. Any disputes arising under this Agreement will be resolved in the competent courts of Nigeria."
+        }
+      ]
+    },
+    {
+      "title": "Contact Information",
+      "children": [
+        {
+          "title": "Email",
+          "description": "startupcampusinc@gmail.com"
+        },
+        {
+          "title": "Address",
+          "description": "Plot 681 Cadastral Zone C-OO Research and Institution Area, Airport Road, Jabi, Abuja FCT, Nigeria"
+        }
+      ]
+    }
+  ]
+  
