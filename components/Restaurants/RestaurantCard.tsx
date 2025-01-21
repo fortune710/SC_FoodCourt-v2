@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
         width: "100%",
         height: verticalScale(155),
         borderRadius: 12,
-        marginVertical: 7
     },
     backgroundImage: { 
         width: "100%", 

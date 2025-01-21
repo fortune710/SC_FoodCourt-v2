@@ -51,11 +51,13 @@ export default function HomePage() {
                 <RecentOrdersList recentOrders={recentOrders!} />
             </View>
 
-            <View style={Styles.DefaultPaddingX}>
-                <Text style={styles.vendorText}>Vendor</Text>
+            <View style={[Styles.DefaultPaddingX, Styles.DefaultSpaceY, {gap: 16}]}>
+                <Text style={styles.vendorText}>Vendors</Text>
                 {
                     isLoading ? <ActivityIndicator/> :
-                    <RestaurantsList restaurants={restaurant!}/>
+                    <View style={{gap: 12}}>
+                        <RestaurantsList restaurants={restaurant!}/>
+                    </View>
                 }
             </View>
         </PageScroll>
@@ -64,8 +66,8 @@ export default function HomePage() {
 
 
 const styles = StyleSheet.create({
-    recentsText: { fontWeight: "900", fontSize: 20, marginHorizontal: 16 },
+    recentsText: { fontWeight: "900", fontSize: 24, marginHorizontal: 16 },
     greetingText: { fontWeight: "700", marginTop: 8, marginBottom: 24, fontSize: 32, fontFamily: "Lato"},
-    vendorText: { fontWeight: "900", marginVertical: 16, fontSize: 20 },
+    vendorText: { fontWeight: "900", fontSize: 24 },
     pagePadding: { paddingHorizontal: 16 }
 })
