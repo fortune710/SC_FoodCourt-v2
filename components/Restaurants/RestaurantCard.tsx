@@ -3,7 +3,7 @@ import { TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
 import { Image, ImageBackground } from "expo-image";
 import { Text } from "@/components/Themed";
-import { Scale, verticalScale } from "react-native-size-matters";
+import { scale, verticalScale } from "react-native-size-matters";
 
 
 const RestaurantCard = ({ id, name, image_url }: { id: number, name: string, image_url: string | null }) => {
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     },
     vendorCard: {
         width: "100%",
-        height: verticalScale(155),
+        height: scale(155),
         borderRadius: 12,
     },
     backgroundImage: { 
