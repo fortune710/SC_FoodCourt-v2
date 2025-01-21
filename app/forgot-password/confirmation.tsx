@@ -5,6 +5,7 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { Entypo } from "@expo/vector-icons";
+import Toast from "react-native-toast-message";
 
 
 
@@ -16,7 +17,21 @@ export default function ConfirmationPage() {
     const { email } = useLocalSearchParams();
     
     const resendLink = async () => {
-        await sendResetEmail(email as string);
+        try {
+            await sendResetEmail(email as string);
+            return Toast.show({
+                text1: "Reset Link Sent",
+                text2: "Successfully resent reset link",
+                type: "success"
+            })
+
+        } catch (error: any) {
+            return Toast.show({
+                text1: "Error Occured",
+                text2: error.message || "Could not resend reset link",
+                type: "error"
+            })
+        }
     }
 
     return (
@@ -82,6 +97,9 @@ const styles = StyleSheet.create({
     mediumText: {
         fontWeight: "500",
         color: '#5c5c5c',
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "row"
     },
   
     inputCon: {
@@ -99,6 +117,7 @@ const styles = StyleSheet.create({
     },
     resendLink: {
         textDecorationLine: "underline",
-        color: '#F72F2F'
+        color: '#F72F2F',
+        marginBottom: -4.5
     },
   })

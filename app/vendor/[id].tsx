@@ -101,7 +101,7 @@ export default function VendorDetailPage() {
                                                 pathname: "/item/[id]",
                                                 params: {
                                                     id: dish.id,
-                                                    resturantId: restaurant?.id
+                                                    restaurantId: restaurant?.id
                                                 }
                                             })}                                            
                                         >
