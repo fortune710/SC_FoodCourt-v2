@@ -15,23 +15,23 @@ export default function PrivacyPolicyPage() {
 
   return (
     <PageScroll>
-      <View style={{flexDirection: 'row',justifyContent:'space-between', width: '70%', alignItems: 'center', marginTop:40}}>
+      <View style={{flexDirection: 'row',justifyContent:'space-between', width: '67%', alignItems: 'center', marginTop: 8}}>
         <View>
           <Pressable
                 onPress={() => router.back()}
-                style={{marginTop: 10, marginLeft: 10}}
+                style={{marginLeft: 10}}
             >
-              <View style={{width: 50, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center', }}>
+              <View style={{width: 50, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center' }}>
                 <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
                 <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
               </View>
           </Pressable>
         </View>
   
-        <Text style={{fontWeight:'bold', fontSize: 22, textAlign:'center'}}>Privacy Policy</Text>
+        <Text style={{fontWeight:'bold', fontSize: 20, textAlign:'center'}}>Privacy Policy</Text>
       </View>
 
-      <View className='px-5 mt-5'>
+      <View className='px-5 mt-5 gap-2'>
         <Text>
           This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your 
           information when You use the Service and tells You about Your privacy rights and how the law protects You.
@@ -46,12 +46,12 @@ export default function PrivacyPolicyPage() {
 
       {
         data.map((item, index) => (
-          <View className='px-5 mt-5'>
+          <View className='px-5 mt-5 gap-2'>
             <Text className='font-semibold text-xl'>{item.title}</Text>
-            <View>
+            <View className='gap-4'>
               {
                 item.children.map((item, index) => (
-                  <View>
+                  <View className='gap-2'>
                     <Text>
                       <Text className='font-semibold'>{item.title}: </Text>{" "}
                       {item.description}

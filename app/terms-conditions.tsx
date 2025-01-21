@@ -3,7 +3,6 @@ import { Text, PageScroll } from '@/components/Themed';
 import { Pressable, View, ScrollView} from "react-native";
 import { Feather, MaterialIcons, Entypo,Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
-import { BrickWall } from 'lucide-react-native';
 import { StatusBar } from 'expo-status-bar';
 import data from "@/constants/terms-conditions.json";
 
@@ -14,13 +13,13 @@ export default function TCPage() {
 
   return (
       <PageScroll>
-        <View style={{flexDirection: 'row', justifyContent:'space-between', width: '85%', alignItems: 'center'}}>
+        <View style={{flexDirection: 'row', justifyContent:'space-between', width: '85%', alignItems: 'center', marginTop: 8}}>
           <View>
             <Pressable
                   onPress={() => router.back()}
-                  style={{marginTop: 10, marginLeft: 10}}
+                  style={{marginLeft: 10}}
               >
-                <View style={{width: 50, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center', }}>
+                <View style={{width: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                   <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
                   <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
                 </View>
@@ -37,7 +36,7 @@ export default function TCPage() {
           September 3, 2024
         </Text>
 
-        <View className='px-5 mt-5'>
+        <View className='px-5 mt-5 gap-2'>
           <Text className='font-semibold text-xl'>Welcome to SC: FoodCourt!</Text>
           <Text>
             These Terms and Conditions ("Terms") outline the rules and regulations for using the SC: FoodCourt mobile 
@@ -48,13 +47,13 @@ export default function TCPage() {
 
         {
           data.map((item, index) => (
-            <View className='px-5 mt-5'>
+            <View className='px-5 mt-5 gap-2'>
               <Text className='font-semibold text-xl'>{index + 1}. {item.title}</Text>
-              <View>
+              <View className='px-6 gap-4'>
                 {
                   item.children.map((item, index) => (
                     <Text>
-                      <Text className='font-semibold'>{item.title}: </Text>{" "}
+                      <Text className='font-semibold'>• {item.title}: </Text>{" "}
                       {item.description}
                     </Text>
                   ))
