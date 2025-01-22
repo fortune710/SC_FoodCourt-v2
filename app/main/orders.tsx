@@ -2,7 +2,7 @@
 import React from "react";
 import CategoriesList from "@/components/CategoriesList";
 import Header from "@/components/Header";
-import { Page } from "@/components/Themed";
+import { PageScroll } from "@/components/Themed";
 import Modal from "@/components/ui/Modal";
 import useThemeColor from "@/hooks/useThemeColor";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -25,7 +25,7 @@ export default function OrdersPage() {
     const { orders, isLoading } = useOrders();
 
     return (
-        <Page style={{ paddingHorizontal: 16, paddingTop: 16 }}>
+        <PageScroll style={{ paddingHorizontal: 16, paddingTop: 16 }}>
 
             <View style={{flexDirection: 'row', gap: 16, alignItems: 'center'}}>
                 <OrderSearchbar setSearchResults={setSearchResults} />
@@ -33,18 +33,18 @@ export default function OrdersPage() {
             </View>
             {
                 isLoading ? <ActivityIndicator/> : 
-                <ScrollView style={{flex: 1, marginTop: 16}}>
+                <View style={{flex: 1, marginTop: 16}}>
                     {
                         orders?.map((order, index) => (
                             <OrderListItem key={index} order={order} />
                         ))
                     }
-                </ScrollView>
+                </View>
 
             }
 
 
-        </Page>
+        </PageScroll>
     )
 }
 
