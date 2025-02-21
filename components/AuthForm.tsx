@@ -174,7 +174,7 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                 loading={loading} 
                 color="#F72F2F" 
                 style={{ alignSelf: "center" }} 
-                buttonStyle={{ paddingHorizontal: 40, marginTop: 40 }} 
+                buttonStyle={{ paddingHorizontal: 40, marginVertical: 20 }} 
                 titleStyle={{ textAlign: "center", fontSize: 16 }} 
                 disabled={formType=== "sign-up" ? (isFormComplete === false ? true : false) : false}
                 onPress={formType === "login" ? signInWithEmail : signUpWithEmail}

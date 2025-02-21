@@ -31,7 +31,6 @@ export default function LoginPage() {
                 type="outline" 
                 buttonStyle={{ borderColor: "#F72F2F" }}
                 titleStyle={{ color: "#F72F2F" }}
-                style={{ marginTop: 16 }}
                 onPress={() => router.push("/create-account")}
             >
                 New User? Create Account
