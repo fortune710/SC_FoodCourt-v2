@@ -123,9 +123,9 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                         secureTextEntry={!isVisible}
                         onChangeText={(password) => setPassword(password)}
                         style={{ marginLeft: 16 }}
-                        icon={<Lock stroke={primaryColor}/>}
+                        icon={<Lock stroke={primaryColor}  />}
                         iconRight={
-                            <TouchableOpacity onPress={()=>setIsVisible(!isVisible)}> 
+                            <TouchableOpacity style={{marginRight:0}} onPress={()=>setIsVisible(!isVisible)}> 
                                 {isVisible ? 
                                     <Eye stroke={primaryColor}/> 
                                 : 
