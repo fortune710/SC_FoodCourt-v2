@@ -1,4 +1,3 @@
-
 import React from "react";
 import CategoriesList from "@/components/CategoriesList";
 import Header from "@/components/Header";
@@ -24,22 +23,24 @@ export default function OrdersPage() {
 
     const { orders, isLoading } = useOrders();
 
+   
+
     return (
         <PageScroll style={{ paddingHorizontal: 16, paddingTop: 16 }}>
 
-            <View style={{flexDirection: 'row', gap: 16, alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
                 <OrderSearchbar setSearchResults={setSearchResults} />
-                <FilterModal/>
+                <FilterModal />
             </View>
             {
-                isLoading ? <ActivityIndicator/> : 
-                <View style={{flex: 1, marginTop: 16}}>
-                    {
-                        orders?.map((order, index) => (
-                            <OrderListItem key={index} order={order} />
-                        ))
-                    }
-                </View>
+                isLoading ? <ActivityIndicator /> :
+                    <View style={{ flex: 1, marginTop: 16 }}>
+                        {
+                            orders?.map((order, index) => (
+                                <OrderListItem key={order.id} order={order} />
+                            ))
+                        }
+                    </View>
 
             }
 
@@ -57,19 +58,19 @@ const FilterModal: React.FC = () => {
     return (
         <>
             <Pressable onPress={() => setModalOpen(!modalOpen)}>
-                <Ionicons 
-                    color={primaryColor} 
+                <Ionicons
+                    color={primaryColor}
                     size={24}
-                    name="filter" 
+                    name="filter"
                 />
             </Pressable>
-        
+
             <Modal isVisible={modalOpen}>
                 <View style={styles.modalContent}>
                     <View style={styles.modalHeader}>
                         <Text style={styles.modalTitle}>Filter</Text>
                         <Pressable onPress={() => setModalOpen(false)}>
-                            <Ionicons name="close" color="red" size={24}/>
+                            <Ionicons name="close" color="red" size={24} />
                         </Pressable>
                     </View>
 

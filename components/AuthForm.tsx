@@ -58,6 +58,7 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
         })
 
         setLoading(false)
+        console.log(error)
         if (error) return Alert.alert(error.message)
 
         return router.replace("/main/home")

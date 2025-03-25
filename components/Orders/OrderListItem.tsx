@@ -6,16 +6,16 @@ import Button from "../ui/Button";
 
 function formatDateTime(dateInput: Date | string) {
     const date = dateInput ? new Date(dateInput) : new Date();
-    
+
     // Format date as DD-MM-YYYY
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
-    
+
     // Format time as HH:MM
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
-    
+
     return {
         date: `${day}-${month}-${year}`,
         time: `${hours}:${minutes}`
@@ -47,24 +47,24 @@ export default function OrderListItem({ order }: { order: any }) {
                     <Text style={styles.date}>{date}</Text>
                 </View>
 
-                <View style={[styles.row, {justifyContent: 'flex-end'}]}>
+                <View style={[styles.row, { justifyContent: 'flex-end' }]}>
                     <Text style={styles.time}>{time}</Text>
                 </View>
             </View>
 
-            <View style={{gap: 8, marginVertical: 12}}>
-                {order?.order_items?.map(({ menu_items, quantity, menu_item_id }: any) => (
-                    <View style={{gap: 4}}>
-                        <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                            <Text style={{fontWeight: 700, fontSize: 16, color: '#f72f2f'}}>{(menu_items as any).restaurant.name}</Text>
+            <View style={{ gap: 8, marginVertical: 12 }}>
+                {order?.order_items?.map(({ menu_items, quantity, menu_item_id }: any, index: number) => (
+                    <View style={{ gap: 4 }} key={index}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text style={{ fontWeight: 700, fontSize: 16, color: '#f72f2f' }}>{(menu_items as any).restaurant.name}</Text>
                             <View className={statusColors[order?.status as 0 | 1 | 2 | 3 | 4 | 5]} style={styles.statusContainer}>
                                 <Text style={styles.statusText}> {OrderStatus[order?.status]} </Text>
                             </View>
                         </View>
 
-                        <View key={menu_item_id} style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8}}>
-                            <View style={{flexDirection: 'row', gap: 12}}>
-                                <Text style={styles.itemPrice}>{quantity}x</Text>   
+                        <View key={menu_item_id} style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
+                            <View style={{ flexDirection: 'row', gap: 12 }}>
+                                <Text style={styles.itemPrice}>{quantity}x</Text>
                                 <Text style={styles.itemPrice}>{(menu_items as any).name}</Text>
                             </View>
 
@@ -74,7 +74,7 @@ export default function OrderListItem({ order }: { order: any }) {
                 ))}
             </View>
 
-            <View style={{borderTopWidth: 1, paddingTop: 8, flexDirection: 'row', justifyContent: 'space-between'}}>
+            <View style={{ borderTopWidth: 1, paddingTop: 8, flexDirection: 'row', justifyContent: 'space-between' }}>
                 {/*
                 Usiere- Please Fix
                 
@@ -85,20 +85,20 @@ export default function OrderListItem({ order }: { order: any }) {
                 >
                     Order Again
                 </Button> */}
-                
-                <View/>
 
-                <View style={{flexDirection: 'row', gap: 40}}>
-                    <View style={{borderWidth: 0, gap: 8}}>
+                <View />
+
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 40 ,width: '100%'}}>
+                    <View style={{ borderWidth: 0, gap: 8 }}>
                         <Text style={styles.orderPriceBreaks}>Subtotal</Text>
                         <Text style={styles.orderPriceBreaks}>Service Charge</Text>
-                        <Text style={[styles.orderPriceBreaks, {fontWeight: 700}]}>Total</Text>
+                        <Text style={[styles.orderPriceBreaks, { fontWeight: 700 }]}>Total</Text>
                     </View>
 
-                    <View style={{borderWidth: 0, gap: 8}}>
+                    <View style={{ borderWidth: 0, gap: 8 }}>
                         <Text style={styles.orderPriceBreaks}> ₦ {new Intl.NumberFormat('en-US').format(order?.total_amount)}</Text>
                         <Text style={styles.orderPriceBreaks}> ₦ {new Intl.NumberFormat('en-US').format(subCharge)}</Text>
-                        <Text style={[styles.orderPriceBreaks, {fontWeight: 700}]}> ₦ {new Intl.NumberFormat('en-US').format(order?.total_amount + subCharge)}</Text>
+                        <Text style={[styles.orderPriceBreaks, { fontWeight: 700 }]}> ₦ {new Intl.NumberFormat('en-US').format(order?.total_amount + subCharge)}</Text>
                     </View>
                 </View>
             </View>
@@ -135,21 +135,21 @@ const styles = StyleSheet.create({
         textAlign: "right",
         // fontWeight: "bold"
     },
-    statusContainer: { 
-        alignSelf: "flex-end", 
+    statusContainer: {
+        alignSelf: "flex-end",
         alignItems: "center",
-        padding: 6, 
-        borderRadius: 16, 
+        padding: 6,
+        borderRadius: 16,
         width: 88
     },
-    statusText: { 
-        color: "#000", 
-        fontSize: 12, 
-        textTransform: "capitalize", 
-        fontWeight: "700" 
+    statusText: {
+        color: "#000",
+        fontSize: 12,
+        textTransform: "capitalize",
+        fontWeight: "700"
     },
     itemPrice: {
-        fontWeight: 600, 
+        fontWeight: 600,
         fontSize: 16
     },
     orderPriceBreaks: {
@@ -157,11 +157,11 @@ const styles = StyleSheet.create({
         fontWeight: 500
     },
     button: {
-        marginTop: 8, 
-        paddingVertical: 8, 
-        paddingHorizontal: 16, 
-        borderWidth: 1, 
-        borderColor: '#f72f2f', 
+        marginTop: 8,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderWidth: 1,
+        borderColor: '#f72f2f',
         backgroundColor: '#fff'
     }
 

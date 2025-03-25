@@ -56,7 +56,35 @@ export default function useOrders() {
       .order('order_date', { ascending: false });
 
     if (error) throw new Error(error.message);
-    return data;
+
+    // Group orders by date and time and merge items
+    const groupedOrders = data.reduce((acc: any[], order) => {
+      // Convert order dates to the same format for comparison, including time
+      const orderDateTime = new Date(order.order_date);
+      
+      const existingOrder = acc.find(o => {
+        const existingDate = new Date(o.order_date);
+        const matches = 
+          orderDateTime.getFullYear() === existingDate.getFullYear() &&
+          orderDateTime.getMonth() === existingDate.getMonth() &&
+          orderDateTime.getDate() === existingDate.getDate() &&
+          orderDateTime.getHours() === existingDate.getHours() &&
+          orderDateTime.getMinutes() === existingDate.getMinutes();
+        return matches;
+      });
+      
+      if (existingOrder) {
+        // Merge items from orders with same date and time
+        existingOrder.order_items = [...existingOrder.order_items, ...order.order_items];
+        existingOrder.total_amount += order.total_amount;
+      } else {
+        acc.push(order);
+      }
+      
+      return acc;
+    }, []);
+
+    return groupedOrders;
   }
 
   
