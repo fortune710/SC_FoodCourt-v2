@@ -22,6 +22,7 @@ export default function HomePage() {
     const { currentUser } = useCurrentUser();
     const { getRecentOrders } = useOrders();
     const recentOrders = getRecentOrders();
+    const cutFullName = currentUser?.full_name?.split(" ")[0];
 
     if(isSearchActive) {
         return (
@@ -35,7 +36,7 @@ export default function HomePage() {
         <PageScroll>
             <View style={[styles.pagePadding, {paddingTop: 24}]}>
                 <Text style={{fontSize: 20, fontFamily: "Montserrat", fontWeight: 400}}>
-                    Hi, {currentUser?.full_name! || "User's Name"}
+                    Hi, {cutFullName! || "User's Name"}
                 </Text>
                 <Text style={styles.greetingText}>What will we be having today?</Text>
             </View>
