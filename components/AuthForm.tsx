@@ -52,7 +52,7 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
         }
 
         setLoading(true)
-        const { error } = await supabase.auth.signInWithPassword({
+        const { data ,error } = await supabase.auth.signInWithPassword({
           email: email,
           password: password,
         })
@@ -61,6 +61,10 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
         console.log(error)
         if (error) return Alert.alert(error.message)
 
+        if(!data.user.email) return Alert.alert("User not found")
+        const userType = await supabase.from("profiles").select("*").eq("email", data.user.email).single()
+        console.log(userType)
+        if(userType.data?.user_type !== "customer") return Alert.alert("only customer can login on this app try the vendor application")
         return router.replace("/main/home")
     }
 
