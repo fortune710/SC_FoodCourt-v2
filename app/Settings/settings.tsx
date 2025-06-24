@@ -31,7 +31,7 @@ export default function SettingsPage() {
 
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Ionicons name="notifications-outline" size={28} color="#f72f2f" />
-                <Text style={{ fontWeight: '500', fontSize: 14, paddingLeft: 10 }}>Notifications Centre</Text>
+                <Text style={{ fontWeight: '500', fontSize: 14, paddingLeft: 10 }}>Notifications</Text>
               </View>
 
               <Switch
