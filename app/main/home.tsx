@@ -35,14 +35,14 @@ export default function HomePage() {
     return (
         <PageScroll>
             <View style={[styles.pagePadding, {paddingTop: 2}]}>
-                <Text style={{fontSize: 20, fontFamily: "Montserrat", fontWeight: 400}}>
+                <Text style={{fontSize: 20, fontFamily: "Montserrat", fontWeight: 700}}>
                     Hi, {cutFullName! || "User's Name"}
                 </Text>
                 <Text style={styles.greetingText}>What will we be having today?</Text>
             </View>
 
             <Pressable onPress={() => setIsSearchActive(true)} style={Styles.DefaultPaddingX}>
-                <Searchbar disable={false} showIcon/>
+                <Searchbar disable={false} showIcon searchbarWithGradient={true} />
             </Pressable>
 
             <CategoriesList style={{marginTop: 24}}/>

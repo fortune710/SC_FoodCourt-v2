@@ -122,7 +122,7 @@ export default function VendorDetailPage() {
                                             filteredMenuItems[category]?.map((dish, index) => (
                                                 <Pressable
                                                     key={index}
-                                                    className="border-b border-gray-200 w-full gap-2"
+                                                    className="border-b border-gray-200 w-full gap-2 h-fit"
                                                     style={styles.listItem}
                                                     onPress={() => router.push({
                                                         pathname: "/item/[id]",
@@ -132,8 +132,11 @@ export default function VendorDetailPage() {
                                                         }
                                                     })}
                                                 >
-                                                    <View style={{ width: "70%" }}>
-                                                        <Text style={{ fontWeight: 600, fontSize: 16 }}>{dish.name}</Text>
+                                                    <View style={{ flex: 1, paddingRight: 12, marginBottom: 10 }}>
+                                                        <Text style={{ fontWeight: 600, fontSize: 16, marginBottom: 4}}>{dish.name}</Text>
+                                                        <Text style={{ fontSize: 14, color: '#000', lineHeight: 13 }}>
+                                                            {dish.description || "No description given"}
+                                                        </Text>
                                                     </View>
                                                     <View style={[styles.priceTag, priceTagColor,]}>
                                                         <Text style={[priceTagColor, { fontWeight: 600, fontSize: 16 }]}>
@@ -160,8 +163,11 @@ export default function VendorDetailPage() {
                                                 }
                                             })}
                                         >
-                                            <View style={{ width: "70%" }}>
-                                                <Text style={{ fontWeight: 600, fontSize: 16 }}>{dish.name}</Text>
+                                            <View style={{ flex: 1, paddingRight: 12 }}>
+                                                <Text style={{ fontWeight: 600, fontSize: 16, marginBottom: 4 }}>{dish.name}</Text>
+                                                <Text style={{ fontSize: 14, color: '#000', lineHeight: 18 }}>
+                                                    {dish.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+                                                </Text>
                                             </View>
                                             <Text style={[styles.priceTag, priceTagColor]}>
                                                 ₦ {new Intl.NumberFormat('en-US').format(dish.price)}

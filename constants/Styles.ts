@@ -36,6 +36,7 @@ const Styles = StyleSheet.create({
         borderTopEndRadius: 35,
         backgroundColor: "#F72F2F",
         paddingVertical: 8,
+        paddingTop: 24,
         paddingBottom: 24,
         //maxHeight: 350,
         flex: 2
