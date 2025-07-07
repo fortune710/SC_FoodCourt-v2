@@ -28,16 +28,11 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, restaurantId }) => {
                     </View>
 
                     <View style={[styles.priceTag, priceTagColor,{height: 35}]}>
-                        <Text style={[priceTagColor, {fontWeight: 600, fontSize: 16}]}>
+                        <Text style={[priceTagColor, { fontWeight: "600", fontSize: 16 }]}>
                             ₦ {new Intl.NumberFormat('en-US').format(item.price)}
                         </Text>
                     </View>
                 </View>
-
-
-                {/* <View style={{borderWidth: 1}}>
-                    <Text style={styles.vendorName}>{item.vendorName}</Text>
-                </View> */}
             </View>
         </Link>
     );
@@ -47,7 +42,7 @@ export default MenuItem;
 
 const styles= StyleSheet.create({
     priceTag: {
-        height: '60%',
+        height: '100%',
         paddingHorizontal: 16,
         paddingVertical: 5,
         borderWidth: 1,

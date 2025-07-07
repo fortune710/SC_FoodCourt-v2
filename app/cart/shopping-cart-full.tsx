@@ -11,6 +11,7 @@ import useCart from "@/hooks/useCart";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { calculateServiceCharge, groupCartItemsByRestaurant } from "@/utils/functions";
 import usePayment from "@/hooks/usePayment";
+import Toast from "react-native-toast-message";
 
 
 
@@ -51,16 +52,25 @@ export default function CartFullPage() {
 
     
 
-    return await initializeTransactionForPaystack({
-      email: currentUser?.email!,
-      amount: totalPrice + subCharge,
-      subaccounts: vendorShares.map((vendor) => ({
-        share: vendor.total_price * convertToKobo,
-        subaccount: vendor.restaurant_subaccount_code
-      })),
-      cartItems: localCartItems!,
-      customerName: currentUser?.full_name!,
-    })
+    try {
+      return await initializeTransactionForPaystack({
+        email: currentUser?.email!,
+        amount: totalPrice + subCharge,
+        subaccounts: vendorShares.map((vendor) => ({
+          share: (vendor.total_price || 100) * convertToKobo,
+          subaccount: vendor.restaurant_subaccount_code
+        })),
+        cartItems: localCartItems!,
+        customerName: currentUser?.full_name!,
+      })
+    } catch (err: any) {
+      return Toast.show({
+        text1: "Error Ocurred",
+        text2: err.message,
+        type: "error"
+      })
+    }
+
 
   }
 
@@ -106,14 +116,14 @@ export default function CartFullPage() {
           ))}
         </View>
 
-        <View style={{ borderBottomWidth: 1.5, borderTopWidth: 1.5, borderColor: '#fe0000', marginHorizontal: 16, gap: 16 }}>
-          <View style={{ justifyContent: 'space-between', flexDirection: 'row', marginTop: 16 }}>
-            <Text style={{ fontSize: 16, fontWeight: 500 }}>Subtotal</Text>
-            <Text style={{ fontWeight: 'bold', fontSize: 16 }}>₦ {new Intl.NumberFormat('en-US').format(totalPrice)}</Text>
-          </View>
+        <View style={{borderBottomWidth: 1.5, borderTopWidth: 1.5, borderColor: '#fe0000', marginHorizontal: 16, gridRowGap: "16"}}>
+            <View style={{justifyContent: 'space-between',flexDirection:'row', marginTop: 16}}>
+              <Text style={{fontSize: 16, fontWeight: "500"}}>Subtotal</Text>
+              <Text style={{fontWeight:'bold', fontSize: 16}}>₦ {new Intl.NumberFormat('en-US').format(totalPrice)}</Text>
+            </View>
 
           <View style={{ justifyContent: 'space-between', flexDirection: 'row', marginBottom: 16 }}>
-            <Text style={{ fontSize: 16, fontWeight: 500 }}>Service Charge</Text>
+            <Text style={{ fontSize: 16, fontWeight: "500" }}>Service Charge</Text>
             <Text style={{ fontWeight: 'bold', fontSize: 16 }}>₦ {new Intl.NumberFormat('en-US').format(subCharge)}</Text>
           </View>
         </View>

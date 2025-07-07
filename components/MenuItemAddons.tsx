@@ -26,7 +26,7 @@ const MenuItemAddons = ({ addons, placeAddOn, selectedAddon }: {
             onPress={() => setExpanded(!expanded)}
         >
             {
-                addons.length === 0 ? 
+                !addons || (addons?.length === 0) ? 
                 <View className="px-3 py-5">
                     <Text className="text-center">No Add ons available for this item</Text>
                 </View>

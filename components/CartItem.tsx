@@ -65,7 +65,7 @@ const CartItem: React.FC<CartItemProps> = ({ id, name, addon, description, price
       <ListItem.Content style={{ padding: 0 }}>
         <View style={styles.container}>
           <View style = {{flexDirection: 'row', justifyContent:'space-between'}}>
-            <View style = {{flexDirection: 'row'}}>
+            <View style = {{flexDirection: 'row', flexWrap: 'wrap', maxWidth: '75%'}}>
               <Text style={styles.title}>{name} - </Text>
               <Text style={{fontWeight: 'bold',fontSize: 15, color:'#f72f2f'}}>{restaurant?.name}</Text>
             </View>

@@ -52,11 +52,11 @@ export default function OrderListItem({ order }: { order: any }) {
                 </View>
             </View>
 
-            <View style={{ gap: 8, marginVertical: 12 }}>
+            <View style={{gap: 8, marginVertical: 12}}>
                 {order?.order_items?.map(({ menu_items, quantity, menu_item_id }: any, index: number) => (
-                    <View style={{ gap: 4 }} key={index}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text style={{ fontWeight: 700, fontSize: 16, color: '#f72f2f' }}>{(menu_items as any).restaurant.name}</Text>
+                    <View key={`${menu_item_id}-${index}`} style={{gap: 4}}>
+                        <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
+                            <Text style={{fontWeight: 700, fontSize: 16, color: '#f72f2f'}}>{(menu_items as any).restaurant.name}</Text>
                             <View className={statusColors[order?.status as 0 | 1 | 2 | 3 | 4 | 5]} style={styles.statusContainer}>
                                 <Text style={styles.statusText}> {OrderStatus[order?.status]} </Text>
                             </View>
