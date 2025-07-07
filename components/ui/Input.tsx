@@ -16,14 +16,14 @@ const Input: React.FC<InputProps> = ({ icon, iconRight, containerStyle, ...restP
     }
 
     return (
-        <View style={[styles.inputContainer, containerColorsStyle, containerStyle, icon ? styles.padding: {}]}>
-            { icon && <>{icon}</> }
-            <TextInput 
+        <View style={[styles.inputContainer, containerColorsStyle, containerStyle, icon ? styles.padding : {}]}>
+            {icon && <>{icon}</>}
+            <TextInput
                 {...rest}
                 style={[styles.defaultInputStyles, style]}
                 placeholderTextColor="#7e7e7e"
             />
-            { iconRight && <>{iconRight}</> }
+            {iconRight && <View style={styles.iconRightContainer}>{iconRight}</View>}
         </View>
     )
 }
@@ -43,7 +43,14 @@ const styles = StyleSheet.create({
     },
     padding: {
         paddingHorizontal: 32,
-        paddingVertical: 16
+        paddingVertical: 1
+    },
+    iconRightContainer: {
+        position: 'absolute',
+        right: 10,
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })
 

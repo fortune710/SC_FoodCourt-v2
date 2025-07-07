@@ -27,8 +27,8 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, restaurantId }) => {
                         { item.description && <Text className="text-gray-500 mt-1">{item?.description}</Text> }
                     </View>
 
-                    <View style={[styles.priceTag, priceTagColor]}>
-                        <Text style={[priceTagColor, {fontWeight: 600, fontSize: 16}]}>
+                    <View style={[styles.priceTag, priceTagColor,{height: 35}]}>
+                        <Text style={[priceTagColor, { fontWeight: "600", fontSize: 16 }]}>
                             ₦ {new Intl.NumberFormat('en-US').format(item.price)}
                         </Text>
                     </View>

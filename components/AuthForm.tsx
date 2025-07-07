@@ -52,14 +52,19 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
         }
 
         setLoading(true)
-        const { error } = await supabase.auth.signInWithPassword({
+        const { data ,error } = await supabase.auth.signInWithPassword({
           email: email,
           password: password,
         })
 
         setLoading(false)
+        console.log(error)
         if (error) return Alert.alert(error.message)
 
+        if(!data.user.email) return Alert.alert("User not found")
+        const userType = await supabase.from("profiles").select("*").eq("email", data.user.email).single()
+        console.log(userType)
+        if(userType.data?.user_type !== "customer") return Alert.alert("only customer can login on this app try the vendor application")
         return router.replace("/main/home")
     }
 
@@ -123,9 +128,9 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                         secureTextEntry={!isVisible}
                         onChangeText={(password) => setPassword(password)}
                         style={{ marginLeft: 16 }}
-                        icon={<Lock stroke={primaryColor}/>}
+                        icon={<Lock stroke={primaryColor}  />}
                         iconRight={
-                            <TouchableOpacity onPress={()=>setIsVisible(!isVisible)}> 
+                            <TouchableOpacity style={{marginRight:0}} onPress={()=>setIsVisible(!isVisible)}> 
                                 {isVisible ? 
                                     <Eye stroke={primaryColor}/> 
                                 : 
@@ -174,7 +179,7 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                 loading={loading} 
                 color="#F72F2F" 
                 style={{ alignSelf: "center" }} 
-                buttonStyle={{ paddingHorizontal: 40, marginTop: 40 }} 
+                buttonStyle={{ paddingHorizontal: 40, marginVertical: 20 }} 
                 titleStyle={{ textAlign: "center", fontSize: 16 }} 
                 disabled={formType=== "sign-up" ? (isFormComplete === false ? true : false) : false}
                 onPress={formType === "login" ? signInWithEmail : signUpWithEmail}

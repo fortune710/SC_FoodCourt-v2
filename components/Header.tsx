@@ -1,5 +1,5 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons"
-import { View, StyleSheet, Text, SafeAreaView } from "react-native";
+import { View, StyleSheet, Text, SafeAreaView, Image } from "react-native";
 import useThemeColor from "../hooks/useThemeColor";
 import { Link } from "expo-router";
 import DrawerButton from "./DrawerButton";
@@ -29,14 +29,23 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, altColor, altBack }) => {
                     backgroundColor: altBack ? "#f72f2f" : "#fff"
                 }}
             >
-                <DrawerButton iconColor={altColor ? "#fff" : primaryColor}/>
+                <DrawerButton iconColor={altColor ? "#fff" : primaryColor} />
 
-                {pageTitle === 'Order History' || 'Settings' ? <Text style= {{fontSize: 20, fontWeight: 600, color: pageTitle ===  'Order History' ? '#000' : "#fff"}}>{pageTitle}</Text> : null }
+                {pageTitle === 'Order History' || 'Settings' ? <Text style={{ fontSize: 20, fontWeight: 600, color: pageTitle === 'Order History' ? '#000' : "#fff" }}>{pageTitle}</Text> : null}
 
-                {/* <Link href="/cart/shopping-cart-full" asChild> */}
-                <Link href={dbCartItems && dbCartItems?.length > 0 ? "/cart/shopping-cart-full" : "/cart/shopping-cart-empty"} disabled={isLoading} asChild>
-                    <MaterialCommunityIcons size={25} name="cart" color={altColor ? "#fff" : primaryColor}/>
-                </Link>
+                {/* Cart with conditional image overlay */}
+                <View style={styles.cartContainer}>
+                    <Link href={dbCartItems && dbCartItems?.length > 0 ? "/cart/shopping-cart-full" : "/cart/shopping-cart-empty"} disabled={isLoading} asChild>
+                        <MaterialCommunityIcons size={25} name="cart" color={altColor ? "#fff" : primaryColor} />
+                    </Link>
+                    {pageTitle === 'Home' && (
+                        <Image
+                            source={require('../assets/images/design.png')}
+                            style={styles.cartOverlayImage}
+                            resizeMode="contain"
+                        />
+                    )}
+                </View>
             </View>
         </SafeAreaView>
     )
@@ -54,6 +63,17 @@ const styles = StyleSheet.create({
     title: {
         fontWeight: "900",
         fontSize: 24
+    },
+    cartContainer: {
+        position: 'relative',
+    },
+    cartOverlayImage: {
+        position: 'absolute',
+        top: -20,
+        right: -40,
+        width: 200,
+        height: 200,
+        zIndex: 1,
     }
 })
 

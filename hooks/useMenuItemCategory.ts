@@ -33,6 +33,7 @@ export default function useMenuItemCategory(categoryName: string, vendor?: strin
                 .eq('restaurant.is_disabled', false);
 
             groupedResults = groupArrayAsArray(data!, "restaurant");
+            console.log(data, "data5")
             fetchError = error;
         } else {
             const { data, error } = await supabase

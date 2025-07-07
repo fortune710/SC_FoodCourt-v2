@@ -1,7 +1,7 @@
 import Button from "../../components/ui/Button";
 import { Text, Page } from '../../components/Themed';
 import { Image } from "expo-image";
-import { Pressable, View, ScrollView, Dimensions} from "react-native";
+import { Pressable, View, ScrollView, Dimensions } from "react-native";
 import { Feather, MaterialIcons, Entypo } from '@expo/vector-icons';
 import { useEffect, useState } from "react";
 import CartItem from '../../components/CartItem';
@@ -37,9 +37,9 @@ export default function CartFullPage() {
   const convertToKobo = 100;
 
   const handleQuantityChange = (menuItemId: number, newQuantity: number) => {
-    setLocalCartItems(prevItems => 
-      prevItems.map(item => 
-        item.menu_item_id === menuItemId 
+    setLocalCartItems(prevItems =>
+      prevItems.map(item =>
+        item.menu_item_id === menuItemId
           ? { ...item, quantity: newQuantity }
           : item
       )
@@ -48,6 +48,9 @@ export default function CartFullPage() {
 
   const confirmCharge = async () => {
     const vendorShares = groupCartItemsByRestaurant(localCartItems!);
+    console.log('button working');
+
+    
 
     try {
       return await initializeTransactionForPaystack({
@@ -72,30 +75,30 @@ export default function CartFullPage() {
   }
 
   return (
-    <Page style={{ height, paddingBottom: 192 }}>
-      <View style={{flexDirection: 'row',justifyContent:'space-between', width: '55%', alignItems: 'center', marginTop: 12}}>
+    <Page style={{ height, paddingBottom: 52 }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '55%', alignItems: 'center', marginTop: 12 }}>
         <Pressable
           onPress={() => router.back()}
-          style={{marginLeft: 10}}
+          style={{ marginLeft: 10 }}
         >
-          <View style={{width: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems:'center'}}>
+          <View style={{ width: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
             <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
-            <Text style={{fontSize: 15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
+            <Text style={{ fontSize: 15, textAlign: 'center', color: '#f72f2f' }}>Back</Text>
           </View>
         </Pressable>
-  
-        <Text style={{fontWeight: 'bold', fontSize: 24, textAlign: 'center'}}>Cart</Text>
+
+        <Text style={{ fontWeight: 'bold', fontSize: 24, textAlign: 'center' }}>Cart</Text>
       </View>
 
-      <View style={{width: '100%', height:'7%', alignItems: 'center'}}>
+      <View style={{ width: '100%', height: '7%', alignItems: 'center' }}>
         <Image
-            source={require("assets/images/shopping-cart-stage.svg")}
-            style={{ width: '65%', height: '100%', resizeMode: 'contain' }}
+          source={require("assets/images/shopping-cart-stage.svg")}
+          style={{ width: '65%', height: '100%', resizeMode: 'contain' }}
         />
       </View>
 
       <ScrollView contentInset={{ bottom: 192 }}>
-        <View style={{paddingBottom: 16}}>
+        <View style={{ paddingBottom: 16 }}>
           {localCartItems?.map((foodItem) => (
             <CartItem
               id={foodItem.id}
@@ -103,36 +106,36 @@ export default function CartFullPage() {
               name={foodItem.menu_item.name}
               description={foodItem.menu_item.description}
               price={foodItem.menu_item.price}
-              quantity = {foodItem.quantity}
+              quantity={foodItem.quantity}
               restaurantId={foodItem.menu_item.resturant_id}
               addon={{ name: foodItem.addon_name!, price: foodItem.addon_price! }}
-              onQuantityChange={(newQuantity) => 
+              onQuantityChange={(newQuantity) =>
                 handleQuantityChange(foodItem.menu_item_id, newQuantity)
               }
             />
           ))}
         </View>
 
-        <View style={{borderBottomWidth: 1.5, borderTopWidth: 1.5, borderColor: '#fe0000', marginTop: 12, marginHorizontal: 16, gap: 16}}>
+        <View style={{borderBottomWidth: 1.5, borderTopWidth: 1.5, borderColor: '#fe0000', marginHorizontal: 16, gridRowGap: "16"}}>
             <View style={{justifyContent: 'space-between',flexDirection:'row', marginTop: 16}}>
-              <Text style={{fontSize: 16, fontWeight: 500}}>Subtotal</Text>
+              <Text style={{fontSize: 16, fontWeight: "500"}}>Subtotal</Text>
               <Text style={{fontWeight:'bold', fontSize: 16}}>₦ {new Intl.NumberFormat('en-US').format(totalPrice)}</Text>
             </View>
 
-            <View style={{justifyContent: 'space-between',flexDirection:'row', marginBottom: 16}}>
-              <Text style={{fontSize: 16, fontWeight: 500}}>Service Charge</Text>
-              <Text style={{fontWeight:'bold', fontSize: 16}}>₦ {new Intl.NumberFormat('en-US').format(subCharge)}</Text>
-            </View>
+          <View style={{ justifyContent: 'space-between', flexDirection: 'row', marginBottom: 16 }}>
+            <Text style={{ fontSize: 16, fontWeight: "500" }}>Service Charge</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 16 }}>₦ {new Intl.NumberFormat('en-US').format(subCharge)}</Text>
+          </View>
         </View>
 
-        <View style={{justifyContent: 'space-between', flexDirection:'row', marginTop:16, marginBottom: 48, marginHorizontal: 16}}>
-            <Text style={{fontWeight:'bold', fontSize: 18}}>Total</Text>
-            <Text style={{fontWeight:'bold', fontSize: 18}}>₦ {new Intl.NumberFormat('en-US').format(totalPrice + subCharge)}</Text>
+        <View style={{ justifyContent: 'space-between', flexDirection: 'row', marginTop: 16, marginBottom: 48, marginHorizontal: 16 }}>
+          <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Total</Text>
+          <Text style={{ fontWeight: 'bold', fontSize: 18 }}>₦ {new Intl.NumberFormat('en-US').format(totalPrice + subCharge)}</Text>
         </View>
-        <Button 
-          color="#F72F2F" 
-          style={{ alignSelf: "center", width: "100%" }} 
-          titleStyle={{ textAlign: "center", padding: 32, fontSize: 18 }} 
+        <Button
+          color="#F72F2F"
+          style={{ alignSelf: "center", width: "100%" }}
+          titleStyle={{ textAlign: "center", padding: 32, fontSize: 18 }}
           buttonStyle={{ marginHorizontal: 16 }}
           onPress={confirmCharge}
         >

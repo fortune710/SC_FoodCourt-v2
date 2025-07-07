@@ -6,7 +6,9 @@ export interface Product {
     categoryId: string,
     vendorId: string,
     vendorName: string,
-    image?: string
+    image?: string,
+    resturant_id: number,
+    category: string
 }
 
 export interface CartItem {
@@ -60,7 +62,8 @@ export interface MenuItem {
 export interface Vendor {
     id: string,
     name: string,
-    image: string,
+    image_url: string | null,
+    is_disabled: boolean
 }
 
 export interface TranactionSplitData {

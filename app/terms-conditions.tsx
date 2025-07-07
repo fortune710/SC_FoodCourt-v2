@@ -47,12 +47,12 @@ export default function TCPage() {
 
         {
           data.map((item, index) => (
-            <View className='px-5 mt-5 gap-2'>
+            <View className='px-5 mt-5 gap-2' key={index}>
               <Text className='font-semibold text-xl'>{index + 1}. {item.title}</Text>
               <View className='px-6 gap-4'>
                 {
                   item.children.map((item, index) => (
-                    <Text>
+                    <Text key={index}>
                       <Text className='font-semibold'>• {item.title}: </Text>{" "}
                       {item.description}
                     </Text>

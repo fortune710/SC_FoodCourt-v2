@@ -22,6 +22,8 @@ const CategoryPage = () => {
   //const primary = useThemeColor({}, "primary");
 
   const { menuItems, isLoading, error } = useMenuItemCategory(categoryName as string, vendor as string);
+  console.log(menuItems)
+  console.log(categoryName)
 
   return (
     <Page style={styles.container}>

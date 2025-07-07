@@ -86,7 +86,7 @@ const CartItem: React.FC<CartItemProps> = ({ id, name, addon, description, price
             !addon ? null : (
               <View style={styles.descriptionContainer}>
                 <Text style={styles.description}>
-                  Selected Addon: {addon.name} - {new Intl.NumberFormat('en-US').format(addon.price)}
+                  Selected Add on: {addon.name} - {new Intl.NumberFormat('en-US').format(addon.price)}
                 </Text>
               </View>
             )

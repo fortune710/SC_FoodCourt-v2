@@ -28,7 +28,7 @@ const MenuItemAddons = ({ addons, placeAddOn, selectedAddon }: {
             {
                 !addons || (addons?.length === 0) ? 
                 <View className="px-3 py-5">
-                    <Text className="text-center">No Addons available for this item</Text>
+                    <Text className="text-center">No Add ons available for this item</Text>
                 </View>
                 :
                 addons?.map((item) => (

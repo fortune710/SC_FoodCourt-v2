@@ -3,7 +3,7 @@ import { Text } from "@/components/Themed";
 import { StyleSheet } from "react-native";
 import { OrderStatus } from "@/types";
 
-const RecentOrderCard = ({ quantity, name, restaurant, status }: { quantity: number, name: string, restaurant: string, status: number }) => {
+const RecentOrderCard = ({ quantity, name, restaurant, status, onPress }: { quantity: number, name: string, restaurant: string, status: number, onPress?: () => void }) => {
     const statusColors = {
         0: "bg-yellow-300",
         1: "bg-[#F7E11E]",
@@ -13,11 +13,11 @@ const RecentOrderCard = ({ quantity, name, restaurant, status }: { quantity: num
         5: "bg-[#F72F2F]",
     }
 
-    
+
     return (
-        <TouchableOpacity style={[styles.horizontalListItem, styles.cardStyle]}>
-            <View style={{gap: 4}}>
-                <View className= 'flex-row gap-2'>
+        <TouchableOpacity style={[styles.horizontalListItem, styles.cardStyle]} onPress={onPress}>
+            <View style={{ gap: 4 }}>
+                <View className='flex-row gap-2'>
                     <Text style={styles.mediumText}>{quantity}x</Text>
                     <Text style={styles.mediumText}>{name}</Text>
                 </View>
@@ -51,11 +51,11 @@ const styles = StyleSheet.create({
     },
     mediumText: { alignSelf: "flex-start", fontWeight: "500" },
     semiboldText: { alignSelf: "flex-start", fontWeight: "700" },
-    statusContainer: { 
-        alignSelf: "flex-end", 
+    statusContainer: {
+        alignSelf: "flex-end",
         alignItems: "center",
-        padding: 6, 
-        borderRadius: 16, 
+        padding: 6,
+        borderRadius: 16,
         width: 88
     },
     statusText: { color: "#000", fontSize: 12, textTransform: "capitalize", fontWeight: "700" }
