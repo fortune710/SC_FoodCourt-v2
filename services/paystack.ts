@@ -1,13 +1,14 @@
 import { TransactionData } from "@/types";
 import axios from "axios";
 
+console.log(process.env.EXPO_PUBLIC_PAYSTACK_KEY!)
 
 
 const Paystack = {
     api: axios.create({
         baseURL: "https://api.paystack.co",
         headers: {
-            "Authorization": `Bearer ${process.env.EXPO_PUBLIC_PAYSTACK_KEY!}`,
+            "Authorization": `Bearer sk_test_4b1d74015e718cd131d4232aa3a8ed0b6073d715`,
             "Content-Type": "application/json"
         }
     }),
@@ -26,7 +27,7 @@ const Paystack = {
             currency: "NGN",
             email: data.email,
             amount: data.amount * 100,
-            callback_url: "http://scfoodcourt.startupcampushq.com/main/home",
+            callback_url: "https://scfoodcourt.startupcampushq.com/main/home",
             split: {
                 type: "flat",
                 bearer_type: "account",

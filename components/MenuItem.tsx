@@ -33,11 +33,6 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, restaurantId }) => {
                         </Text>
                     </View>
                 </View>
-
-
-                <View style={{borderWidth: 1}}>
-                    <Text style={styles.vendorName}>{item.vendorName}</Text>
-                </View>
             </View>
         </Link>
     );
@@ -47,7 +42,7 @@ export default MenuItem;
 
 const styles= StyleSheet.create({
     priceTag: {
-        height: '60%',
+        height: '100%',
         paddingHorizontal: 16,
         paddingVertical: 5,
         borderWidth: 1,
