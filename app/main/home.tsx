@@ -13,41 +13,6 @@ import Styles from "@/constants/Styles";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import {scale, verticalScale} from 'react-native-size-matters'
 
-const Recents = [
-    {
-        name: "Mexican Sharwama",
-        restaurant: "W Sauce",
-        status: 4
-    },
-    {
-        name: "Mexican Sharwama",
-        restaurant: "W Sauce",
-        status: 4
-    },
-    {
-        name: "Mexican Sharwama",
-        restaurant: "W Sauce",
-        status: 4
-    },
-    {
-        name: "Mexican Sharwama",
-        restaurant: "W Sauce",
-        status: 4
-    },
-    {
-        name: "Mexican Sharwama",
-        restaurant: "W Sauce",
-        status: 4
-    },
-    {
-        name: "Mexican Sharwama",
-        restaurant: "W Sauce",
-        status: 4
-    },
-]
-
-
-
 
 export default function HomePage() {
     const [isSearchActive, setIsSearchActive] = useState(false);
@@ -57,10 +22,11 @@ export default function HomePage() {
     const { currentUser } = useCurrentUser();
     const { getRecentOrders } = useOrders();
     const recentOrders = getRecentOrders();
+    const cutFullName = currentUser?.full_name?.split(" ")[0];
 
     if(isSearchActive) {
         return (
-            <Page style={styles.pagePadding}>
+            <Page style={{paddingVertical: 16}}>
                 <HomeSearch setIsSearchActive={setIsSearchActive} />
             </Page>
         )
@@ -68,29 +34,31 @@ export default function HomePage() {
 
     return (
         <PageScroll>
-            <View style={[styles.pagePadding, {paddingTop: 24}]}>
-                <Text style={{fontSize: 20, fontFamily: "Montserrat", fontWeight: 500}}>
-                    Hi, {currentUser?.full_name! || "User's Name"}
+            <View style={[styles.pagePadding, {paddingTop: 2}]}>
+                <Text style={{fontSize: 20, fontFamily: "Montserrat", fontWeight: 700}}>
+                    Hi, {cutFullName! || "User's Name"}
                 </Text>
                 <Text style={styles.greetingText}>What will we be having today?</Text>
             </View>
 
             <Pressable onPress={() => setIsSearchActive(true)} style={Styles.DefaultPaddingX}>
-                <Searchbar disable={false}/>
+                <Searchbar disable={false} showIcon searchbarWithGradient={true} />
             </Pressable>
 
-            <CategoriesList/>
+            <CategoriesList style={{marginTop: 24}}/>
 
-            <View style={[Styles.DefaultSpaceY]}>
+            <View style={[Styles.DefaultSpaceY, {gap: 16}]}>
                 <Text style={styles.recentsText}>Recents</Text>
                 <RecentOrdersList recentOrders={recentOrders!} />
             </View>
 
-            <View style={Styles.DefaultPaddingX}>
-                <Text style={styles.vendorText}>Vendor</Text>
+            <View style={[Styles.DefaultPaddingX, Styles.DefaultSpaceY, {gap: 16}]}>
+                <Text style={styles.vendorText}>Vendors</Text>
                 {
                     isLoading ? <ActivityIndicator/> :
-                    <RestaurantsList restaurants={restaurant!}/>
+                    <View style={{gap: 12}}>
+                        <RestaurantsList restaurants={restaurant!}/>
+                    </View>
                 }
             </View>
         </PageScroll>
@@ -99,8 +67,8 @@ export default function HomePage() {
 
 
 const styles = StyleSheet.create({
-    recentsText: { fontWeight: "900", marginVertical: 16, fontSize: 20, marginHorizontal: 16 },
+    recentsText: { fontWeight: "900", fontSize: 24, marginHorizontal: 16 },
     greetingText: { fontWeight: "700", marginTop: 8, marginBottom: 24, fontSize: 32, fontFamily: "Lato"},
-    vendorText: { fontWeight: "900", marginVertical: 16, fontSize: 20 },
+    vendorText: { fontWeight: "900", fontSize: 24 },
     pagePadding: { paddingHorizontal: 16 }
 })

@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, AppState, KeyboardAvoidingView, View } from "react-native"
+import { Alert, AppState, KeyboardAvoidingView, View, Text, TouchableOpacity } from "react-native"
 import Input from "@/components/ui/Input";
 import { useState } from "react";
 import Button from "./ui/Button";
@@ -8,11 +8,13 @@ import { supabase } from "@/utils/supabase";
 import { CheckBox } from "@rneui/themed"
 import useThemeColor from "@/hooks/useThemeColor";
 import { Link, useRouter } from "expo-router";
-import { Lock, Mail, Phone, User } from "lucide-react-native";
+import { Lock, Mail, Eye, EyeOff, User } from "lucide-react-native";
 import useAuth from "@/hooks/useAuth";
 
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+
 interface FormProps {
-    formType: "login"|"sign-up"
+    formType: "login" | "sign-up" | "forgot-password"
 }
 
 // Tells Supabase Auth to continuously refresh the session automatically if
@@ -31,37 +33,49 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [fullName, setFullName] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
+    const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [isFormComplete, setIsFormComplete] = useState(true);
+
     const { signUpWithEmail: signUp } = useAuth();
 
     const router = useRouter()
 
 
-    const [rememberMe, setRememberMe] = useState(false);
+    const [isSelected, setIsSelected] = useState(false);
     const primaryColor = useThemeColor({}, "primary");
 
 
     async function signInWithEmail() {
+        if (!email.trim() || !password.trim()) {
+            return Alert.alert("Missing email or Password")
+        }
+
         setLoading(true)
-        const { error } = await supabase.auth.signInWithPassword({
+        const { data ,error } = await supabase.auth.signInWithPassword({
           email: email,
           password: password,
         })
 
         setLoading(false)
+        console.log(error)
         if (error) return Alert.alert(error.message)
 
+        if(!data.user.email) return Alert.alert("User not found")
+        const userType = await supabase.from("profiles").select("*").eq("email", data.user.email).single()
+        console.log(userType)
+        if(userType.data?.user_type !== "customer") return Alert.alert("only customer can login on this app try the vendor application")
         return router.replace("/main/home")
-      }
+    }
 
-      async function signUpWithEmail() {
+    async function signUpWithEmail() {
+        if (!email.trim() || !password.trim()) {
+            return Alert.alert("Missing email or Password")
+        }
+
         setLoading(true)
 
-        const {
-            data: { session },
-            error,
-        } = await signUp({
+        const { data: { session }, error } = await signUp({
             name: fullName,
             password,
             email,
@@ -69,12 +83,12 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
         })
 
         if (error) return Alert.alert(error.message)
-
         if (session) Alert.alert('Please check your inbox for email verification!')
+
         setLoading(false)
 
-        router.replace("/login")
-      }
+        return router.replace("/login")
+    }
 
     return (
         <KeyboardAvoidingView behavior="padding">
@@ -107,59 +121,67 @@ const AuthForm: React.FC<FormProps> = ({ formType }) => {
                     keyboardType="email-address"
                 />
 
-                <Input
-                    placeholder="Password"
-                    secureTextEntry={true}
-                    onChangeText={(password) => setPassword(password)}
-                    style={{ marginLeft: 16 }}
-                    icon={<Lock stroke={primaryColor}/>}
-                    // iconRight={<Lock stroke={primaryColor}/>}
-                />
+                {
+                    formType !== "forgot-password" &&
+                    <Input
+                        placeholder="Password"
+                        secureTextEntry={!isVisible}
+                        onChangeText={(password) => setPassword(password)}
+                        style={{ marginLeft: 16 }}
+                        icon={<Lock stroke={primaryColor}  />}
+                        iconRight={
+                            <TouchableOpacity style={{marginRight:0}} onPress={()=>setIsVisible(!isVisible)}> 
+                                {isVisible ? 
+                                    <Eye stroke={primaryColor}/> 
+                                : 
+                                    <EyeOff stroke={primaryColor}/>}
+                             </TouchableOpacity>
+                        }
+                    />
+                }
             </View>
 
             {   
-                formType !== "sign-up" ? 
+                formType === "forgot-password" ?  null :
                     <View className="flex flex-row py-3 items-center justify-between" style={{ paddingHorizontal: 16 }}>
                         <CheckBox
-                            checked={rememberMe}
-                            onPress={() => setRememberMe(!rememberMe)}
-                            iconType="ionicon"
-                            checkedIcon="checkbox-outline"
-                            uncheckedIcon="checkbox"
+                            checked={isSelected}
+                            onPress={() => setIsSelected(!isSelected)}
+                            iconType="material-community"
+                            checkedIcon="checkbox-marked"
+                            uncheckedIcon="checkbox-blank-outline"
                             checkedColor={primaryColor}
-                            title="Remember Me"
+                            uncheckedColor={primaryColor}
+                            title={
+                                formType !== "sign-up" ? 
+
+                                "Remember Me" : 
+                                <Text>
+                                    I have read and accepted the
+
+                                    <TouchableOpacity onPress={() => router.push('./terms-conditions')}>
+                                        <Text style={{ color: '#F72F2F', fontWeight: 600 }}> Terms and Conditions</Text>
+                                    </TouchableOpacity>
+                                </Text>
+                            }
                             containerStyle={{ borderRadius: 5, padding: 0 }}
                             center={true}
                         />
-                        <Link href="/forgot-password">Forgot Password?</Link>
+
+                        {formType !== "sign-up" ? 
+                            <Link href="/forgot-password">Forgot Password?</Link> : null 
+                        }
                     </View>
-                :   
-                    
-                    <View className="flex flex-row py-3 items-center justify-between" style={{ paddingHorizontal: 16 }}> 
-                        {/* Usiere, help fix abeg */}
-                        <CheckBox
-                            checked={rememberMe}
-                            onPress={() => setRememberMe(!rememberMe)} 
-                            iconType="ionicon"
-                            checkedIcon="checkbox"
-                            uncheckedIcon="checkbox-outline"
-                            checkedColor={primaryColor}
-                            title="I have read and accepted the Terms and Conditions"
-                            textStyle={{borderWidth: 1, alignItems: "center"}}
-                            containerStyle={{ borderRadius: 5}}
-                            center={true}
-                            // titleProps={}
-                            // wrapperStyle={{borderWidth: 1}}
-                        />
-                    </View>
+                
             }
 
             <Button 
                 loading={loading} 
                 color="#F72F2F" 
                 style={{ alignSelf: "center" }} 
-                buttonStyle={{ paddingHorizontal: 40, marginTop: 40 }} 
+                buttonStyle={{ paddingHorizontal: 40, marginVertical: 20 }} 
                 titleStyle={{ textAlign: "center", fontSize: 16 }} 
+                disabled={formType=== "sign-up" ? (isFormComplete === false ? true : false) : false}
                 onPress={formType === "login" ? signInWithEmail : signUpWithEmail}
             >
                 Continue

@@ -1,8 +1,7 @@
-
 import React from "react";
 import CategoriesList from "@/components/CategoriesList";
 import Header from "@/components/Header";
-import { Page } from "@/components/Themed";
+import { PageScroll } from "@/components/Themed";
 import Modal from "@/components/ui/Modal";
 import useThemeColor from "@/hooks/useThemeColor";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -24,48 +23,54 @@ export default function OrdersPage() {
 
     const { orders, isLoading } = useOrders();
 
-    return (
-        <Page style={{ paddingHorizontal: 16, paddingTop: 16 }}>
+   
 
-            <OrderSearchbar setSearchResults={setSearchResults} />
+    return (
+        <PageScroll style={{ paddingHorizontal: 16, paddingTop: 16 }}>
+
+            <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+                <OrderSearchbar setSearchResults={setSearchResults} />
+                <FilterModal />
+            </View>
             {
-                isLoading ? <ActivityIndicator/> : 
-                <ScrollView style={{flex: 1, marginTop: 16}}>
-                    {
-                        orders?.map((order, index) => (
-                            <OrderListItem key={index} order={order} />
-                        ))
-                    }
-                </ScrollView>
+                isLoading ? <ActivityIndicator /> :
+                    <View style={{ flex: 1, marginTop: 16 }}>
+                        {
+                            orders?.map((order, index) => (
+                                <OrderListItem key={order.id} order={order} />
+                            ))
+                        }
+                    </View>
 
             }
 
 
-        </Page>
+        </PageScroll>
     )
 }
 
 const FilterModal: React.FC = () => {
     const [modalOpen, setModalOpen] = useState(false);
+    const [filterIcon, setFilterIcon] = useState(0)
     const primaryColor = useThemeColor({}, "primary");
+
 
     return (
         <>
             <Pressable onPress={() => setModalOpen(!modalOpen)}>
-                <Text>Filter</Text>
-                <MaterialCommunityIcons 
-                    color={primaryColor} 
-                    size={23}
-                    name="filter-variant" 
+                <Ionicons
+                    color={primaryColor}
+                    size={24}
+                    name="filter"
                 />
             </Pressable>
-        
+
             <Modal isVisible={modalOpen}>
                 <View style={styles.modalContent}>
                     <View style={styles.modalHeader}>
                         <Text style={styles.modalTitle}>Filter</Text>
                         <Pressable onPress={() => setModalOpen(false)}>
-                            <Ionicons name="close" color="red" size={24}/>
+                            <Ionicons name="close" color="red" size={24} />
                         </Pressable>
                     </View>
 

@@ -1,0 +1,134 @@
+[
+    {
+      "title": "Account Registration",
+      "children": [
+        {
+          "title": "Account Responsibility",
+          "description": "You are responsible for maintaining the confidentiality of your login details and all activities under your account. You agree to notify us immediately of any unauthorized use of your account or any other breach of security. SC: FoodCourt will not be liable for any loss or damage arising from your failure to comply with this obligation."
+        },
+        {
+          "title": "Account Usage",
+          "description": "Your account is for your personal use only. You are not allowed to share your account with others or allow others to access your account. Any misuse of your account may result in its suspension or termination."
+        }
+      ]
+    },
+    {
+      "title": "Ordering",
+      "children": [
+        {
+          "title": "Order Placement",
+          "description": "When you place an order through the App, it constitutes an offer to purchase products. Orders are subject to availability and confirmation of payment."
+        },
+        {
+          "title": "Order Confirmation",
+          "description": "Upon placing an order, you will receive an email confirmation. If any issues arise, our support team will contact you."
+        }
+      ]
+    },
+    {
+      "title": "Payment",
+      "children": [
+        {
+          "title": "Payment Methods",
+          "description": "We accept credit/debit cards, mobile payments, and other forms of electronic payments. All transactions must be completed through the payment gateway in the App."
+        },
+        {
+          "title": "Payment Confirmation",
+          "description": "Your order is processed once your payment is confirmed. If payment fails, the order will not be processed."
+        }
+      ]
+    },
+    {
+      "title": "Cancellations and Refunds",
+      "children": [
+        {
+          "title": "Order Cancellation",
+          "description": "You can cancel your order before it is confirmed by the restaurant. Once confirmed, cancellation is no longer possible."
+        },
+        {
+          "title": "Refund Policy",
+          "description": "Refunds may be issued under specific circumstances, such as incorrect orders (e.g., wrong items received) or non-delivery or significant delay in delivery."
+        },
+        {
+          "title": "Order Pickup",
+          "description": "You are required to pick up your order within [insert time frame, e.g., 30 minutes] from the time the order is ready for pickup. If you fail to pick up your order within the specified time frame, SC: FoodCourt will not be responsible for any refunds or compensation."
+        },
+        {
+          "title": "Refund Requests",
+          "description": "To request a refund, please contact our support team with your order details. Refunds are evaluated on a case-by-case basis, and we reserve the right to deny refund requests that do not meet our criteria."
+        }
+      ]
+    },
+    {
+      "title": "User Conduct",
+      "children": [
+        {
+          "title": "Prohibited Activities",
+          "description": "You agree not to use the App for any unlawful or prohibited activities, such as misrepresenting your identity or impersonating others when placing orders or communicating, attempting to gain unauthorized access to the App, its servers, or associated systems, posting abusive, defamatory, obscene, or harassing content in reviews or communication, engaging in fraudulent activities, such as placing fake orders or using stolen payment methods, disrupting the proper functioning of the App through spamming or automated means, abusing promotions, discounts, or referral programs in ways that violate intended use, and using someone else’s account or payment information without permission."
+        },
+        {
+          "title": "Violation Consequences",
+          "description": "We reserve the right to suspend or terminate your account if you violate these Terms."
+        }
+      ]
+    },
+    {
+      "title": "Privacy",
+      "children": [
+        {
+          "title": "Privacy Policy",
+          "description": "Your privacy is important to us. Please review our Privacy Policy to understand how we collect, use, and protect your information."
+        }
+      ]
+    },
+    {
+      "title": "Third-Party Services",
+      "children": [
+        {
+          "title": "Third-Party Links",
+          "description": "The App may contain links to third-party websites or services that are not owned or controlled by Startup Campus Inc. We are not responsible for the content, privacy policies, or practices of third-party websites or services."
+        }
+      ]
+    },
+    {
+      "title": "Liability Limitation",
+      "children": [
+        {
+          "title": "Limitation of Liability",
+          "description": "Startup Campus Inc is not liable for any direct, indirect, incidental, or consequential damages arising from your use of the App, including but not limited to delivery issues, food quality, or payment disputes."
+        }
+      ]
+    },
+    {
+      "title": "Changes to Terms",
+      "children": [
+        {
+          "title": "Revisions to Terms",
+          "description": "We may revise these Terms from time to time. The updated Terms will be posted on the App, and your continued use of the App constitutes acceptance of the new Terms."
+        }
+      ]
+    },
+    {
+      "title": "Governing Law",
+      "children": [
+        {
+          "title": "Applicable Law",
+          "description": "These Terms are governed by the laws of the Federal Republic of Nigeria. Any disputes arising from these Terms will be resolved in the competent courts of Nigeria."
+        }
+      ]
+    },
+    {
+      "title": "Contact Information",
+      "children": [
+        {
+          "title": "Email",
+          "description": "startupcampusinc@gmail.com"
+        },
+        {
+          "title": "Address",
+          "description": "Plot 681 Cadastral Zone C-OO Research and Institution Area, Airport Road, Jabi, Abuja FCT, Nigeria"
+        }
+      ]
+    }
+  ]
+  

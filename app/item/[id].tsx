@@ -1,8 +1,8 @@
-import { Pressable, ScrollView, View, Text as RnText, TouchableOpacity } from "react-native";
+import { Pressable, ScrollView, View, Text as RnText, TouchableOpacity, ActivityIndicator } from "react-native";
 import { Page, Text } from "../../components/Themed";
 import useThemeColor from "../../hooks/useThemeColor";
 import { useLocalSearchParams, useRouter, Link } from "expo-router";
-import { ImageBackground } from "expo-image";
+import { Image } from "expo-image";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons"
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import useSingleRestaurant from "@/hooks/useSingleResturant";
@@ -14,18 +14,21 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import MenuItemAddons from "@/components/MenuItemAddons";
 import { Entypo } from "@expo/vector-icons";
 import Styles from "@/constants/Styles";
+import { StatusBar } from "expo-status-bar";
+import Toast from "react-native-toast-message";
 
 export default function MenuItemDetail() {
   const router = useRouter();
-  const { id, resturantId } = useLocalSearchParams();
+  const { id, restaurantId } = useLocalSearchParams();
 
-  const { getSingleMenuItem } = useSingleRestaurant(Number(resturantId));
+  const { getSingleMenuItem, isLoading } = useSingleRestaurant(Number(restaurantId));
+
   const menuItem = getSingleMenuItem(Number(id));
   const [quantity, setQuantity] = useState(1);
   const { currentUser } = useCurrentUser();
-  const [selectedAddon, setAddon] = useState<{ name: string, price: number }|null>(null);
+  const [selectedAddon, setAddon] = useState<{ name: string, price: number } | null>(null);
 
-  const placeAddOn = (data: {name: string, price: number }|null) => {
+  const placeAddOn = (data: { name: string, price: number } | null) => {
     if (!selectedAddon || selectedAddon.name !== data?.name) {
       return setAddon(data);
     }
@@ -44,10 +47,17 @@ export default function MenuItemDetail() {
   const increaseQuantity = () => setQuantity(quantity + 1);
 
   const addItemToCart = () => {
+    if (menuItem?.price === 0 && !selectedAddon) {
+      Toast.show({
+        text1: "Please select an addon",
+        type: "error",
+      });
+      return;
+    }
     const existingItem = getSingleCartItem(menuItem?.id!);
 
     if (existingItem) {
-      updateItem({id: existingItem.id, quantity: existingItem.quantity + quantity});
+      updateItem({ id: existingItem.id, quantity: existingItem.quantity + quantity });
     } else {
       addItem({
         user_id: currentUser?.id!,
@@ -58,45 +68,64 @@ export default function MenuItemDetail() {
       });
     }
 
-    router.back() //Usiere- it'a too quick
+    //router.back() //Usiere- it'a too quick
   };
 
   const totalPrice = (menuItem?.price || 0) * quantity + (selectedAddon?.price || 0);
 
+  if (isLoading) {
+    return (
+      <Page className="flex-1 bg-white h-screen">
+        <View className="flex-1 items-center justify-center">
+          <ActivityIndicator size="large" color="#f72f2f" />
+        </View>
+      </Page>
+    );
+  }
+
+  if (!menuItem) {
+    return (
+      <Page className="flex-1 bg-white h-screen">
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-lg">Menu item not found</Text>
+        </View>
+      </Page>
+    );
+  }
+
   return (
     <Page className="flex-1 bg-white h-screen">
-      <View className="relative h-48">
-        <ImageBackground
+      <StatusBar />
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 16, marginHorizontal: 12 }}>
+        <Pressable onPress={() => router.back()}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
+            <Text style={{ fontSize: 15, textAlign: 'center', color: '#f72f2f' }}>Back</Text>
+          </View>
+        </Pressable>
+
+        <Link href="/cart/shopping-cart-full" asChild>
+          <MaterialCommunityIcons size={25} name="cart" color={primary} />
+        </Link>
+      </View>
+
+      <View style={{ height: 160, marginTop: 8 }}>
+        <Image
           source={require("@/assets/images/food.png")}
           style={[Styles.ImageBackground]}
-        >
-
-        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 16, marginHorizontal: 12}}>
-          <Pressable onPress={() => router.back()}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems:'center' }}>
-                  <Entypo name="chevron-small-left" size={22} color="#f72f2f" />
-                  <Text style={{fontSize:15, textAlign:'center', color:'#f72f2f'}}>Back</Text>
-              </View>
-          </Pressable>
-
-          <Link href="/cart/shopping-cart-full" asChild>
-              <MaterialCommunityIcons size={25} name="cart" color={primary}/>
-          </Link>
-        </View>
-
-        </ImageBackground>
+        />
       </View>
 
       <ScrollView className="p-4 space-y-4">
         <View className="flex flex-row items-center justify-between">
           <View className="w-2/3">
-            <Text className="text-xl font-semibold">{menuItem?.name}</Text>
-            <Text className="text-gray-500">
+            <Text className="text-2xl font-semibold">{menuItem?.name}</Text>
+            <Text className="text-gray-500 mt-2 text-lg">
               {menuItem?.description || "No description available for this item."}
             </Text>
           </View>
 
-          <View className="flex flex-row items-center gap-2">
+          <View className="flex flex-row items-center gap-3">
             <TouchableOpacity onPress={reduceQuantity} className="p-2 border border-primary rounded-full">
               <Minus stroke={primary} className="text-primary" />
             </TouchableOpacity>
@@ -110,7 +139,7 @@ export default function MenuItemDetail() {
         </View>
 
         <View className="my-3 flex flex-col">
-          <Text className="font-medium">Category: {menuItem?.category}</Text>
+          <Text className="font-medium text-lg">Category: {menuItem?.category}</Text>
         </View>
 
         <View className="flex flex-row items-center gap-2 my-3">
@@ -118,19 +147,19 @@ export default function MenuItemDetail() {
           <Text>{menuItem?.preparation_time || '15 mins'}</Text>
         </View>
 
-        <MenuItemAddons 
-          addons={menuItem?.add_ons!} 
+        <MenuItemAddons
+          addons={menuItem?.add_ons!}
           selectedAddon={selectedAddon}
           placeAddOn={placeAddOn}
         />
 
         <TouchableOpacity
           onPress={addItemToCart}
-          disabled={menuItem?.quantity! < menuItem?.warning_stock_value!}
+          // disabled={(menuItem?.quantity! < menuItem?.warning_stock_value!) || (menuItem?.price === 0 && !selectedAddon)}
           className="bg-primary disabled:bg-red-600 rounded-3xl py-4 flex flex-row items-center justify-center mt-32"
-          style={{borderRadius: 50}}
+          style={{ borderRadius: 50 }}
         >
-          <RnText className="text-white font-medium text-lg">Add to Cart (₦ {totalPrice})</RnText>
+          <RnText className="text-white font-medium text-lg">Add to Cart (₦ {new Intl.NumberFormat('en-US').format(totalPrice)})</RnText>
         </TouchableOpacity>
       </ScrollView>
     </Page>

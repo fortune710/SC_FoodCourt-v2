@@ -1,9 +1,9 @@
 import { useRouter } from "expo-router"
 import { TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
-import { Image } from "expo-image";
+import { Image, ImageBackground } from "expo-image";
 import { Text } from "@/components/Themed";
-import { Scale, verticalScale } from "react-native-size-matters";
+import { scale, verticalScale } from "react-native-size-matters";
 
 
 const RestaurantCard = ({ id, name, image_url }: { id: number, name: string, image_url: string | null }) => {
@@ -15,39 +15,33 @@ const RestaurantCard = ({ id, name, image_url }: { id: number, name: string, ima
         <TouchableOpacity 
             onPress={moveToVendorPage} 
             style={[styles.horizontalListItem, styles.vendorCard]}
-        >
-            {
-                !image_url ? 
-                <Image 
-                    style={styles.backgroundImage} 
-                    source={require("@/assets/images/food.png")}
-                />
-                :
-                <Image 
-                    style={styles.backgroundImage} 
-                    source={{ uri: image_url }}
-                />
-            }
-            <View style={{flexDirection: 'row', alignItems: 'center', padding: 16, gap: 12, }}>
-                {
-                    !image_url ?
-                    <Image
-                        style={styles.restaurantLogo} 
-                        source={require("@/assets/images/food.png")}
-                    />
+        >            
+            <ImageBackground
+                source={
+                    image_url ?
+                        { uri: image_url }  
                     :
-                    <Image 
-                        style={styles.restaurantLogo} 
-                        source={{ uri: image_url }}
-                    />
-                }
-                {/* <View style={{backgroundColor: 12}}/> */}
-                <View>
-                    {/* <Text style={[styles.text, {fontSize: 20}]}>{name}</Text> */}
-                    <Text style={styles.text}>{name}</Text>
+                        require("@/assets/images/food.png")
+                } 
+                imageStyle={{ borderRadius: 12 }}
+                style={[styles.backgroundImage, { justifyContent: "flex-end", alignItems: 'flex-start'}]}
+            >
+                <View style={{flexDirection: 'row', alignItems: 'center', padding: 16, gap: 12}}>
+                    {
+                        <Image 
+                            source={
+                                image_url ? 
+                                { uri: image_url } 
+                                : 
+                                require("@/assets/images/food.png") 
+                            }
+                            style={styles.restaurantLogo} 
+                        />
+                    }
 
+                    <Text style={styles.text}>{name}</Text>
                 </View>
-            </View>
+            </ImageBackground>
         </TouchableOpacity>
     )
 }
@@ -60,20 +54,15 @@ const styles = StyleSheet.create({
         marginRight: 12,
     },
     vendorCard: {
-        backgroundColor: "black",
-        marginRight: 0,
-        height: verticalScale(150),
+        width: "100%",
+        height: scale(155),
         borderRadius: 12,
-        marginVertical: 7,
-        justifyContent: "flex-end",
-        alignItems: 'flex-start'
     },
     backgroundImage: { 
         width: "100%", 
         height: "100%", 
         position: "absolute", 
         zIndex: -10, 
-        borderRadius: 12 ,
         tintColor: "#11111",
     },
     text: { 

@@ -9,6 +9,8 @@ const Button: React.FC<ButtonProps> = ({ buttonStyle, titleStyle, ...restProps }
         <RNEButton
             buttonStyle={[styles.defaultButtonStyles, buttonStyle]}
             titleStyle={[styles.defaultButtonTextStyle, titleStyle]}
+            disabledStyle={styles.defaultDisabledStyle}
+            disabledTitleStyle={styles.defaultDisabledTitleStyle}
             {...restProps}
         />
     )
@@ -26,6 +28,12 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         fontSize: 15,
         fontFamily: "Inter"
+    },
+    defaultDisabledStyle: {
+        backgroundColor: "#FB9292"
+    },
+    defaultDisabledTitleStyle: {
+        color: '#f2f2f2'
     }
 });
 

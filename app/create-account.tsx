@@ -1,4 +1,4 @@
-import { Page, Text } from "../components/Themed";
+import { PageScroll, Text } from "../components/Themed";
 import useThemeColor from "@/hooks/useThemeColor";
 import { StyleSheet } from "react-native";
 import AuthForm from "@/components/AuthForm";
@@ -17,7 +17,7 @@ export default function CreateAccountPage() {
 
 
     return (
-        <Page>
+        <PageScroll>
             <View className="flex-row justify-center mb-10" style={{marginTop: 24}}>
                 <Image
                     source={require("../assets/images/login-image.png")}
@@ -41,7 +41,7 @@ export default function CreateAccountPage() {
                 Already have an account? Log in            
             </Button>
 
-        </Page>
+        </PageScroll>
     )
 }
 

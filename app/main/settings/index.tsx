@@ -36,11 +36,10 @@ export default function SettingsPage() {
 
   return (
       <Page>
-        <View style={{backgroundColor: '#f72f2f', height: 100}}/>
+        <View style={{backgroundColor: '#f72f2f', height: 120, marginTop: -50}}/>
 
         <View style={{
           backgroundColor: '#fff', borderRadius: 25, marginTop: -50, elevation: 3, marginHorizontal: 24, shadowColor: "#7e7e7e", shadowOffset: {width: 0, height: 2}, shadowOpacity: 0.12, shadowRadius: 6,
-          // borderBottomWidth: 1, borderLeftWidth: 1, borderRightWidth: 1 
         }}>
           <View style={{padding: 30}}>
             {/* INTERFACE */}
@@ -66,7 +65,7 @@ export default function SettingsPage() {
                   circleSize={22}
                   barHeight={30}
                   backgroundActive={'#fe0000'}
-                  backgroundInactive={'gray'}
+                  backgroundInactive={'#fff'}
                   circleActiveColor={'#fff'}
                   circleInActiveColor={'#000000'}
                   switchWidthMultiplier={2.70}

@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "SC: FoodCourt",
-    "slug": "SC: FoodCourt",
+    "slug": "sc-foodcourt",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -17,13 +17,22 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.usieredev.scfoodcourt",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
+      "edgeToEdgeEnabled": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.usieredev.scfoodcourt"
     },
     "web": {
       "bundler": "metro",
@@ -38,11 +47,20 @@
           "photosPermission": "The app accesses your photos to let you upload profile pictures."
         }
       ],
-      "expo-font"
+      "expo-font",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
       "tsconfigPaths": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "53059760-0638-402f-9a25-289b1995eac7"
+      }
     }
   }
 }

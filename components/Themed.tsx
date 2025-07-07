@@ -17,6 +17,7 @@ type ThemeProps = {
 type ScrollProps = {
   scrollBg?: string;
   scrollBottomPadding?: number;
+  stickyHeaderIndices?: Array<number>;
 }
 
 export type TextProps = ThemeProps & DefaultText['props'];
@@ -52,6 +53,7 @@ export function PageScroll(props: ViewProps) {
       contentInset={{ bottom: 10 }}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{paddingBottom: props.scrollBottomPadding || 40}}
+      stickyHeaderIndices={props.stickyHeaderIndices}
     >
       <SafeAreaView>
         <DefaultView style={[{ backgroundColor, minHeight: height }, style]} {...otherProps} />

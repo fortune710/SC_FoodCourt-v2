@@ -65,12 +65,12 @@ const CartItem: React.FC<CartItemProps> = ({ id, name, addon, description, price
       <ListItem.Content style={{ padding: 0 }}>
         <View style={styles.container}>
           <View style = {{flexDirection: 'row', justifyContent:'space-between'}}>
-            <View style = {{flexDirection: 'row'}}>
+            <View style = {{flexDirection: 'row', flexWrap: 'wrap', maxWidth: '75%'}}>
               <Text style={styles.title}>{name} - </Text>
               <Text style={{fontWeight: 'bold',fontSize: 15, color:'#f72f2f'}}>{restaurant?.name}</Text>
             </View>
             <View style={styles.priceContainer}>
-              <Text style={styles.priceLabel}>N {(price * quantity) + (addon?.price || 0)}</Text>
+              <Text style={styles.priceLabel}>₦ {new Intl.NumberFormat('en-US').format((price * quantity) + (addon?.price || 0))}</Text>
             </View>
           </View>
 
@@ -86,21 +86,21 @@ const CartItem: React.FC<CartItemProps> = ({ id, name, addon, description, price
             !addon ? null : (
               <View style={styles.descriptionContainer}>
                 <Text style={styles.description}>
-                  Selected Addon: {addon.name} - {addon.price}
+                  Selected Add on: {addon.name} - {new Intl.NumberFormat('en-US').format(addon.price)}
                 </Text>
               </View>
             )
           }
           <View style={styles.actionsContainer}>
-            <Pressable onPress={handleIncrement} style={styles.actionButton}>
-              <View style={styles.iconContainer}>
-                <Feather name="plus-circle" size={18} color="white" />
-              </View>
-            </Pressable>
-            <Text style={styles.amountText}>{quantity}</Text>
             <Pressable onPress={handleDecrement} style={styles.actionButton}>
               <View style={styles.iconContainer}>
                 <Feather name="minus-circle" size={18} color="white" />
+              </View>
+            </Pressable>
+            <Text style={styles.amountText}>{quantity}</Text>
+            <Pressable onPress={handleIncrement} style={styles.actionButton}>
+              <View style={styles.iconContainer}>
+                <Feather name="plus-circle" size={18} color="white" />
               </View>
             </Pressable>
           </View>

@@ -5,7 +5,10 @@ export interface Product {
     price: number,
     categoryId: string,
     vendorId: string,
-    image?: string
+    vendorName: string,
+    image?: string,
+    resturant_id: number,
+    category: string
 }
 
 export interface CartItem {
@@ -58,7 +61,9 @@ export interface MenuItem {
 
 export interface Vendor {
     id: string,
-    name: string
+    name: string,
+    image_url: string | null,
+    is_disabled: boolean
 }
 
 export interface TranactionSplitData {
